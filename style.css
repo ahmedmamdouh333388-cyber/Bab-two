@@ -1,13 +1,13 @@
 :root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
+    --bg-color: #0d131f;
+    --card-bg: #1a2332;
     --text-color: #f8fafc;
     --text-secondary: #94a3b8;
     --primary-accent: #38bdf8;
-    --btn-bg: #1e293b;
-    --btn-border: #334155;
-    --border-color: #334155;
-    --header-bg: #1e293b;
+    --btn-bg: #1a2332;
+    --btn-border: #2d3a4e;
+    --border-color: #2d3a4e;
+    --header-bg: #131b29;
     --shadow-color: rgba(0, 0, 0, 0.4);
     --note-bg: #332b00;
     --note-border: #eab308;
@@ -62,7 +62,6 @@ body.theme-dark {
     --note-text: #ffe082;
 }
 
-/* ثيم السهارية الصفراء المريحة للعين */
 body.theme-night-lamp {
     --bg-color: #1c1917 !important;
     --card-bg: #292524 !important;
@@ -93,7 +92,7 @@ body {
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
     min-height: 100vh;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
 }
 
 .top-bar {
@@ -102,62 +101,57 @@ body {
     z-index: 1000;
     background-color: var(--header-bg);
     border-bottom: 1px solid var(--border-color);
-    padding: 12px 20px;
+    padding: 10px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 12px var(--shadow-color);
 }
 
+.top-right-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .top-bar .title {
     font-size: 1.1rem;
-    font-weight: bold;
+    font-weight: 800;
     color: var(--primary-accent);
 }
 
-.palette-btn {
+.palette-btn, .lamp-btn, .home-btn {
     background: var(--btn-bg);
     border: 1px solid var(--btn-border);
     color: var(--text-color);
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     box-shadow: 0 2px 8px var(--shadow-color);
+    transition: all 0.2s ease;
 }
 
-/* زر اللمبة في منتصف الشريط العلوي */
-.lamp-btn {
-    background: var(--btn-bg);
-    border: 1px solid var(--btn-border);
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.3rem;
-    box-shadow: 0 2px 8px var(--shadow-color);
-    transition: all 0.3s ease;
+.home-btn {
+    border-radius: 10px;
 }
 
 .lamp-btn.active {
     background-color: #fef08a;
     border-color: #eab308;
-    box-shadow: 0 0 15px #fef08a;
-    transform: scale(1.1);
+    box-shadow: 0 0 12px #fef08a;
+    transform: scale(1.05);
 }
 
 .theme-menu {
     display: none;
     position: fixed;
-    top: 60px;
-    right: 20px;
+    top: 58px;
+    right: 16px;
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -213,45 +207,43 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* واجهة الدخول التكنولوجية المتقدمة */
+/* واجهة الدخول النظيفة */
 .tech-login-card {
     position: relative;
-    background: rgba(30, 41, 59, 0.7);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(56, 189, 248, 0.3);
-    border-radius: 24px;
-    padding: 35px 22px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 35px 20px;
     margin-top: 15px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.1);
+    box-shadow: 0 15px 35px var(--shadow-color);
     overflow: hidden;
     text-align: center;
 }
 
 .glow-sphere {
     position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 130px;
-    height: 130px;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, transparent 70%);
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
 }
 
 .atom-icon {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     margin-bottom: 8px;
     animation: floatAtom 3s ease-in-out infinite;
 }
 
 @keyframes floatAtom {
     0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(10deg); }
+    50% { transform: translateY(-6px) rotate(8deg); }
 }
 
 .tech-header h1 {
-    font-size: 1.45rem;
+    font-size: 1.4rem;
     color: var(--text-color);
     font-weight: 800;
     margin-bottom: 4px;
@@ -260,20 +252,20 @@ body {
 .tech-header p {
     font-size: 0.88rem;
     color: var(--primary-accent);
-    margin-bottom: 28px;
+    margin-bottom: 25px;
     font-weight: 600;
 }
 
 .input-group {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     text-align: right;
 }
 
 .input-group input {
     width: 100%;
     padding: 14px 42px 14px 14px;
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     color: var(--text-color);
@@ -281,10 +273,14 @@ body {
     transition: all 0.3s ease;
 }
 
+.input-group input.input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important;
+}
+
 .input-group input:focus {
     border-color: var(--primary-accent);
     box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
-    background: rgba(15, 23, 42, 0.8);
 }
 
 .input-group label {
@@ -293,7 +289,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-secondary);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     pointer-events: none;
     transition: all 0.25s ease;
 }
@@ -318,6 +314,15 @@ body {
     opacity: 0.7;
 }
 
+.error-msg {
+    display: none;
+    color: #ef4444;
+    font-size: 0.78rem;
+    text-align: right;
+    margin-bottom: 12px;
+    padding-right: 5px;
+}
+
 .neon-glow-btn {
     position: relative;
     background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%) !important;
@@ -328,12 +333,7 @@ body {
     margin-top: 10px;
     border: none !important;
     border-radius: 12px !important;
-    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4) !important;
-    overflow: hidden;
-}
-
-.neon-glow-btn:hover {
-    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6) !important;
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3) !important;
 }
 
 .welcome-features {
@@ -342,8 +342,22 @@ body {
     margin-top: 25px;
     padding-top: 18px;
     border-top: 1px dashed var(--border-color);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     color: var(--text-secondary);
+}
+
+/* بطاقات الأزرار والدروس المنسقة */
+.user-welcome-banner {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-accent);
+    margin-bottom: 20px;
+    text-align: center;
+    background: var(--card-bg);
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .tech-btn {
@@ -354,14 +368,14 @@ body {
     border: 1px solid var(--btn-border);
     border-radius: 14px;
     color: var(--text-color);
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 0.98rem;
+    font-weight: 700;
     text-align: right;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    box-shadow: 0 4px 14px var(--shadow-color);
+    box-shadow: 0 4px 12px var(--shadow-color);
     transition: all 0.2s ease;
 }
 
@@ -375,8 +389,9 @@ body {
 }
 
 .arrow {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--primary-accent);
+    font-weight: bold;
 }
 
 .nav-header {
@@ -451,7 +466,7 @@ body {
     padding: 4px 10px;
     border-radius: 6px;
     font-weight: bold;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     margin: 2px;
 }
 .bg-white-prec { background-color: #ffffff; color: #000; border: 1px solid #ccc; }
@@ -461,33 +476,30 @@ body {
 .bg-brown-prec { background-color: #78350f; color: #fff; }
 .bg-green-prec { background-color: #22c55e; color: #fff; }
 
-/* Floating WhatsApp Button */
-.whatsapp-float {
+/* زر الواتساب الثابت أسفل اليسار */
+.whatsapp-fixed {
     position: fixed;
-    bottom: 25px;
+    bottom: 20px;
     left: 20px;
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     background-color: #25d366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     z-index: 9999;
-    cursor: pointer;
-    touch-action: none;
-    user-select: none;
-    transition: transform 0.1s ease;
+    text-decoration: none;
+    transition: transform 0.2s ease;
 }
 
-.whatsapp-float:active {
+.whatsapp-fixed:active {
     transform: scale(0.92);
 }
 
 .whatsapp-icon {
-    width: 32px;
-    height: 32px;
-    pointer-events: none;
+    width: 30px;
+    height: 30px;
     }
     
