@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var currentParentScreen = "scr-main-menu";
 
-    // قاعدة بيانات الدروس والرواسب والألوان
+    // قاعدة بيانات الدروس والمعادلات
     var dataDB = {
         co3: {
             title: "أنيون الكربونات (CO₃²⁻)",
@@ -108,7 +108,15 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo(0, 0);
     }
 
-    // زر قائمة الألوان
+    // زر العودة للهوم أعلى اليسار
+    var homeHeaderBtn = document.getElementById('homeHeaderBtn');
+    if (homeHeaderBtn) {
+        homeHeaderBtn.addEventListener('click', function () {
+            showScreen('scr-main-menu');
+        });
+    }
+
+    // قائمة الألوان
     var paletteBtn = document.getElementById('paletteBtn');
     var themeMenu = document.getElementById('themeMenu');
     if (paletteBtn && themeMenu) {
@@ -117,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // السيمات الألوان
+    // خيارات السيمات
     var themeOpts = document.querySelectorAll('.theme-opt');
     themeOpts.forEach(function (opt) {
         opt.addEventListener('click', function () {
@@ -128,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // زر اللمبة (السهارية)
+    // زر اللمبة السهارية
     var lampBtn = document.getElementById('lampBtn');
     if (lampBtn) {
         lampBtn.addEventListener('click', function () {
@@ -137,26 +145,39 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // تسجيل الدخول والترحيب بالاسم
+    // تسجيل الدخول بالاسم والتحقق من الـ 3 حروف
     var startBtn = document.getElementById('startBtn');
-    if (startBtn) {
+    var studentNameInput = document.getElementById('studentName');
+    var nameError = document.getElementById('nameError');
+
+    if (startBtn && studentNameInput) {
         startBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            var studentName = document.getElementById('studentName').value.trim();
-            
-            if (studentName !== "") {
-                var welcomeTitle = document.getElementById('userWelcomeTitle');
-                if (!welcomeTitle) {
-                    var h2 = document.createElement('h2');
-                    h2.id = 'userWelcomeTitle';
-                    h2.style.cssText = "color: var(--primary-accent); font-size: 1.1rem; margin-bottom: 15px; text-align: center;";
-                    h2.innerText = "أهلاً بك يا " + studentName + " 👋";
-                    document.getElementById('scr-main-menu').prepend(h2);
-                } else {
-                    welcomeTitle.innerText = "أهلاً بك يا " + studentName + " 👋";
-                }
+            var studentName = studentNameInput.value.trim();
+
+            if (studentName.length < 3) {
+                studentNameInput.classList.add('input-error');
+                if (nameError) nameError.style.display = 'block';
+                return;
             }
+
+            studentNameInput.classList.remove('input-error');
+            if (nameError) nameError.style.display = 'none';
+
+            // عرض الترحيب بشكل أنيق
+            var welcomeContainer = document.getElementById('welcomeUserContainer');
+            if (welcomeContainer) {
+                welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
+            }
+
             showScreen('scr-main-menu');
+        });
+
+        studentNameInput.addEventListener('input', function() {
+            if (studentNameInput.value.trim().length >= 3) {
+                studentNameInput.classList.remove('input-error');
+                if (nameError) nameError.style.display = 'none';
+            }
         });
     }
 
@@ -169,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // أزرار فتح الشرح
+    // أزرار تفاصيل الدروس
     var detailBtns = document.querySelectorAll('.detail-btn');
     detailBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -184,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // أزرار قسم الألوان
+    // أزرار تفاصيل الألوان
     var colorDetailBtns = document.querySelectorAll('.color-detail-btn');
     colorDetailBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -206,69 +227,5 @@ document.addEventListener("DOMContentLoaded", function () {
             showScreen(currentParentScreen);
         });
     }
-
-    // برمجة زر الواتساب العائم والسحب
-    var waBtn = document.getElementById('whatsappFloatBtn');
-    if (waBtn) {
-        var isDragging = false;
-        var hasDragged = false;
-        var startX, startY, initialLeft, initialTop;
-        var phoneNum = "201225428692";
-
-        function onStart(e) {
-            isDragging = true;
-            hasDragged = false;
-            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-            startX = clientX;
-            startY = clientY;
-
-            var rect = waBtn.getBoundingClientRect();
-            initialLeft = rect.left;
-            initialTop = rect.top;
-        }
-
-        function onMove(e) {
-            if (!isDragging) return;
-            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-            var dx = clientX - startX;
-            var dy = clientY - startY;
-
-            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-                hasDragged = true;
-            }
-
-            var newLeft = initialLeft + dx;
-            var newTop = initialTop + dy;
-
-            var maxLeft = window.innerWidth - waBtn.offsetWidth;
-            var maxTop = window.innerHeight - waBtn.offsetHeight;
-
-            newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
-            newTop = Math.max(10, Math.min(newTop, maxTop - 10));
-
-            waBtn.style.left = newLeft + 'px';
-            waBtn.style.top = newTop + 'px';
-            waBtn.style.bottom = 'auto';
-        }
-
-        function onEnd() {
-            if (!hasDragged && isDragging) {
-                window.open("https://wa.me/" + phoneNum, "_blank");
-            }
-            isDragging = false;
-        }
-
-        waBtn.addEventListener('mousedown', onStart);
-        window.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseup', onEnd);
-
-        waBtn.addEventListener('touchstart', onStart, { passive: true });
-        window.addEventListener('touchmove', onMove, { passive: true });
-        window.addEventListener('touchend', onEnd);
-    }
 });
-            
+                                    
