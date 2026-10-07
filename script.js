@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var currentParentScreen = "scr-main-menu";
 
-    // قاعدة بيانات الدروس والمعادلات
     var dataDB = {
         co3: {
             title: "أنيون الكربونات (CO₃²⁻)",
@@ -95,7 +94,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // التنقل بين الشاشات
     function showScreen(screenId) {
         var screens = document.querySelectorAll('.screen');
         screens.forEach(function (screen) {
@@ -108,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo(0, 0);
     }
 
-    // زر العودة للهوم أعلى اليسار
     var homeHeaderBtn = document.getElementById('homeHeaderBtn');
     if (homeHeaderBtn) {
         homeHeaderBtn.addEventListener('click', function () {
@@ -116,7 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // قائمة الألوان
     var paletteBtn = document.getElementById('paletteBtn');
     var themeMenu = document.getElementById('themeMenu');
     if (paletteBtn && themeMenu) {
@@ -125,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // خيارات السيمات
     var themeOpts = document.querySelectorAll('.theme-opt');
     themeOpts.forEach(function (opt) {
         opt.addEventListener('click', function () {
@@ -136,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // زر اللمبة السهارية
     var lampBtn = document.getElementById('lampBtn');
     if (lampBtn) {
         lampBtn.addEventListener('click', function () {
@@ -145,17 +139,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // تسجيل الدخول بالاسم والتحقق من الـ 3 حروف
+    // تسجيل الدخول وعرض الـ Splash Screen لمدة 3 ثوانٍ
     var startBtn = document.getElementById('startBtn');
     var studentNameInput = document.getElementById('studentName');
     var nameError = document.getElementById('nameError');
+    var splashScreen = document.getElementById('splashScreen');
 
     if (startBtn && studentNameInput) {
         startBtn.addEventListener('click', function (e) {
             e.preventDefault();
             var studentName = studentNameInput.value.trim();
 
-            if (studentName.length < 3) {
+            if (studentName.length < 2) {
                 studentNameInput.classList.add('input-error');
                 if (nameError) nameError.style.display = 'block';
                 return;
@@ -164,24 +159,27 @@ document.addEventListener("DOMContentLoaded", function () {
             studentNameInput.classList.remove('input-error');
             if (nameError) nameError.style.display = 'none';
 
-            // عرض الترحيب بشكل أنيق
             var welcomeContainer = document.getElementById('welcomeUserContainer');
             if (welcomeContainer) {
                 welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
             }
 
-            showScreen('scr-main-menu');
+            // إظهار الشاشة الترحيبية لمدة 3 ثوانٍ
+            splashScreen.classList.add('active');
+            setTimeout(function () {
+                splashScreen.classList.remove('active');
+                showScreen('scr-main-menu');
+            }, 3000);
         });
 
         studentNameInput.addEventListener('input', function() {
-            if (studentNameInput.value.trim().length >= 3) {
+            if (studentNameInput.value.trim().length >= 2) {
                 studentNameInput.classList.remove('input-error');
                 if (nameError) nameError.style.display = 'none';
             }
         });
     }
 
-    // أزرار التنقل الرئيسية
     var navBtns = document.querySelectorAll('.nav-screen-btn');
     navBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -190,7 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // أزرار تفاصيل الدروس
     var detailBtns = document.querySelectorAll('.detail-btn');
     detailBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -205,7 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // أزرار تفاصيل الألوان
     var colorDetailBtns = document.querySelectorAll('.color-detail-btn');
     colorDetailBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -220,7 +216,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // زر الرجوع
     var goBackDetailBtn = document.getElementById('goBackDetailBtn');
     if (goBackDetailBtn) {
         goBackDetailBtn.addEventListener('click', function () {
@@ -228,4 +223,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-                                    
+            
