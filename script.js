@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var currentParentScreen = "scr-main-menu";
 
-    // بيانات الشرح والتفاصيل
+    // قاعدة بيانات الدروس والرواسب والألوان
     var dataDB = {
         co3: {
             title: "أنيون الكربونات (CO₃²⁻)",
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo(0, 0);
     }
 
-    // فتح زر الألوان
+    // زر قائمة الألوان
     var paletteBtn = document.getElementById('paletteBtn');
     var themeMenu = document.getElementById('themeMenu');
     if (paletteBtn && themeMenu) {
@@ -117,20 +117,45 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // خيارات السيمات
+    // السيمات الألوان
     var themeOpts = document.querySelectorAll('.theme-opt');
     themeOpts.forEach(function (opt) {
         opt.addEventListener('click', function () {
             var themeName = opt.getAttribute('data-theme');
             document.body.className = themeName;
             themeMenu.classList.remove('active');
+            if(lampBtn) lampBtn.classList.remove('active');
         });
     });
 
-    // زر البدء
+    // زر اللمبة (السهارية)
+    var lampBtn = document.getElementById('lampBtn');
+    if (lampBtn) {
+        lampBtn.addEventListener('click', function () {
+            lampBtn.classList.toggle('active');
+            document.body.classList.toggle('theme-night-lamp');
+        });
+    }
+
+    // تسجيل الدخول والترحيب بالاسم
     var startBtn = document.getElementById('startBtn');
     if (startBtn) {
-        startBtn.addEventListener('click', function () {
+        startBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            var studentName = document.getElementById('studentName').value.trim();
+            
+            if (studentName !== "") {
+                var welcomeTitle = document.getElementById('userWelcomeTitle');
+                if (!welcomeTitle) {
+                    var h2 = document.createElement('h2');
+                    h2.id = 'userWelcomeTitle';
+                    h2.style.cssText = "color: var(--primary-accent); font-size: 1.1rem; margin-bottom: 15px; text-align: center;";
+                    h2.innerText = "أهلاً بك يا " + studentName + " 👋";
+                    document.getElementById('scr-main-menu').prepend(h2);
+                } else {
+                    welcomeTitle.innerText = "أهلاً بك يا " + studentName + " 👋";
+                }
+            }
             showScreen('scr-main-menu');
         });
     }
@@ -144,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // أزرار فتح الشرح المباشر
+    // أزرار فتح الشرح
     var detailBtns = document.querySelectorAll('.detail-btn');
     detailBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -159,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // أزرار قسم ملخص الألوان
+    // أزرار قسم الألوان
     var colorDetailBtns = document.querySelectorAll('.color-detail-btn');
     colorDetailBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -174,11 +199,76 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // زر الرجوع من صفحة الشرح
+    // زر الرجوع
     var goBackDetailBtn = document.getElementById('goBackDetailBtn');
     if (goBackDetailBtn) {
         goBackDetailBtn.addEventListener('click', function () {
             showScreen(currentParentScreen);
         });
     }
+
+    // برمجة زر الواتساب العائم والسحب
+    var waBtn = document.getElementById('whatsappFloatBtn');
+    if (waBtn) {
+        var isDragging = false;
+        var hasDragged = false;
+        var startX, startY, initialLeft, initialTop;
+        var phoneNum = "201225428692";
+
+        function onStart(e) {
+            isDragging = true;
+            hasDragged = false;
+            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            startX = clientX;
+            startY = clientY;
+
+            var rect = waBtn.getBoundingClientRect();
+            initialLeft = rect.left;
+            initialTop = rect.top;
+        }
+
+        function onMove(e) {
+            if (!isDragging) return;
+            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            var dx = clientX - startX;
+            var dy = clientY - startY;
+
+            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                hasDragged = true;
+            }
+
+            var newLeft = initialLeft + dx;
+            var newTop = initialTop + dy;
+
+            var maxLeft = window.innerWidth - waBtn.offsetWidth;
+            var maxTop = window.innerHeight - waBtn.offsetHeight;
+
+            newLeft = Math.max(10, Math.min(newLeft, maxLeft - 10));
+            newTop = Math.max(10, Math.min(newTop, maxTop - 10));
+
+            waBtn.style.left = newLeft + 'px';
+            waBtn.style.top = newTop + 'px';
+            waBtn.style.bottom = 'auto';
+        }
+
+        function onEnd() {
+            if (!hasDragged && isDragging) {
+                window.open("https://wa.me/" + phoneNum, "_blank");
+            }
+            isDragging = false;
+        }
+
+        waBtn.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        waBtn.addEventListener('touchstart', onStart, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: true });
+        window.addEventListener('touchend', onEnd);
+    }
 });
+            
