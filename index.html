@@ -11,6 +11,10 @@
     <!-- الشريط العلوي -->
     <div class="top-bar">
         <button class="palette-btn" id="paletteBtn">🎨</button>
+        
+        <!-- زر اللمبة (السهارية) في منتصف الشاشة -->
+        <button class="lamp-btn" id="lampBtn">💡</button>
+        
         <div class="title">الكيمياء التحليلية</div>
     </div>
 
@@ -32,12 +36,40 @@
 
     <div class="container">
 
-        <!-- الشاشة 1: الترحيب -->
+        <!-- الشاشة 1: واجهة الدخول التكنولوجية -->
         <div id="scr-welcome" class="screen active">
-            <div class="welcome-card">
-                <h1>ملخص الباب الثاني: التحليل الكيميائي</h1>
-                <p>شامل للدروس الأول والثاني والثالث مع المعادلات وتلخيص الألوان والرواسب كاملة</p>
-                <button class="tech-btn start-btn" id="startBtn">اضغط للبدء</button>
+            <div class="tech-login-card">
+                <div class="glow-sphere"></div>
+                <div class="tech-header">
+                    <div class="atom-icon">⚛️</div>
+                    <h1>منصة التحليل الكيميائي</h1>
+                    <p>الصف الثالث الثانوي • الباب الثاني</p>
+                </div>
+
+                <form id="loginForm" onsubmit="return false;">
+                    <div class="input-group">
+                        <input type="text" id="studentName" required placeholder=" ">
+                        <label for="studentName">اسم الطالب / الطالبة</label>
+                        <span class="input-icon">👤</span>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="tel" id="studentPhone" pattern="[0-9]{11}" placeholder=" ">
+                        <label for="studentPhone">رقم الهاتف (اختياري)</label>
+                        <span class="input-icon">📱</span>
+                    </div>
+
+                    <button class="tech-btn start-btn neon-glow-btn" id="startBtn">
+                        <span>دخول إلى المنصة</span>
+                        <span class="btn-shine"></span>
+                    </button>
+                </form>
+
+                <div class="welcome-features">
+                    <span>⚡ تلخيص شامل</span>
+                    <span>🎨 رواسب وألوان</span>
+                    <span>💡 معادلات موزونة</span>
+                </div>
             </div>
         </div>
 
@@ -151,6 +183,13 @@
             <div id="detail-body"></div>
         </div>
 
+    </div>
+
+    <!-- زر الواتساب العائم القابل للتحريك -->
+    <div id="whatsappFloatBtn" class="whatsapp-float">
+        <svg viewBox="0 0 32 32" class="whatsapp-icon">
+            <path fill="#ffffff" d="M16 2a13 13 0 0 0-11.25 19.55L3 29l7.67-1.7A13 13 0 1 0 16 2zm0 23.8a10.74 10.74 0 0 1-5.48-1.5l-.39-.23-4.55 1 1-4.43-.26-.42A10.8 10.8 0 1 1 16 25.8zm5.91-8.11c-.32-.16-1.92-.95-2.22-1.06s-.52-.16-.74.16-.85 1.06-1.04 1.28-.39.24-.71.08a9 9 0 0 1-2.65-1.63 9.87 9.87 0 0 1-1.83-2.28c-.19-.32 0-.49.14-.65s.32-.37.48-.56a2.21 2.21 0 0 0 .32-.53.59.59 0 0 0 0-.56c-.08-.16-.74-1.78-1-2.43s-.54-.54-.74-.55h-.63a1.21 1.21 0 0 0-.88.41 3.7 3.7 0 0 0-1.15 2.75 6.44 6.44 0 0 0 1.35 3.42 14.77 14.77 0 0 0 5.65 5 18.72 18.72 0 0 0 1.88.69 4.53 4.53 0 0 0 2.08.13 3.4 3.4 0 0 0 2.23-1.57 2.76 2.76 0 0 0 .19-1.57c-.07-.12-.24-.2-.56-.36z"/>
+        </svg>
     </div>
 
     <script src="script.js"></script>
