@@ -295,6 +295,7 @@ body {
 .flask-icon {
     font-size: 3rem;
     margin-bottom: 8px;
+    animation: floatAtom 3s ease-in-out infinite;
 }
 
 .tech-header h1 {
@@ -401,6 +402,7 @@ body {
     color: var(--text-secondary);
 }
 
+/* بطاقات الأزرار والدروس التكنولوجية المضيئة */
 .user-welcome-banner {
     font-size: 1.15rem;
     font-weight: 800;
@@ -440,11 +442,6 @@ body {
 
 .tech-btn:active {
     transform: scale(0.98);
-}
-
-.tech-btn.ox-btn {
-    border-right: 5px solid #38bdf8;
-    background: rgba(14, 165, 233, 0.15);
 }
 
 .tech-btn.color-btn {
@@ -538,39 +535,3 @@ body {
 .bg-red-prec { background-color: #ef4444; color: #fff; }
 .bg-brown-prec { background-color: #78350f; color: #fff; }
 .bg-green-prec { background-color: #22c55e; color: #fff; }
-
-.ox-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 10px;
-}
-
-.ox-card {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 12px;
-    text-align: center;
-}
-
-.ox-card h4 {
-    color: var(--primary-accent);
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 4px;
-}
-
-.ox-list {
-    list-style: none;
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-
-@media (max-width: 480px) {
-    .ox-grid {
-        grid-template-columns: 1fr;
-    }
-    }
-    
