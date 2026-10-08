@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentParentScreen = "scr-main-menu";
 
     var dataDB = {
-        // --- قسم الأكسدة والاختزال والغازات ---
         ox_gases: {
             title: "الغازات القابلة وغير القابلة للأكسدة",
             parent: "scr-ox-menu",
@@ -21,10 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ox_agents: {
             title: "العوامل المؤكسدة وتفاعل النيتريت",
             parent: "scr-ox-menu",
-            content: '<div class="detail-card"><h3>العوامل المؤكسدة الشهيرة وتغير ألوانها</h3><p><strong>1. برمنجنات البوتاسيوم (KMnO₄):</strong> عامل مؤكسد قوي، لونه <span class="color-badge" style="background:#a855f7; color:#fff;">بنفسجي</span> ويزول اللون عند تفاعله مع النيتريت (قابل للأكسدة).</p><p><strong>2. ثاني كرومات البوتاسيوم (K₂Cr₂O₇):</strong> عامل مؤكسد، لونه <span class="color-badge bg-yellow-prec">برتقالي</span> يتحول إلى <span class="color-badge bg-green-prec">أخضر</span> بسبب تكون كبريتات الكروم III.</p></div><div class="detail-card"><h3>معادلة تفاعل النيتريت مع البرمنجنات</h3><div class="formula-box">5NaNO₂ + 2KMnO₄ + 3H₂SO₄ → 5NaNO₃ + K₂SO₄ + 2MnSO₄ + 3H₂O</div><p style="text-align:center; font-size:0.85rem; color:var(--text-secondary);">يزول لون برمنجنات البوتاسيوم البنفسجية لتكون مركب MnSO₄ عديم اللون.</p></div>'
+            content: '<div class="detail-card"><h3>العوامل المؤكسدة الشهيرة وتغير ألوانها</h3><p><strong>1. برمنجنات البوتاسيوم (KMnO₄):</strong> عامل مؤكسد قوي، لونه <span class="color-badge" style="background:#a855f7; color:#fff;">بنفسجي</span> ويزول اللون عند تفاعله مع النيتريت.</p><p><strong>2. ثاني كرومات البوتاسيوم (K₂Cr₂O₇):</strong> عامل مؤكسد، لونه <span class="color-badge bg-yellow-prec">برتقالي</span> يتحول إلى <span class="color-badge bg-green-prec">أخضر</span> بسبب تكون كبريتات الكروم III.</p></div><div class="detail-card"><h3>معادلة تفاعل النيتريت مع البرمنجنات</h3><div class="formula-box">5NaNO₂ + 2KMnO₄ + 3H₂SO₄ → 5NaNO₃ + K₂SO₄ + 2MnSO₄ + 3H₂O</div><p style="text-align:center; font-size:0.85rem; color:var(--text-secondary);">يزول لون برمنجنات البوتاسيوم البنفسجية لتكون مركب MnSO₄ عديم اللون.</p></div>'
         },
-
-        // --- باقي الدروس كما هي ---
         co3: {
             title: "أنيون الكربونات (CO₃²⁻)",
             parent: "scr-l1-menu",
@@ -162,7 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- تصحيح دالة زرار الدخول المبسط والمباشر ---
     var startBtn = document.getElementById('startBtn');
     var studentNameInput = document.getElementById('studentName');
     var nameError = document.getElementById('nameError');
@@ -186,7 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
             }
 
-            // التبديل المباشر للشاشة الرئيسية لضمان عدم العطل
             showScreen('scr-main-menu');
         });
 
@@ -198,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // التنقل بين الشاشات والدروس
     var navBtns = document.querySelectorAll('.nav-screen-btn');
     navBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -229,4 +223,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if (item) {
                 currentParentScreen = 'scr-colors-menu';
                 document.getElementById('detail-title').innerText = "رواسب ولون: " + item.title;
-                document.getElementById('detail-body').inne
+                document.getElementById('detail-body').innerHTML = item.content;
+                showScreen('scr-detail');
+            }
+        });
+    });
+
+    var goBackDetailBtn = document.getElementById('goBackDetailBtn');
+    if (goBackDetailBtn) {
+        goBackDetailBtn.addEventListener('click', function 
