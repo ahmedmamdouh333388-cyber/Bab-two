@@ -295,7 +295,6 @@ body {
 .flask-icon {
     font-size: 3rem;
     margin-bottom: 8px;
-    animation: floatAtom 3s ease-in-out infinite;
 }
 
 .tech-header h1 {
@@ -402,7 +401,6 @@ body {
     color: var(--text-secondary);
 }
 
-/* بطاقات الأزرار والدروس التكنولوجية المضيئة */
 .user-welcome-banner {
     font-size: 1.15rem;
     font-weight: 800;
@@ -541,7 +539,6 @@ body {
 .bg-brown-prec { background-color: #78350f; color: #fff; }
 .bg-green-prec { background-color: #22c55e; color: #fff; }
 
-/* تنسيقات شبكة كروت الأكسدة والاختزال */
 .ox-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
