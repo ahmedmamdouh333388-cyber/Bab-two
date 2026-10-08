@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentParentScreen = "scr-main-menu";
 
     var dataDB = {
-        // قسم بيانات الأكسدة والاختزال والغازات المدمجة
+        // بيانات الأكسدة والاختزال والغازات
         ox_gases: {
             title: "الغازات القابلة وغير القابلة للأكسدة",
             parent: "scr-ox-menu",
@@ -161,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // تسجيل الدخول وعرض الـ Splash Screen لمدة 3 ثوانٍ
     var startBtn = document.getElementById('startBtn');
     var studentNameInput = document.getElementById('studentName');
     var nameError = document.getElementById('nameError');
@@ -186,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
             }
 
-            // إظهار الشاشة الترحيبية لمدة 3 ثوانٍ
             splashScreen.classList.add('active');
             setTimeout(function () {
                 splashScreen.classList.remove('active');
@@ -231,4 +229,5 @@ document.addEventListener("DOMContentLoaded", function () {
             var item = dataDB[key];
             if (item) {
                 currentParentScreen = 'scr-colors-menu';
-      
+                document.getElementById('detail-title').innerText = "رواسب ولون: " + item.title;
+                document.get
