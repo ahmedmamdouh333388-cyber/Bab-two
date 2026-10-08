@@ -2,198 +2,170 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>تطبيق الكيمياء - الباب الثاني</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموقع قيد الصيانة والتحسين</title>
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --border-color: rgba(56, 189, 248, 0.3);
+            --primary-accent: #38bdf8;
+            --text-color: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* كرة نيون خلفية جمالية */
+        .glow-sphere {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        /* كارت الصيانة الزجاجي */
+        .maintenance-card {
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+        }
+
+        .icon-container {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* شريط حالة التقدم */
+        .progress-bar-container {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            height: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 70%; /* يمكنك تغيير نسبة الإنجاز من هنا */
+            height: 100%;
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+        }
+
+        /* معلومات التواصل والتوقيع */
+        .footer-info {
+            border-top: 1px dashed var(--border-color);
+            padding-top: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .creator {
+            color: var(--primary-accent);
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25d366;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .wa-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- الشريط العلوي التكنولوجي -->
-    <div class="top-bar">
-        <div class="top-right-tools">
-            <button class="palette-btn" id="paletteBtn" title="تغيير الثيم">🎨</button>
-            <button class="lamp-btn" id="lampBtn" title="السهارية الصفراء">💡</button>
-            <a href="https://wa.me/201225428692" target="_blank" class="header-wa-btn" title="تواصل عبر الواتساب">💬</a>
-        </div>
-        
-        <div class="title">الكيمياء التحليلية</div>
+    <div class="glow-sphere"></div>
 
-        <button class="home-btn" id="homeHeaderBtn" title="الرئيسية">🏠</button>
-    </div>
+    <div class="maintenance-card">
+        <div class="icon-container">🧪🛠️</div>
+        <h1>منصة التحليل الكيميائي</h1>
+        <p>نعمل حالياً على تحديث المنصة وإضافة تحسينات جديدة لتوفير أفضل تجربة تعليمية. سنعود قريباً جداً!</p>
 
-    <!-- قائمة تغيير الألوان -->
-    <div class="theme-menu" id="themeMenu">
-        <div class="theme-opt" data-theme="">
-            <span class="color-dot" style="background:#0f172a;"></span> كحلي تكنولوجي
-        </div>
-        <div class="theme-opt" data-theme="theme-white">
-            <span class="color-dot" style="background:#ffffff;"></span> أبيض ناصع
-        </div>
-        <div class="theme-opt" data-theme="theme-light-blue">
-            <span class="color-dot" style="background:#e0f2fe;"></span> لبني هادئ
-        </div>
-        <div class="theme-opt" data-theme="theme-dark">
-            <span class="color-dot" style="background:#050505;"></span> ليلي داكن
-        </div>
-    </div>
-
-    <!-- الشاشة الترحيبية (Splash Screen) -->
-    <div id="splashScreen" class="splash-overlay">
-        <div class="splash-box">
-            <div class="splash-icon">🚨</div>
-            <h2>تم إنشاء الموقع بواسطة</h2>
-            <div class="creator-name">Ahmed Mamdouh</div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <!-- الشاشة 1: واجهة الدخول التكنولوجية -->
-        <div id="scr-welcome" class="screen active">
-            <div class="tech-login-card">
-                <div class="glow-sphere"></div>
-                <div class="tech-header">
-                    <div class="flask-icon">🧪</div>
-                    <h1>منصة التحليل الكيميائي</h1>
-                    <p>الصف الثالث الثانوي • الباب الثاني</p>
-                </div>
-
-                <form id="loginForm" onsubmit="return false;">
-                    <div class="input-group">
-                        <input type="text" id="studentName" required placeholder=" " minlength="2">
-                        <label for="studentName">اسم الطالب / الطالبة (حرفين فأكثر)</label>
-                        <span class="input-icon">👤</span>
-                    </div>
-                    <div id="nameError" class="error-msg">برجاء كتابة الاسم بحد أدنى حرفين</div>
-
-                    <button class="tech-btn start-btn neon-glow-btn" id="startBtn">
-                        <span>دخول إلى المنصة</span>
-                        <span class="arrow">←</span>
-                    </button>
-                </form>
-
-                <div class="welcome-features">
-                    <span>⚡ تلخيص شامل</span>
-                    <span>🎨 رواسب وألوان</span>
-                    <span>💡 معادلات موزونة</span>
-                </div>
-            </div>
+        <!-- نسبة الإنجاز -->
+        <div class="progress-bar-container">
+            <div class="progress-bar"></div>
         </div>
 
-        <!-- الشاشة 2: القائمة الرئيسية -->
-        <div id="scr-main-menu" class="screen">
-            <div id="welcomeUserContainer"></div>
+        <div class="footer-info">
+            <span>جاري تجهيز التحديثات بواسطة</span>
+            <span class="creator">Ahmed Mamdouh</span>
             
-            <button class="tech-btn nav-screen-btn" data-target="scr-l1-menu">
-                <span>الدرس الأول: أنيونات HCl المخفف</span>
-                <span class="arrow">←</span>
-            </button>
-            <button class="tech-btn nav-screen-btn" data-target="scr-l2-menu">
-                <span>الدرس الثاني: أنيونات H₂SO₄ و BaCl₂</span>
-                <span class="arrow">←</span>
-            </button>
-            <button class="tech-btn nav-screen-btn" data-target="scr-l3-menu">
-                <span>الدرس الثالث: الكشف عن الكاتيونات</span>
-                <span class="arrow">←</span>
-            </button>
-            <button class="tech-btn color-btn nav-screen-btn" data-target="scr-colors-menu">
-                <span>🎨 تلخيص الألوان والرواسب كاملة</span>
-                <span class="arrow">←</span>
-            </button>
+            <a href="https://wa.me/201225428692" target="_blank" class="wa-btn">
+                <span>💬 للتواصل المباشر عبر الواتساب</span>
+            </a>
         </div>
-
-        <!-- قائمة الدرس الأول -->
-        <div id="scr-l1-menu" class="screen">
-            <div class="nav-header">
-                <h2>الدرس الأول</h2>
-                <button class="back-btn nav-screen-btn" data-target="scr-main-menu">رجوع للقائمة</button>
-            </div>
-            <button class="tech-btn detail-btn" data-key="co3">أنيون الكربونات (CO₃²⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="hco3">أنيون البيكربونات (HCO₃⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="s2">أنيون الكبريتيد (S²⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="so3">أنيون الكبريتيت (SO₃²⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="s2o3">أنيون الثيوكبريتات (S₂O₃²⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="no2">أنيون النيتريت (NO₂⁻) <span class="arrow">←</span></button>
-            
-            <div class="note-box">
-                <strong>📌 ملاحظة هامة للدرس الأول:</strong>
-                جميع أملاح الكربونات لا تذوب في الماء باستثناء (الصوديوم، البوتاسيوم، والأمونيوم). بينما جميع أملاح البيكربونات تذوب في الماء بدون استثناء.
-            </div>
-        </div>
-
-        <!-- قائمة الدرس الثاني -->
-        <div id="scr-l2-menu" class="screen">
-            <div class="nav-header">
-                <h2>الدرس الثاني</h2>
-                <button class="back-btn nav-screen-btn" data-target="scr-main-menu">رجوع للقائمة</button>
-            </div>
-            <button class="tech-btn detail-btn" data-key="cl">أنيون الكلوريد (Cl⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="br">أنيون البروميد (Br⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="i">أنيون اليوديد (I⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="no3">أنيون النيترات (NO₃⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="po4">أنيون الفوسفات (PO₄³⁻) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="so4">أنيون الكبريتات (SO₄²⁻) <span class="arrow">←</span></button>
-
-            <div class="note-box">
-                <strong>📌 ملاحظة هامة للدرس الثاني:</strong>
-                نستخدم حمض H₂SO₄ المركز الساخن للكشف عن الهاليدات والنيترات لأنه أعلى في درجة الغليان وأكثر ثباتًا منها، فيطردها في صورة غازات.
-            </div>
-        </div>
-
-        <!-- قائمة الدرس الثالث -->
-        <div id="scr-l3-menu" class="screen">
-            <div class="nav-header">
-                <h2>الدرس الثالث</h2>
-                <button class="back-btn nav-screen-btn" data-target="scr-main-menu">رجوع للقائمة</button>
-            </div>
-            <button class="tech-btn detail-btn" data-key="cat1">المجموعة التحليلية الأولى (Ag⁺, Hg⁺, Pb²⁺) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="cu2">المجموعة التحليلية الثانية - النحاس II (Cu²⁺) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="al3">المجموعة الثالثة - الألومنيوم (Al³⁺) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="fe2">المجموعة الثالثة - الحديد II (Fe²⁺) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="fe3">المجموعة الثالثة - الحديد III (Fe³⁺) <span class="arrow">←</span></button>
-            <button class="tech-btn detail-btn" data-key="ca2">المجموعة الخامسة - الكالسيوم (Ca²⁺) <span class="arrow">←</span></button>
-
-            <div class="note-box">
-                <strong>📌 ملاحظة هامة للدرس الثالث:</strong>
-                الكشف عن الشقوق القاعدية (الكاتيونات) أكثر تعقيدًا بكثير من الشقوق الحامضية بسبب كثرة عدد الكاتيونات وتداخلها وتعدد حالات تأكسد العنصر الواحد.
-            </div>
-        </div>
-
-        <!-- قائمة تلخيص الألوان والرواسب -->
-        <div id="scr-colors-menu" class="screen">
-            <div class="nav-header">
-                <h2>🎨 ملخص الرواسب والألوان</h2>
-                <button class="back-btn nav-screen-btn" data-target="scr-main-menu">رجوع للقائمة</button>
-            </div>
-            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:15px;">اضغط على اسم الأنيون أو الكاتيون لمشاهدة لونه ورواسبه والمعادلة المكونة له:</p>
-            
-            <button class="tech-btn color-detail-btn" data-key="co3">الكربونات <span class="color-badge bg-white-prec">راسب أبيض</span></button>
-            <button class="tech-btn color-detail-btn" data-key="s2">الكبريتيد <span class="color-badge bg-black-prec">راسب أسود</span></button>
-            <button class="tech-btn color-detail-btn" data-key="so3">الكبريتيت <span class="color-badge bg-white-prec">راسب أبيض يسوّد</span></button>
-            <button class="tech-btn color-detail-btn" data-key="s2o3">الثيوكبريتات <span class="color-badge bg-yellow-prec">معلق أصفر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="no2">النيتريت / أبخرة <span class="color-badge bg-brown-prec">بني محمر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="cl">الكلوريد <span class="color-badge bg-white-prec">راسب أبيض</span></button>
-            <button class="tech-btn color-detail-btn" data-key="br">البروميد <span class="color-badge bg-yellow-prec">أبيض مصفر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="i">اليوديد <span class="color-badge bg-yellow-prec">راسب أصفر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="po4">الفوسفات <span class="color-badge bg-yellow-prec">راسب أصفر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="cu2">النحاس II <span class="color-badge bg-black-prec">راسب أسود</span></button>
-            <button class="tech-btn color-detail-btn" data-key="al3">الألومنيوم <span class="color-badge bg-white-prec">أبيض جيلاتيني</span></button>
-            <button class="tech-btn color-detail-btn" data-key="fe2">الحديد II <span class="color-badge bg-green-prec">أبيض مخضر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="fe3">الحديد III <span class="color-badge bg-brown-prec">بني محمر</span></button>
-            <button class="tech-btn color-detail-btn" data-key="ca2">الكالسيوم <span class="color-badge bg-red-prec">لهب أحمر طوبي</span></button>
-        </div>
-
-        <!-- شاشة عرض التفاصيل -->
-        <div id="scr-detail" class="screen">
-            <div class="nav-header">
-                <h2 id="detail-title">التفاصيل</h2>
-                <button class="back-btn" id="goBackDetailBtn">رجوع</button>
-            </div>
-            <div id="detail-body"></div>
-        </div>
-
     </div>
 
-    <script src="script.js"></script>
 </body>
 </html>
