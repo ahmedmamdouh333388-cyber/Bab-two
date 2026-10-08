@@ -2,6 +2,29 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentParentScreen = "scr-main-menu";
 
     var dataDB = {
+        // --- قسم الأكسدة والاختزال والغازات ---
+        ox_gases: {
+            title: "الغازات القابلة وغير القابلة للأكسدة",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>تصنيف الغازات</h3><div class="ox-grid"><div class="ox-card"><h4 style="color:#22c55e;">غازات قابلة للأكسدة</h4><ul class="ox-list"><li><strong>CO</strong> (أول أكسيد الكربون)</li><li><strong>SO₂</strong> (ثاني أكسيد الكبريت)</li><li><strong>NO</strong> (أول أكسيد النيتروجين)</li><li><strong>HBr(g)</strong> (بروميد الهيدروجين)</li><li><strong>HI(g)</strong> (يوديد الهيدروجين)</li></ul></div><div class="ox-card"><h4 style="color:#ef4444;">غازات غير قابلة للأكسدة</h4><ul class="ox-list"><li><strong>CO₂</strong> (ثاني أكسيد الكربون)</li><li><strong>SO₃</strong> (ثالث أكسيد الكبريت)</li><li><strong>NO₂</strong> (ثاني أكسيد النيتروجين)</li><li><strong>Br₂</strong> (أبخرة البروم)</li><li><strong>I₂</strong> (أبخرة اليود)</li><li><strong>Cl₂</strong> (غاز الكلور)</li><li><strong>HCl</strong> (كلوريد الهيدروجين)</li></ul></div></div></div>'
+        },
+        ox_anions: {
+            title: "الأنيونات القابلة وغير القابلة للأكسدة",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>تصنيف الأنيونات</h3><div class="ox-grid"><div class="ox-card"><h4 style="color:#22c55e;">أنيونات قابلة للأكسدة</h4><ul class="ox-list"><li><strong>S²⁻</strong> (الكبريتيد)</li><li><strong>SO₃²⁻</strong> (الكبريتيت)</li><li><strong>S₂O₃²⁻</strong> (الثيوكبريتات)</li><li><strong>NO₂⁻</strong> (النيتريت)</li><li><strong>Br⁻</strong> (البروميد)</li><li><strong>I⁻</strong> (اليوديد)</li></ul></div><div class="ox-card"><h4 style="color:#ef4444;">أنيونات غير قابلة للأكسدة</h4><ul class="ox-list"><li><strong>HCO₃⁻</strong> (البيكربونات)</li><li><strong>CO₃²⁻</strong> (الكربونات)</li><li><strong>SO₄²⁻</strong> (الكبريتات)</li><li><strong>PO₄³⁻</strong> (الفوسفات)</li><li><strong>Cl⁻</strong> (الكلوريد)</li></ul></div></div></div>'
+        },
+        ox_cations: {
+            title: "الكاتيونات القابلة وغير القابلة للأكسدة",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>تصنيف الكاتيونات</h3><div class="ox-grid"><div class="ox-card"><h4 style="color:#22c55e;">كاتيونات قابلة للأكسدة</h4><ul class="ox-list"><li><strong>Fe²⁺</strong> (الحديد II يتحول إلى Fe³⁺)</li></ul></div><div class="ox-card"><h4 style="color:#ef4444;">كاتيونات غير قابلة للأكسدة</h4><ul class="ox-list"><li><strong>Fe³⁺</strong> (الحديد III)</li><li><strong>Al³⁺</strong> (الألومنيوم)</li></ul></div></div></div>'
+        },
+        ox_agents: {
+            title: "العوامل المؤكسدة وتفاعل النيتريت",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>العوامل المؤكسدة الشهيرة وتغير ألوانها</h3><p><strong>1. برمنجنات البوتاسيوم (KMnO₄):</strong> عامل مؤكسد قوي، لونه <span class="color-badge" style="background:#a855f7; color:#fff;">بنفسجي</span> ويزول اللون عند تفاعله مع النيتريت (قابل للأكسدة).</p><p><strong>2. ثاني كرومات البوتاسيوم (K₂Cr₂O₇):</strong> عامل مؤكسد، لونه <span class="color-badge bg-yellow-prec">برتقالي</span> يتحول إلى <span class="color-badge bg-green-prec">أخضر</span> بسبب تكون كبريتات الكروم III.</p></div><div class="detail-card"><h3>معادلة تفاعل النيتريت مع البرمنجنات</h3><div class="formula-box">5NaNO₂ + 2KMnO₄ + 3H₂SO₄ → 5NaNO₃ + K₂SO₄ + 2MnSO₄ + 3H₂O</div><p style="text-align:center; font-size:0.85rem; color:var(--text-secondary);">يزول لون برمنجنات البوتاسيوم البنفسجية لتكون مركب MnSO₄ عديم اللون.</p></div>'
+        },
+
+        // --- باقي الدروس كما هي ---
         co3: {
             title: "أنيون الكربونات (CO₃²⁻)",
             parent: "scr-l1-menu",
@@ -127,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var themeName = opt.getAttribute('data-theme');
             document.body.className = themeName;
             themeMenu.classList.remove('active');
-            if(lampBtn) lampBtn.classList.remove('active');
+            if (lampBtn) lampBtn.classList.remove('active');
         });
     });
 
@@ -139,15 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // تسجيل الدخول وعرض الـ Splash Screen لمدة 3 ثوانٍ
+    // --- تصحيح دالة زرار الدخول المبسط والمباشر ---
     var startBtn = document.getElementById('startBtn');
     var studentNameInput = document.getElementById('studentName');
     var nameError = document.getElementById('nameError');
-    var splashScreen = document.getElementById('splashScreen');
 
     if (startBtn && studentNameInput) {
         startBtn.addEventListener('click', function (e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
             var studentName = studentNameInput.value.trim();
 
             if (studentName.length < 2) {
@@ -164,15 +186,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
             }
 
-            // إظهار الشاشة الترحيبية لمدة 3 ثوانٍ
-            splashScreen.classList.add('active');
-            setTimeout(function () {
-                splashScreen.classList.remove('active');
-                showScreen('scr-main-menu');
-            }, 3000);
+            // التبديل المباشر للشاشة الرئيسية لضمان عدم العطل
+            showScreen('scr-main-menu');
         });
 
-        studentNameInput.addEventListener('input', function() {
+        studentNameInput.addEventListener('input', function () {
             if (studentNameInput.value.trim().length >= 2) {
                 studentNameInput.classList.remove('input-error');
                 if (nameError) nameError.style.display = 'none';
@@ -180,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // التنقل بين الشاشات والدروس
     var navBtns = document.querySelectorAll('.nav-screen-btn');
     navBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -210,16 +229,4 @@ document.addEventListener("DOMContentLoaded", function () {
             if (item) {
                 currentParentScreen = 'scr-colors-menu';
                 document.getElementById('detail-title').innerText = "رواسب ولون: " + item.title;
-                document.getElementById('detail-body').innerHTML = item.content;
-                showScreen('scr-detail');
-            }
-        });
-    });
-
-    var goBackDetailBtn = document.getElementById('goBackDetailBtn');
-    if (goBackDetailBtn) {
-        goBackDetailBtn.addEventListener('click', function () {
-            showScreen(currentParentScreen);
-        });
-    }
-});
+                document.getElementById('detail-body').inne
