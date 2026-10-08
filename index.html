@@ -228,53 +228,7 @@
 
     </div>
 
-    <!-- كود المنطق والتفاعل المباشر لضمان العمل على Vercel بدون مشاكل -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var currentParentScreen = "scr-main-menu";
-
-            var dataDB = {
-                ox_gases: {
-                    title: "الغازات القابلة وغير القابلة للأكسدة",
-                    parent: "scr-ox-menu",
-                    content: '<div class="detail-card"><h3>تصنيف الغازات</h3><div class="ox-grid"><div class="ox-card"><h4 style="color:#22c55e;">غازات قابلة للأكسدة</h4><ul class="ox-list"><li><strong>CO</strong> (أول أكسيد الكربون)</li><li><strong>SO₂</strong> (ثاني أكسيد الكبريت)</li><li><strong>NO</strong> (أول أكسيد النيتروجين)</li><li><strong>HBr(g)</strong> (بروميد الهيدروجين)</li><li><strong>HI(g)</strong> (يوديد الهيدروجين)</li></ul></div><div class="ox-card"><h4 style="color:#ef4444;">غازات غير قابلة للأكسدة</h4><ul class="ox-list"><li><strong>CO₂</strong> (ثاني أكسيد الكربون)</li><li><strong>SO₃</strong> (ثالث أكسيد الكبريت)</li><li><strong>NO₂</strong> (ثاني أكسيد النيتروجين)</li><li><strong>Br₂</strong> (أبخرة البروم)</li><li><strong>I₂</strong> (أبخرة اليود)</li><li><strong>Cl₂</strong> (غاز الكلور)</li><li><strong>HCl</strong> (كلوريد الهيدروجين)</li></ul></div></div></div>'
-                },
-                ox_anions: {
-                    title: "الأنيونات القابلة وغير القابلة للأكسدة",
-                    parent: "scr-ox-menu",
-                    content: '<div class="detail-card"><h3>تصنيف الأنيونات</h3><div class="ox-grid"><div class="ox-card"><h4 style="color:#22c55e;">أنيونات قابلة للأكسدة</h4><ul class="ox-list"><li><strong>S²⁻</strong> (الكبريتيد)</li><li><strong>SO₃²⁻</strong> (الكبريتيت)</li><li><strong>S₂O₃²⁻</strong> (الثيوكبريتات)</li><li><strong>NO₂⁻</strong> (النيتريت)</li><li><strong>Br⁻</strong> (البروميد)</li><li><strong>I⁻</strong> (اليوديد)</li></ul></div><div class="ox-card"><h4 style="color:#ef4444;">أنيونات غير قابلة للأكسدة</h4><ul class="ox-list"><li><strong>HCO₃⁻</strong> (البيكربونات)</li><li><strong>CO₃²⁻</strong> (الكربونات)</li><li><strong>SO₄²⁻</strong> (الكبريتات)</li><li><strong>PO₄³⁻</strong> (الفوسفات)</li><li><strong>Cl⁻</strong> (الكلوريد)</li></ul></div></div></div>'
-                },
-                ox_cations: {
-                    title: "الكاتيونات القابلة وغير القابلة للأكسدة",
-                    parent: "scr-ox-menu",
-                    content: '<div class="detail-card"><h3>تصنيف الكاتيونات</h3><div class="ox-grid"><div class="ox-card"><h4 style="color:#22c55e;">كاتيونات قابلة للأكسدة</h4><ul class="ox-list"><li><strong>Fe²⁺</strong> (الحديد II يتحول إلى Fe³⁺)</li></ul></div><div class="ox-card"><h4 style="color:#ef4444;">كاتيونات غير قابلة للأكسدة</h4><ul class="ox-list"><li><strong>Fe³⁺</strong> (الحديد III)</li><li><strong>Al³⁺</strong> (الألومنيوم)</li></ul></div></div></div>'
-                },
-                ox_agents: {
-                    title: "العوامل المؤكسدة وتفاعل النيتريت",
-                    parent: "scr-ox-menu",
-                    content: '<div class="detail-card"><h3>العوامل المؤكسدة الشهيرة وتغير ألوانها</h3><p><strong>1. برمنجنات البوتاسيوم (KMnO₄):</strong> عامل مؤكسد قوي، لونه <span class="color-badge" style="background:#a855f7; color:#fff;">بنفسجي</span> ويزول اللون عند تفاعله مع النيتريت (قابل للأكسدة).</p><p><strong>2. ثاني كرومات البوتاسيوم (K₂Cr₂O₇):</strong> عامل مؤكسد، لونه <span class="color-badge bg-yellow-prec">برتقالي</span> يتحول إلى <span class="color-badge bg-green-prec">أخضر</span> بسبب تكون كبريتات الكروم III.</p></div><div class="detail-card"><h3>معادلة تفاعل النيتريت مع البرمنجنات</h3><div class="formula-box">5NaNO₂ + 2KMnO₄ + 3H₂SO₄ → 5NaNO₃ + K₂SO₄ + 2MnSO₄ + 3H₂O</div><p style="text-align:center; font-size:0.85rem; color:var(--text-secondary);">يزول لون برمنجنات البوتاسيوم البنفسجية لتكون مركب MnSO₄ عديم اللون.</p></div>'
-                },
-                co3: {
-                    title: "أنيون الكربونات (CO₃²⁻)",
-                    parent: "scr-l1-menu",
-                    content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>الملح الصلب + حمض HCl المخفف ← يحدث فوران ويتصاعد غاز ثاني أكسيد الكربون (CO₂) الذي يعكر ماء الجير الرائق لفترة قصيرة (ST).</p><div class="formula-box">Na₂CO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)↑</div><div class="formula-box">Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s)↓ (راسب أبيض) + H₂O(l)</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + محلول كبريتات المغنسيوم (MgSO₄) ← يتكون <span class="color-badge bg-white-prec">راسب أبيض على البارد</span> يذوب في حمض HCl.</p><div class="formula-box">Na₂CO₃(aq) + MgSO₄(aq) → Na₂SO₄(aq) + MgCO₃(s)↓</div></div>'
-                },
-                hco3: {
-                    title: "أنيون البيكربونات (HCO₃⁻)",
-                    parent: "scr-l1-menu",
-                    content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>الملح الصلب + حمض HCl المخفف ← يحدث فوران ويتصاعد غاز CO₂ الذي يعكر ماء الجير الرائق عند إمراره لفترة قصيرة.</p><div class="formula-box">NaHCO₃(s) + HCl(aq) → NaCl(aq) + H₂O(l) + CO₂(g)↑</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + محلول MgSO₄ ← يتكون <span class="color-badge bg-white-prec">راسب أبيض بعد التسخين</span>.</p><div class="formula-box">2NaHCO₃(aq) + MgSO₄(aq) → Na₂SO₄(aq) + Mg(HCO₃)₂(aq)</div><div class="formula-box">Mg(HCO₃)₂(aq) —Δ→ MgCO₃(s)↓ (راسب أبيض) + H₂O(l) + CO₂(g)↑</div></div>'
-                },
-                s2: {
-                    title: "أنيون الكبريتيد (S²⁻)",
-                    parent: "scr-l1-menu",
-                    content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>الملح الصلب + حمض HCl المخفف ← يتصاعد غاز H₂S ذو الرائحة الكريهة والذي يسوّد ورقة مبللة بأسيتات الرصاص II.</p><div class="formula-box">Na₂S(s) + 2HCl(aq) → 2NaCl(aq) + H₂S(g)↑</div><div class="formula-box">(CH₃COO)₂Pb(aq) + H₂S(g) → 2CH₃COOH(aq) + PbS(s)↓ (أسود)</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + محلول نترات الفضة (AgNO₃) ← يتكون <span class="color-badge bg-black-prec">راسب أسود</span> من كبريتيد الفضة.</p><div class="formula-box">Na₂S(aq) + 2AgNO₃(aq) → 2NaNO₃(aq) + Ag₂S(s)↓ (أسود)</div></div>'
-                },
-                so3: {
-                    title: "أنيون الكبريتيت (SO₃²⁻)",
-                    parent: "scr-l1-menu",
-                    content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>الملح الصلب + حمض HCl المخفف ← يتصاعد غاز SO₂ ذو الرائحة النفاذة والذي يخضر ورقة مبللة بثاني كرومات البوتاسيوم المحمضة.</p><div class="formula-box">Na₂SO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + SO₂(g)↑</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + AgNO₃ ← يتكون <span class="color-badge bg-white-prec">راسب أبيض يسوّد بالتسخين</span>.</p><div class="formula-box">Na₂SO₃(aq) + 2AgNO₃(aq) → 2NaNO₃(aq) + Ag₂SO₃(s)↓ (أبيض)</div><div class="formula-box">Ag₂SO₃(s) —Δ→ Ag₂S(s)↓ (أسود) + SO₃(g)</div></div>'
-                },
-                s2o3: {
-                    title: "أنيون الثيوكبريتات (S₂O₃²⁻)",
-                    parent: "scr-l1-menu",
+    <script src="script.js"></script>
+</body>
+                </html>
     
