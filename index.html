@@ -40,7 +40,7 @@
     <!-- الشاشة الترحيبية (Splash Screen) -->
     <div id="splashScreen" class="splash-overlay">
         <div class="splash-box">
-            <div class="splash-icon">⚛️</div>
+            <div class="splash-icon">🚨</div>
             <h2>تم إنشاء الموقع بواسطة</h2>
             <div class="creator-name">Ahmed Mamdouh</div>
         </div>
@@ -48,7 +48,7 @@
 
     <div class="container">
 
-        <!-- الشاشة 1: واجهة الدخول التكنولوجية -->
+        <!-- الشاشة 1: واجهة الدخول -->
         <div id="scr-welcome" class="screen active">
             <div class="tech-login-card">
                 <div class="glow-sphere"></div>
@@ -94,6 +94,10 @@
             </button>
             <button class="tech-btn nav-screen-btn" data-target="scr-l3-menu">
                 <span>الدرس الثالث: الكشف عن الكاتيونات</span>
+                <span class="arrow">←</span>
+            </button>
+            <button class="tech-btn ox-btn nav-screen-btn" data-target="scr-ox-menu">
+                <span>🧪 ملخص الأكسدة والاختزال والغازات</span>
                 <span class="arrow">←</span>
             </button>
             <button class="tech-btn color-btn nav-screen-btn" data-target="scr-colors-menu">
@@ -156,6 +160,36 @@
             <div class="note-box">
                 <strong>📌 ملاحظة هامة للدرس الثالث:</strong>
                 الكشف عن الشقوق القاعدية (الكاتيونات) أكثر تعقيدًا بكثير من الشقوق الحامضية بسبب كثرة عدد الكاتيونات وتداخلها وتعدد حالات تأكسد العنصر الواحد.
+            </div>
+        </div>
+
+        <!-- قائمة الأكسدة والاختزال الجديدة -->
+        <div id="scr-ox-menu" class="screen">
+            <div class="nav-header">
+                <h2>🧪 ملخص الأكسدة والاختزال</h2>
+                <button class="back-btn nav-screen-btn" data-target="scr-main-menu">رجوع للقائمة</button>
+            </div>
+            
+            <button class="tech-btn detail-btn" data-key="ox_gases">
+                <span>1. الغازات (قابلة وغير قابلة للأكسدة)</span>
+                <span class="arrow">←</span>
+            </button>
+            <button class="tech-btn detail-btn" data-key="ox_anions">
+                <span>2. الأنيونات (قابلة وغير قابلة للأكسدة)</span>
+                <span class="arrow">←</span>
+            </button>
+            <button class="tech-btn detail-btn" data-key="ox_cations">
+                <span>3. الكاتيونات (قابلة وغير قابلة للأكسدة)</span>
+                <span class="arrow">←</span>
+            </button>
+            <button class="tech-btn detail-btn" data-key="ox_agents">
+                <span>4. العوامل المؤكسدة ومعادلة تفاعل النيتريت</span>
+                <span class="arrow">←</span>
+            </button>
+
+            <div class="note-box">
+                <strong>📌 ملخص مهم جدًا:</strong>
+                المركبات التي تحتوي على عناصر في أعلى حالة تأكسد لها تكون غير قابلة للأكسدة، بينما المركبات في حالات التأكسد الصغرى تكون قابلة للأكسدة.
             </div>
         </div>
 
