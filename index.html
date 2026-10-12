@@ -159,7 +159,7 @@
         <!-- عداد الوقت -->
         <div class="countdown">
             <div class="time-box">
-                <span id="days">07</span>
+                <span id="days">00</span>
                 <label>أيام</label>
             </div>
             <div class="time-box">
@@ -188,20 +188,13 @@
     </div>
 
     <script>
-        // تحديد مدة الصيانة بـ 7 أيام مع ثبات الوقت بالمتصفح بدون إعادة تعيين عند التحديث
-        const totalDurationDays = 7;
-        const storageKey = "maintenanceEndTime";
+        // تحديد وقت بداية الصيانة ووقت نهايتها الثابت ليكون موحداً على كل الأجهزة
+        // وقت البداية: 12 أكتوبر 2026
+        const startTime = new Date("2026-10-12T00:00:00").getTime();
+        // وقت النهاية الثابت: بعد 7 أيام بالضبط (19 أكتوبر 2026)
+        const endTime = new Date("2026-10-19T00:00:00").getTime();
         
-        let endTime = localStorage.getItem(storageKey);
-        
-        if (!endTime) {
-            endTime = new Date().getTime() + (totalDurationDays * 24 * 60 * 60 * 1000);
-            localStorage.setItem(storageKey, endTime);
-        } else {
-            endTime = parseInt(endTime);
-        }
-
-        const totalDurationMs = totalDurationDays * 24 * 60 * 60 * 1000;
+        const totalDurationMs = endTime - startTime;
 
         function updateCountdown() {
             const now = new Date().getTime();
@@ -226,7 +219,11 @@
             document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
             document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
 
-            const progressPercentage = (timeLeft / totalDurationMs) * 100;
+            // حساب نسبة شريط التقدم بناءً على الوقت المتبقي من الـ 7 أيام الثابتة
+            let progressPercentage = (timeLeft / totalDurationMs) * 100;
+            if (progressPercentage > 100) progressPercentage = 100;
+            if (progressPercentage < 0) progressPercentage = 0;
+            
             document.getElementById("progressBar").style.width = progressPercentage + "%";
         }
 
@@ -234,5 +231,4 @@
         setInterval(updateCountdown, 1000);
     </script>
 </body>
-            </html>
-            
+</html>
