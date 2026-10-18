@@ -1,7 +1,8 @@
+// الجزء الأول: قاعدة البيانات ومنطق التنقل بين الشاشات
 document.addEventListener("DOMContentLoaded", function () {
-    var currentParentScreen = "scr-main-menu";
+    window.currentParentScreen = "scr-main-menu";
 
-    var dataDB = {
+    window.dataDB = {
         co3: {
             title: "أنيون الكربونات (CO₃²⁻)",
             parent: "scr-l1-menu",
@@ -112,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    function showScreen(screenId) {
+    window.showScreen = function(screenId) {
         document.querySelectorAll('.app-screen').forEach(function (screen) {
             screen.classList.remove('active');
         });
@@ -121,122 +122,133 @@ document.addEventListener("DOMContentLoaded", function () {
             targetScreen.classList.add('active');
         }
         window.scrollTo(0, 0);
-    }
-
-    var homeHeaderBtn = document.getElementById('homeHeaderBtn');
-    if (homeHeaderBtn) {
-        homeHeaderBtn.onclick = function () {
-            showScreen('scr-main-menu');
-        };
-    }
-
-    var startBtn = document.getElementById('startBtn');
-    var studentNameInput = document.getElementById('studentName');
-    var nameError = document.getElementById('nameError');
-    var splashScreen = document.getElementById('splashScreen');
-
-    if (startBtn && studentNameInput) {
-        startBtn.onclick = function (e) {
-            e.preventDefault();
-            var studentName = studentNameInput.value.trim();
-
-            if (studentName.length < 2) {
-                studentNameInput.classList.add('input-error');
-                if (nameError) nameError.style.display = 'block';
-                return;
-            }
-
-            studentNameInput.classList.remove('input-error');
-            if (nameError) nameError.style.display = 'none';
-
-            var welcomeContainer = document.getElementById('welcomeUserContainer');
-            if (welcomeContainer) {
-                welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
-            }
-
-            if (splashScreen) {
-                splashScreen.classList.add('active');
-                setTimeout(function () {
-                    splashScreen.classList.remove('active');
-                    showScreen('scr-main-menu');
-                }, 1200);
-            } else {
-                showScreen('scr-main-menu');
-            }
-        };
-    }
-
-    document.querySelectorAll('.nav-screen-btn').forEach(function (btn) {
-        btn.onclick = function () {
-            var target = btn.getAttribute('data-target');
-            showScreen(target);
-        };
-    });
-
-    // تنظيم عرض الرواسب حسب اللون المختار
-    document.querySelectorAll('.color-folder-btn').forEach(function (btn) {
-        btn.onclick = function () {
-            var groupKey = btn.getAttribute('data-color-group');
-            var groupTitleText = btn.querySelector('span:nth-child(2)').innerText;
-            
-            var container = document.getElementById('group-content-body');
-            document.getElementById('group-title').innerText = groupTitleText;
-            
-            var htmlContent = '';
-            for (var key in dataDB) {
-                if (dataDB[key].colorGroup === groupKey) {
-                    htmlContent += '<button class="item-link-btn detail-btn" data-key="' + key + '">' + dataDB[key].title + ' <span>←</span></button>';
-                }
-            }
-            
-            if (htmlContent === '') {
-                htmlContent = '<p style="text-align:center; color:#9ca3af; padding:20px;">لا توجد عناصر مضافة لهذه المجموعة حالياً.</p>';
-            }
-            
-            container.innerHTML = htmlContent;
-            
-            container.querySelectorAll('.detail-btn').forEach(function (detBtn) {
-                detBtn.onclick = function () {
-                    var k = detBtn.getAttribute('data-key');
-                    var item = dataDB[k];
-                    if (item) {
-                        currentParentScreen = 'scr-color-group';
-                        document.getElementById('detail-title').innerText = item.title;
-                        document.getElementById('detail-body').innerHTML = item.content;
-                        showScreen('scr-detail');
-                    }
-                };
-            });
-
-            showScreen('scr-color-group');
-        };
-    });
-
-    var backToColorsBtn = document.getElementById('backToColorsBtn');
-    if (backToColorsBtn) {
-        backToColorsBtn.onclick = function () {
-            showScreen('scr-colors-menu');
-        };
-    }
-
-    document.querySelectorAll('.detail-btn').forEach(function (btn) {
-        btn.onclick = function () {
-            var key = btn.getAttribute('data-key');
-            var item = dataDB[key];
-            if (item) {
-                currentParentScreen = item.parent;
-                document.getElementById('detail-title').innerText = item.title;
-                document.getElementById('detail-body').innerHTML = item.content;
-                showScreen('scr-detail');
-            }
-        };
-    });
-
-    var goBackDetailBtn = document.getElementById('goBackDetailBtn');
-    if (goBackDetailBtn) {
-        goBackDetailBtn.onclick = function () {
-            showScreen(currentParentScreen);
-        };
-    }
+    };
 });
-            
+// الجزء الثاني: تفعيل جميع الأزرار والروابط والاستجابة الكاملة
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function() {
+        var homeHeaderBtn = document.getElementById('homeHeaderBtn');
+        if (homeHeaderBtn) {
+            homeHeaderBtn.onclick = function () {
+                window.showScreen('scr-main-menu');
+            };
+        }
+
+        var startBtn = document.getElementById('startBtn');
+        var studentNameInput = document.getElementById('studentName');
+        var nameError = document.getElementById('nameError');
+        var splashScreen = document.getElementById('splashScreen');
+
+        if (startBtn && studentNameInput) {
+            startBtn.onclick = function (e) {
+                e.preventDefault();
+                var studentName = studentNameInput.value.trim();
+
+                if (studentName.length < 2) {
+                    studentNameInput.classList.add('input-error');
+                    if (nameError) nameError.style.display = 'block';
+                    return;
+                }
+
+                studentNameInput.classList.remove('input-error');
+                if (nameError) nameError.style.display = 'none';
+
+                var welcomeContainer = document.getElementById('welcomeUserContainer');
+                if (welcomeContainer) {
+                    welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
+                }
+
+                if (splashScreen) {
+                    splashScreen.classList.add('active');
+                    setTimeout(function () {
+                        splashScreen.classList.remove('active');
+                        window.showScreen('scr-main-menu');
+                    }, 1000);
+                } else {
+                    window.showScreen('scr-main-menu');
+                }
+            };
+        }
+
+        // ربط جميع أزرار الانتقال بين القوائم
+        document.querySelectorAll('.nav-screen-btn, .menu-card-btn').forEach(function (btn) {
+            btn.onclick = function () {
+                var target = btn.getAttribute('data-target');
+                if (target) {
+                    window.showScreen(target);
+                }
+            };
+        });
+
+        // ربط أزرار مجموعات الألوان
+        document.querySelectorAll('.color-folder-btn').forEach(function (btn) {
+            btn.onclick = function () {
+                var groupKey = btn.getAttribute('data-color-group');
+                var groupTitleText = btn.querySelector('span:nth-child(2)').innerText;
+                
+                var container = document.getElementById('group-content-body');
+                var groupTitleElem = document.getElementById('group-title');
+                if (groupTitleElem) groupTitleElem.innerText = groupTitleText;
+                
+                var htmlContent = '';
+                for (var key in window.dataDB) {
+                    if (window.dataDB[key].colorGroup === groupKey) {
+                        htmlContent += '<button class="item-link-btn detail-btn" data-key="' + key + '">' + window.dataDB[key].title + ' <span>←</span></button>';
+                    }
+                }
+                
+                if (htmlContent === '') {
+                    htmlContent = '<p style="text-align:center; color:#9ca3af; padding:20px;">لا توجد عناصر مضافة لهذه المجموعة حالياً.</p>';
+                }
+                
+                if (container) {
+                    container.innerHTML = htmlContent;
+                    
+                    container.querySelectorAll('.detail-btn').forEach(function (detBtn) {
+                        detBtn.onclick = function () {
+                            var k = detBtn.getAttribute('data-key');
+                            var item = window.dataDB[k];
+                            if (item) {
+                                window.currentParentScreen = 'scr-color-group';
+                                document.getElementById('detail-title').innerText = item.title;
+                                document.getElementById('detail-body').innerHTML = item.content;
+                                window.showScreen('scr-detail');
+                            }
+                        };
+                    });
+                }
+
+                window.showScreen('scr-color-group');
+            };
+        });
+
+        var backToColorsBtn = document.getElementById('backToColorsBtn');
+        if (backToColorsBtn) {
+            backToColorsBtn.onclick = function () {
+                window.showScreen('scr-colors-menu');
+            };
+        }
+
+        // ربط أزرار تفاصيل الدروس العادية
+        document.querySelectorAll('.detail-btn').forEach(function (btn) {
+            btn.onclick = function () {
+                var key = btn.getAttribute('data-key');
+                var item = window.dataDB[key];
+                if (item) {
+                    window.currentParentScreen = item.parent;
+                    document.getElementById('detail-title').innerText = item.title;
+                    document.getElementById('detail-body').innerHTML = item.content;
+                    window.showScreen('scr-detail');
+                }
+            };
+        });
+
+        var goBackDetailBtn = document.getElementById('goBackDetailBtn');
+        if (goBackDetailBtn) {
+            goBackDetailBtn.onclick = function () {
+                window.showScreen(window.currentParentScreen);
+            };
+        }
+    }, 100);
+});
+               
