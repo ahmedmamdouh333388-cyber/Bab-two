@@ -1,428 +1,233 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#080d1b">
-    <meta name="description" content="منصة الكيمياء التحليلية - تعلم الأيونات والتجارب وألوان الرواسب">
-    <title>منصة الكيمياء التحليلية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>منصة الكيمياء المتطورة</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="app-header">
-    <button class="brand" id="brandHomeBtn" type="button">
-        <span class="brand-icon">⚗️</span>
-        <span class="brand-copy">
-            <strong>CHEMISTRY</strong>
-            <small>منصة الكيمياء التحليلية</small>
-        </span>
-    </button>
+    <!-- الشريط العلوي -->
+    <header class="app-header">
+        <div class="logo-area">
+            <span class="logo-icon">🧪</span>
+            <h1>الكيمياء التحليلية</h1>
+        </div>
+        <button class="home-nav-btn" id="homeHeaderBtn" title="الرئيسية">🏠</button>
+    </header>
 
-    <button class="home-nav-btn" id="homeHeaderBtn" type="button" aria-label="الرئيسية">
-        ⌂
-    </button>
-</header>
-
-<div id="splashScreen" class="splash-overlay">
-    <div class="splash-card">
-        <div class="splash-orbit"><span>⚛</span></div>
-        <p class="eyebrow">CHEMISTRY PLATFORM</p>
-        <h2>بنجهز معملك العلمي</h2>
-        <div class="loading-track"><span></span></div>
-        <small>لحظات ونبدأ رحلة التفوق</small>
+    <!-- الشاشة الترحيبية -->
+    <div id="splashScreen" class="splash-overlay">
+        <div class="splash-card">
+            <div class="splash-spinner">⚛️</div>
+            <h2>منصة التحليل الكيميائي</h2>
+            <div class="creator-tag">Ahmed Mamdouh</div>
+        </div>
     </div>
-</div>
 
-<main class="main-container">
+    <main class="main-container">
 
-    <!-- شاشة تسجيل الدخول -->
-    <section id="scr-welcome" class="app-screen active">
-        <div class="auth-layout">
-
-            <div class="auth-intro">
-                <div class="live-pill">
-                    <span class="live-dot"></span>
-                    بوابتك للتفوق في الكيمياء
-                </div>
-
-                <div class="hero-visual">
-                    <div class="hero-ring ring-one"></div>
-                    <div class="hero-ring ring-two"></div>
-                    <div class="hero-flask">🧪</div>
-                    <span class="floating-symbol symbol-one">H₂O</span>
-                    <span class="floating-symbol symbol-two">NaCl</span>
-                    <span class="floating-symbol symbol-three">⚛</span>
-                </div>
-
-                <p class="eyebrow">LEARN · EXPLORE · EXCEL</p>
-
-                <h1 class="hero-title">
-                    افهم الكيمياء،
-                    <span>واكتشف سرّها.</span>
-                </h1>
-
-                <p class="hero-description">
-                    رحلتك لفهم التجارب والمعادلات وألوان الرواسب تبدأ من هنا،
-                    بخطوات منظمة وتجربة تعلم أسهل.
-                </p>
-
-                <div class="hero-stats">
-                    <div>
-                        <strong>03</strong>
-                        <span>دروس أساسية</span>
-                    </div>
-                    <span class="stat-divider"></span>
-                    <div>
-                        <strong>01</strong>
-                        <span>مرجع تفاعلي</span>
-                    </div>
-                    <span class="stat-divider"></span>
-                    <div>
-                        <strong>∞</strong>
-                        <span>فرص للتعلم</span>
-                    </div>
-                </div>
-            </div>
-
+        <!-- واجهة تسجيل الدخول -->
+        <section id="scr-welcome" class="app-screen active">
             <div class="glass-auth-box">
-                <div class="auth-top-icon">✦</div>
-                <span class="auth-overline">STUDENT ACCESS</span>
-                <h2>أهلاً بيك يا بطل!</h2>
-                <p class="auth-subtitle">سجّل اسمك وابدأ رحلتك التعليمية</p>
+                <div class="auth-icon-wrap">🔬</div>
+                <h2>بوابة الطلاب</h2>
+                <p>الصف الثالث الثانوي • الباب الثاني</p>
 
-                <div class="auth-divider">
-                    <span></span>
-                    <small>بيانات الطالب</small>
-                    <span></span>
+                <div class="input-container">
+                    <input type="text" id="studentName" placeholder="أدخل اسم الطالب..." autocomplete="off">
                 </div>
+                <div id="nameError" class="error-notification">يرجى كتابة الاسم بشكل صحيح (حرفين على الأقل)</div>
 
-                <form id="loginForm" novalidate>
-                    <label for="studentName">اسم الطالب</label>
-
-                    <div class="input-container">
-                        <span class="input-icon">♙</span>
-                        <input
-                            type="text"
-                            id="studentName"
-                            name="studentName"
-                            placeholder="اكتب اسمك هنا..."
-                            autocomplete="name"
-                            maxlength="60"
-                            required
-                        >
-                    </div>
-
-                    <div id="nameError" class="error-notification" role="alert">
-                        اكتب اسمك بحرفين على الأقل.
-                    </div>
-
-                    <button class="primary-glow-btn" id="startBtn" type="submit">
-                        <span>ابدأ رحلتك</span>
-                        <span class="btn-arrow">←</span>
-                    </button>
-                </form>
-
-                <div class="secure-note">
-                    <span>✧</span>
-                    <span>واجهة دخول بسيطة بدون كلمة مرور</span>
-                </div>
-
-                <div class="auth-features">
-                    <div><span>◈</span> شرح منظم</div>
-                    <div><span>◉</span> معادلات واضحة</div>
-                    <div><span>✧</span> ألوان تفاعلية</div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- القائمة الرئيسية -->
-    <section id="scr-main-menu" class="app-screen">
-        <div class="dashboard-heading">
-            <div>
-                <span class="eyebrow">YOUR LEARNING SPACE</span>
-                <h2>مساحتك العلمية <span class="heading-spark">✦</span></h2>
-                <p>اختار القسم اللي تحب تبدأ منه النهارده.</p>
-            </div>
-            <div class="dashboard-atom">⚛</div>
-        </div>
-
-        <div id="welcomeUserContainer"></div>
-
-        <div class="section-label">
-            <div>
-                <span class="section-number">01</span>
-                <h3>المحتوى التعليمي</h3>
-            </div>
-            <span class="section-caption">اختار درسًا للبدء</span>
-        </div>
-
-        <div class="menu-grid">
-            <button class="menu-card-btn" data-target="scr-l1-menu" type="button">
-                <span class="card-icon icon-blue">01</span>
-                <span class="card-info">
-                    <span class="card-kicker">LESSON ONE</span>
-                    <strong>الدرس الأول</strong>
-                    <span class="card-description">أنيونات حمض HCl المخفف</span>
-                </span>
-                <span class="card-arrow">←</span>
-            </button>
-
-            <button class="menu-card-btn" data-target="scr-l2-menu" type="button">
-                <span class="card-icon icon-purple">02</span>
-                <span class="card-info">
-                    <span class="card-kicker">LESSON TWO</span>
-                    <strong>الدرس الثاني</strong>
-                    <span class="card-description">أنيونات حمض الكبريتيك المركز</span>
-                </span>
-                <span class="card-arrow">←</span>
-            </button>
-
-            <button class="menu-card-btn" data-target="scr-l3-menu" type="button">
-                <span class="card-icon icon-green">03</span>
-                <span class="card-info">
-                    <span class="card-kicker">LESSON THREE</span>
-                    <strong>الدرس الثالث</strong>
-                    <span class="card-description">أيونات المجموعة والتحليل</span>
-                </span>
-                <span class="card-arrow">←</span>
-            </button>
-        </div>
-
-        <div class="feature-card">
-            <div class="card-icon icon-orange">⚗</div>
-            <div class="card-info">
-                <span class="card-kicker">QUICK REFERENCE</span>
-                <strong>مراجع الكيمياء</strong>
-                <span class="card-description">اختصارات للوصول السريع للمعلومات</span>
-            </div>
-            <div class="feature-actions">
-                <button class="return-btn nav-screen-btn" data-target="scr-ox-menu" type="button">
-                    مجموعة الأكاسيد
+                <button class="primary-glow-btn" id="startBtn" type="button">
+                    <span>دخول إلى المنصة</span>
+                    <span class="btn-arrow">←</span>
                 </button>
-                <button class="return-btn nav-screen-btn" data-target="scr-colors-menu" type="button">
-                    ألوان الرواسب
+
+                <div class="features-row">
+                    <span>⚡ شروح بصرية</span>
+                    <span>🎨 ألوان ورواسب</span>
+                    <span>💡 معادلات دقيقة</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- القائمة الرئيسية -->
+        <section id="scr-main-menu" class="app-screen">
+            <div id="welcomeUserContainer"></div>
+            
+            <div class="menu-grid">
+                <button class="menu-card-btn" data-target="scr-l1-menu">
+                    <div class="card-icon">📖</div>
+                    <div class="card-info">
+                        <h3>الدرس الأول</h3>
+                        <p>أنيونات حمض HCl المخفف</p>
+                    </div>
+                    <span class="card-arrow">←</span>
+                </button>
+
+                <button class="menu-card-btn" data-target="scr-l2-menu">
+                    <div class="card-icon">📖</div>
+                    <div class="card-info">
+                        <h3>الدرس الثاني</h3>
+                        <p>أنيونات حمض H₂SO₄ المركز و BaCl₂</p>
+                    </div>
+                    <span class="card-arrow">←</span>
+                </button>
+
+                <button class="menu-card-btn" data-target="scr-l3-menu">
+                    <div class="card-icon">📖</div>
+                    <div class="card-info">
+                        <h3>الدرس الثالث</h3>
+                        <p>الكشف عن الشقوق القاعدية (الكاتيونات)</p>
+                    </div>
+                    <span class="card-arrow">←</span>
+                </button>
+
+                <button class="menu-card-btn highlight-card" data-target="scr-ox-menu">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-info">
+                        <h3>الأكسدة والاختزال والغازات</h3>
+                        <p>تصنيف الغازات والأنيونات والعوامل المؤكسدة</p>
+                    </div>
+                    <span class="card-arrow">←</span>
+                </button>
+
+                <button class="menu-card-btn highlight-card" data-target="scr-colors-menu" style="border-color: rgba(236, 72, 153, 0.4);">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-info">
+                        <h3>ألوان الرواسب</h3>
+                        <p>تصنيف تفاعلي حسب الألوان لتثبيت المعلومات</p>
+                    </div>
+                    <span class="card-arrow">←</span>
                 </button>
             </div>
-        </div>
+        </section>
 
-        <div class="study-tip">
-            <span class="tip-icon">💡</span>
-            <div>
-                <strong>نصيحة للمذاكرة</strong>
-                <p>اربط بين الكاشف والملاحظة والنتيجة؛ ده هيساعدك تفهم التجربة بدل ما تحفظها بس.</p>
+        <!-- قائمة الدرس الأول -->
+        <section id="scr-l1-menu" class="app-screen">
+            <div class="section-top-bar">
+                <h2>الدرس الأول</h2>
+                <button class="return-btn nav-screen-btn" data-target="scr-main-menu">الرجوع للقائمة</button>
             </div>
-        </div>
-    </section>
-</main>
+            <div class="sub-menu-list">
+                <button class="item-link-btn detail-btn" data-key="co3">أنيون الكربونات (CO₃²⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="hco3">أنيون البيكربونات (HCO₃⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="s2">أنيون الكبريتيد (S²⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="so3">أنيون الكبريتيت (SO₃²⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="s2o3">أنيون الثيوكبريتات (S₂O₃²⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="no2">أنيون النيتريت (NO₂⁻) <span>←</span></button>
+            </div>
+        </section>
+
+        <!-- قائمة الدرس الثاني -->
+        <section id="scr-l2-menu" class="app-screen">
+            <div class="section-top-bar">
+                <h2>الدرس الثاني</h2>
+                <button class="return-btn nav-screen-btn" data-target="scr-main-menu">الرجوع للقائمة</button>
+            </div>
+            <div class="sub-menu-list">
+                <button class="item-link-btn detail-btn" data-key="cl">أنيون الكلوريد (Cl⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="br">أنيون البروميد (Br⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="i">أنيون اليوديد (I⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="no3">أنيون النيترات (NO₃⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="po4">أنيون الفوسفات (PO₄³⁻) <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="so4">أنيون الكبريتات (SO₄²⁻) <span>←</span></button>
+            </div>
+        </section>
+
+        <!-- قائمة الدرس الثالث -->
+        <section id="scr-l3-menu" class="app-screen">
+            <div class="section-top-bar">
+                <h2>الدرس الثالث</h2>
+                <button class="return-btn nav-screen-btn" data-target="scr-main-menu">الرجوع للقائمة</button>
+            </div>
+            <div class="sub-menu-list">
+                <button class="item-link-btn detail-btn" data-key="cat1">المجموعة التحليلية الأولى <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="cu2">المجموعة الثانية - النحاس II <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="al3">المجموعة الثالثة - الألومنيوم <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="fe2">المجموعة الثالثة - الحديد II <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="fe3">المجموعة الثالثة - الحديد III <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="ca2">المجموعة الخامسة - الكالسيوم <span>←</span></button>
+            </div>
+        </section>
+
+        <!-- قائمة الأكسدة والاختزال -->
+        <section id="scr-ox-menu" class="app-screen">
+            <div class="section-top-bar">
+                <h2>الأكسدة والاختزال والغازات</h2>
+                <button class="return-btn nav-screen-btn" data-target="scr-main-menu">الرجوع للقائمة</button>
+            </div>
+            <div class="sub-menu-list">
+                <button class="item-link-btn detail-btn" data-key="ox_gases">تصنيف الغازات <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="ox_anions">تصنيف الأنيونات <span>←</span></button>
+                <button class="item-link-btn detail-btn" data-key="ox_agents">العوامل المؤكسدة وتفاعل النيتريت <span>←</span></button>
+            </div>
+        </section>
+
+        <!-- قسم ألوان الرواسب -->
+        <section id="scr-colors-menu" class="app-screen">
+            <div class="section-top-bar">
+                <h2>ألوان الرواسب</h2>
+                <button class="return-btn nav-screen-btn" data-target="scr-main-menu">الرجوع للقائمة</button>
+            </div>
+            <p class="section-hint">اضغط على أي لون لعرض كافة الرواسب والمواد والتفاعلات الخاصة به:</p>
+            
+            <div class="color-palette-grid">
+                <button class="color-folder-btn" data-color-group="white">
+                    <span class="dot-indicator" style="background:#ffffff; border:1px solid #ccc;"></span>
+                    <span>اللون الأبيض (رواسب أساسية)</span>
+                    <span class="count-badge">عرض</span>
+                </button>
+                
+                <button class="color-folder-btn" data-color-group="black">
+                    <span class="dot-indicator" style="background:#000000; border:1px solid #555;"></span>
+                    <span>اللون الأسود</span>
+                    <span class="count-badge">عرض</span>
+                </button>
+
+                <button class="color-folder-btn" data-color-group="yellow">
+                    <span class="dot-indicator" style="background:#eab308;"></span>
+                    <span>اللون الأصفر / أبيض مصفر</span>
+                    <span class="count-badge">عرض</span>
+                </button>
+
+                <button class="color-folder-btn" data-color-group="brown">
+                    <span class="dot-indicator" style="background:#b45309;"></span>
+                    <span>اللون البني المحمر (يتضمن FeSO₄ و NO₂)</span>
+                    <span class="count-badge">عرض</span>
+                </button>
+
+                <button class="color-folder-btn" data-color-group="green">
+                    <span class="dot-indicator" style="background:#22c55e;"></span>
+                    <span>اللون الأبيض المخضر</span>
+                    <span class="count-badge">عرض</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- صفحة عرض عناصر لون معين -->
+        <section id="scr-color-group" class="app-screen">
+            <div class="section-top-bar">
+                <h2 id="group-title">المجموعة اللونية</h2>
+                <button class="return-btn" id="backToColorsBtn">رجوع للألوان</button>
+            </div>
+            <div id="group-content-body" class="sub-menu-list"></div>
+        </section>
+
+        <!-- شاشة التفاصيل والمعادلات -->
+        <section id="scr-detail" class="app-screen">
+            <div class="section-top-bar">
+                <h2 id="detail-title">التفاصيل</h2>
+                <button class="return-btn" id="goBackDetailBtn">رجوع</button>
+            </div>
+            <div id="detail-body"></div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
-                                                              </html>
-                                                              
-<!-- قائمة الدرس الأول -->
-<section id="scr-l1-menu" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn nav-screen-btn" data-target="scr-main-menu">← رجوع</button>
-    <span class="section-number">01</span>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">LESSON ONE</span>
-    <h2>الدرس الأول</h2>
-    <p>أنيونات حمض الهيدروكلوريك المخفف</p>
-  </div>
-
-  <div class="sub-menu-list">
-    <button class="item-link-btn detail-btn" data-key="co3">
-      <span>أيون الكربونات</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="hco3">
-      <span>أيون البيكربونات</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="s2">
-      <span>أيون الكبريتيد</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="so3">
-      <span>أيون الكبريتيت</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="s2o3">
-      <span>أيون الثيوكبريتات</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="no2">
-      <span>أيون النيتريت</span><span>←</span>
-    </button>
-  </div>
-</section>
-
-<!-- قائمة الدرس الثاني -->
-<section id="scr-l2-menu" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn nav-screen-btn" data-target="scr-main-menu">← رجوع</button>
-    <span class="section-number">02</span>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">LESSON TWO</span>
-    <h2>الدرس الثاني</h2>
-    <p>اختبارات الكشف عن الأنيونات</p>
-  </div>
-
-  <div class="sub-menu-list">
-    <button class="item-link-btn detail-btn" data-key="cl">
-      <span>أيون الكلوريد</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="br">
-      <span>أيون البروميد</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="i">
-      <span>أيون اليوديد</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="no3">
-      <span>أيون النترات</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="po4">
-      <span>أيون الفوسفات</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="so4">
-      <span>أيون الكبريتات</span><span>←</span>
-    </button>
-  </div>
-</section>
-
-<!-- قائمة الدرس الثالث -->
-<section id="scr-l3-menu" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn nav-screen-btn" data-target="scr-main-menu">← رجوع</button>
-    <span class="section-number">03</span>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">LESSON THREE</span>
-    <h2>الدرس الثالث</h2>
-    <p>الكشف عن بعض الكاتيونات</p>
-  </div>
-
-  <div class="sub-menu-list">
-    <button class="item-link-btn detail-btn" data-key="cat1">
-      <span>أيونات المجموعة الأولى</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="cu2">
-      <span>أيون النحاس الثنائي</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="al3">
-      <span>أيون الألومنيوم</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="fe2">
-      <span>أيون الحديد الثنائي</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="fe3">
-      <span>أيون الحديد الثلاثي</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="ca2">
-      <span>أيون الكالسيوم</span><span>←</span>
-    </button>
-  </div>
-</section>
-
-<!-- مرجع الأكاسيد -->
-<section id="scr-ox-menu" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn nav-screen-btn" data-target="scr-main-menu">← رجوع</button>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">CHEMISTRY REFERENCE</span>
-    <h2>مرجع الأكاسيد</h2>
-    <p>اختار القسم لعرض المعلومات المتاحة.</p>
-  </div>
-
-  <div class="sub-menu-list">
-    <button class="item-link-btn detail-btn" data-key="ox_gases">
-      <span>الغازات الناتجة</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="ox_anions">
-      <span>الأنيونات</span><span>←</span>
-    </button>
-    <button class="item-link-btn detail-btn" data-key="ox_agents">
-      <span>الكواشف المستخدمة</span><span>←</span>
-    </button>
-  </div>
-</section>
-
-<!-- معمل الألوان -->
-<section id="scr-colors-menu" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn nav-screen-btn" data-target="scr-main-menu">← رجوع</button>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">COLOR LAB</span>
-    <h2>معمل الألوان</h2>
-    <p>اختار لون الراسب أو المركب لعرض المعلومات المرتبطة به.</p>
-  </div>
-
-  <div class="color-palette-grid">
-    <button class="color-folder-btn" data-color-group="white">
-      <span class="dot-indicator" style="background:#fff;border:1px solid #bbb"></span>
-      <span>أبيض</span>
-    </button>
-    <button class="color-folder-btn" data-color-group="black">
-      <span class="dot-indicator" style="background:#222"></span>
-      <span>أسود</span>
-    </button>
-    <button class="color-folder-btn" data-color-group="yellow">
-      <span class="dot-indicator" style="background:#facc15"></span>
-      <span>أصفر</span>
-    </button>
-    <button class="color-folder-btn" data-color-group="brown">
-      <span class="dot-indicator" style="background:#92400e"></span>
-      <span>بني</span>
-    </button>
-    <button class="color-folder-btn" data-color-group="green">
-      <span class="dot-indicator" style="background:#22c55e"></span>
-      <span>أخضر</span>
-    </button>
-  </div>
-</section>
-
-<!-- نتائج مجموعة الألوان -->
-<section id="scr-color-group" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn" id="backToColorsBtn">← رجوع للألوان</button>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">COLOR DETAILS</span>
-    <h2 id="group-title">تفاصيل اللون</h2>
-    <p>المواد والاختبارات المرتبطة باللون المختار.</p>
-  </div>
-
-  <div id="group-content-body" class="sub-menu-list"></div>
-</section>
-
-<!-- صفحة تفاصيل المادة -->
-<section id="scr-detail" class="app-screen">
-  <div class="section-top-bar">
-    <button class="return-btn" id="goBackDetailBtn">← رجوع</button>
-  </div>
-
-  <div class="section-heading">
-    <span class="eyebrow">CHEMISTRY DETAILS</span>
-    <h2 id="detail-title">التفاصيل</h2>
-  </div>
-
-  <div id="detail-body"></div>
-</section>
-
-</main>
-
-<footer class="app-footer">
-  <div class="footer-mark">⚗️ CHEMISTRY</div>
-  <p>رحلتك في فهم الكيمياء تبدأ بخطوة.</p>
-</footer>
-
-<script type="module" src="script.js"></script>
-</body>
-</html>
+    </html>
+                        
