@@ -1,116 +1,40 @@
-// الجزء الأول: قاعدة البيانات ومنطق التنقل بين الشاشات
 document.addEventListener("DOMContentLoaded", function () {
     window.currentParentScreen = "scr-main-menu";
 
     window.dataDB = {
-        co3: {
-            title: "أنيون الكربونات (CO₃²⁻)",
-            parent: "scr-l1-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتفاعلات</h3><p>الملح الصلب + حمض HCl المخفف ← يحدث فوران ويتصاعد غاز ثاني أكسيد الكربون (CO₂) الذي يعكر ماء الجير الرائق.</p><div class="formula-box">Na₂CO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)↑</div><div class="formula-box">Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s)↓ (راسب أبيض) + H₂O(l)</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + كبريتات المغنسيوم (MgSO₄) ← يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض على البارد</span>.</p><div class="formula-box">Na₂CO₃(aq) + MgSO₄(aq) → Na₂SO₄(aq) + MgCO₃(s)↓</div></div>'
+        ox_gases: {
+            title: "تصنيف الغازات (أكسدة واختزال)",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>الغازات القابلة وغير القابلة للأكسدة</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;"><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#22c55e; margin-bottom:8px;">غازات قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>CO</li><li>SO₂</li><li>NO</li><li>HBr(g)</li><li>HI(g)</li></ul></div><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#ef4444; margin-bottom:8px;">غازات غير قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>CO₂</li><li>SO₃</li><li>NO₂</li><li>Br₂</li><li>I₂</li><li>Cl₂</li><li>HCl</li></ul></div></div></div>'
         },
-        hco3: {
-            title: "أنيون البيكربونات (HCO₃⁻)",
-            parent: "scr-l1-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز CO₂ يعكر ماء الجير، ومع MgSO₄ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض بعد التسخين</span>.</p><div class="formula-box">Mg(HCO₃)₂(aq) —Δ→ MgCO₃(s)↓ (راسب أبيض) + H₂O(l) + CO₂(g)↑</div></div>'
+        ox_anions: {
+            title: "تصنيف الأنيونات (أكسدة واختزال)",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>الأنيونات القابلة وغير القابلة للأكسدة</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;"><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#22c55e; margin-bottom:8px;">أنيونات قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>S²⁻</li><li>SO₃²⁻</li><li>S₂O₃²⁻</li><li>NO₂⁻</li><li>Br⁻</li><li>I⁻</li></ul></div><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#ef4444; margin-bottom:8px;">أنيونات غير قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>HCO₃⁻</li><li>CO₃²⁻</li><li>SO₄²⁻</li><li>PO₄³⁻</li><li>Cl⁻</li></ul></div></div></div>'
         },
-        s2: {
-            title: "أنيون الكبريتيد (S²⁻)",
-            parent: "scr-l1-menu",
-            colorGroup: "black",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز H₂S الذي يسوّد ورقة أسيتات الرصاص، ومع نترات الفضة يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أسود</span>.</p><div class="formula-box">Na₂S(aq) + 2AgNO₃(aq) → 2NaNO₃(aq) + Ag₂S(s)↓ (أسود)</div></div>'
+        ox_agents: {
+            title: "العوامل المؤكسدة وتفاعل النيتريت",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>العوامل المؤكسدة وتغير الألوان</h3><p><strong>1. برمنجنات البوتاسيوم (KMnO₄):</strong> عامل مؤكسد (اختزال لونه <span style="color:#a855f7; font-weight:bold;">بنفسجي</span> ويزول اللون وتتحول لـ MnSO₄ عديمة اللون).</p><p><strong>2. ثاني كرومات البوتاسيوم (K₂Cr₂O₇):</strong> عامل مؤكسد لونه <span style="color:#f59e0b; font-weight:bold;">برتقالي</span> يتحول إلى <span style="color:#22c55e; font-weight:bold;">أخضر</span>.</p></div><div class="detail-card"><h3>معادلة تفاعل النيتريت مع البرمنجنات</h3><div class="formula-box">5NaNO₂ + 2KMnO₄ + 3H₂SO₄ → 5NaNO₃ + K₂SO₄ + 2MnSO₄ + 3H₂O</div></div>'
         },
-        so3: {
-            title: "أنيون الكبريتيت (SO₃²⁻)",
-            parent: "scr-l1-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز SO₂ يخضر ورقة ثاني كرومات البوتاسيوم، ومع AgNO₃ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض يسوّد بالتسخين</span>.</p><div class="formula-box">Ag₂SO₃(s) —Δ→ Ag₂S(s)↓ (أسود) + SO₃(g)</div></div>'
-        },
-        s2o3: {
-            title: "أنيون الثيوكبريتات (S₂O₃²⁻)",
-            parent: "scr-l1-menu",
-            colorGroup: "yellow",
-            content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>يتصاعد غاز SO₂ مع <span style="color:#eab308; font-weight:bold;">معلق أصفر</span> من الكبريت S.</p><div class="formula-box">Na₂S₂O₃(s) + 2HCl(aq) → 2NaCl + H₂O + SO₂ + S(s)↓</div></div>'
-        },
-        no2: {
-            title: "أنيون النيتريت (NO₂⁻)",
-            parent: "scr-l1-menu",
-            colorGroup: "brown",
-            content: '<div class="detail-card"><h3>أبخرة NO₂ البنية الحمراء وتفاعل النيتريت</h3><p>يتصاعد غاز NO يتحول عند فوهة الأنبوبة إلى أبخرة <span style="color:#b45309; font-weight:bold;">بنية حمراء</span> من غاز NO₂.</p><div class="formula-box">2NO(g) + O₂(g) → 2NO₂(g)↑ (بني محمر)</div></div>'
-        },
-        cl: {
-            title: "أنيون الكلوريد (Cl⁻)",
-            parent: "scr-l2-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تصاعد غاز HCl المكون لسحب بيضاء، ومع AgNO₃ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span> يذوب بسرعة في النشادر.</p><div class="formula-box">NaCl(aq) + AgNO₃(aq) → NaNO₃(aq) + AgCl(s)↓</div></div>'
-        },
-        br: {
-            title: "أنيون البروميد (Br⁻)",
-            parent: "scr-l2-menu",
-            colorGroup: "yellow",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تتصاعد أبخرة برتقالية حمراء، ومع AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أبيض مصفر</span> يذوب ببطء في النشادر.</p><div class="formula-box">NaBr(aq) + AgNO₃(aq) → NaNO₃(aq) + AgBr(s)↓</div></div>'
-        },
-        i: {
-            title: "أنيون اليوديد (I⁻)",
-            parent: "scr-l2-menu",
-            colorGroup: "yellow",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تسامى أبخرة بنفسجية، ومع AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أصفر</span> لا يذوب في النشادر.</p><div class="formula-box">NaI(aq) + AgNO₃(aq) → NaNO₃(aq) + AgI(s)↓</div></div>'
-        },
-        no3: {
-            title: "أنيون النيترات (NO₃⁻)",
-            parent: "scr-l2-menu",
-            colorGroup: "brown",
-            content: '<div class="detail-card"><h3>تجربة الحلقة السمراء (FeSO₄)</h3><p>تتكون <span style="color:#b45309; font-weight:bold;">حلقة سمراء</span> عند السطح الفاصل نتيجة تفاعل مركب FeSO₄ مع غاز NO.</p><div class="formula-box">FeSO₄ + NO → FeSO₄·NO (مركب الحلقة السمراء)</div></div>'
-        },
-        po4: {
-            title: "أنيون الفوسفات (PO₄³⁻)",
-            parent: "scr-l2-menu",
-            colorGroup: "yellow",
-            content: '<div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أصفر</span> يذوب في النشادر وحمض النيتريك.</p><div class="formula-box">Na₃PO₄ + 3AgNO₃ → 3NaNO₃ + Ag₃PO₄(s)↓</div></div>'
-        },
-        so4: {
-            title: "أنيون الكبريتات (SO₄²⁻)",
-            parent: "scr-l2-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>محلول الملح + BaCl₂ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span> لا يذوب في HCl.</p><div class="formula-box">Na₂SO₄ + BaCl₂ → 2NaCl + BaSO₄(s)↓</div></div>'
-        },
-        cat1: {
-            title: "المجموعة التحليلية الأولى",
-            parent: "scr-l3-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>الشقوق والترسيب</h3><p>تترسب على هيئة <span style="color:#38bdf8; font-weight:bold;">كلوريدات شحيحة الذوبان</span> في الماء.</p></div>'
-        },
-        cu2: {
-            title: "المجموعة الثانية - النحاس II (Cu²⁺)",
-            parent: "scr-l3-menu",
-            colorGroup: "black",
-            content: '<div class="detail-card"><h3>الكشف عن النحاس</h3><p>مع غاز H₂S في وسط حمضي يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أسود</span> من CuS.</p><div class="formula-box">CuSO₄(aq) + H₂S(g) → CuS(s)↓ (أسود)</div></div>'
-        },
-        al3: {
-            title: "المجموعة الثالثة - الألومنيوم (Al³⁺)",
-            parent: "scr-l3-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>الكشف عن الألومنيوم</h3><p>يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض جيلاتيني</span> يذوب في الزيادة من الصودا الكاوية.</p></div>'
-        },
-        fe2: {
-            title: "المجموعة الثالثة - الحديد II (Fe²⁺)",
-            parent: "scr-l3-menu",
-            colorGroup: "green",
-            content: '<div class="detail-card"><h3>الكشف عن الحديد II وتفاعل FeSO₄</h3><p>مع محلول هيدروكسيد الصوديوم يتكون <span style="color:#22c55e; font-weight:bold;">راسب أبيض مخضر</span>.</p><div class="formula-box">FeSO₄ + 2NaOH → Na₂SO₄ + Fe(OH)₂(s)↓ (أبيض مخضر)</div></div>'
-        },
-        fe3: {
-            title: "المجموعة الثالثة - الحديد III (Fe³⁺)",
-            parent: "scr-l3-menu",
-            colorGroup: "brown",
-            content: '<div class="detail-card"><h3>الكشف عن الحديد III</h3><p>يتكون <span style="color:#b45309; font-weight:bold;">راسب بني محمر جيلاتيني</span> من Fe(OH)₃.</p><div class="formula-box">FeCl₃ + 3NaOH → 3NaCl + Fe(OH)₃(s)↓ (بني محمر)</div></div>'
-        },
-        ca2: {
-            title: "المجموعة الخامسة - الكالسيوم (Ca²⁺)",
-            parent: "scr-l3-menu",
-            colorGroup: "white",
-            content: '<div class="detail-card"><h3>الكشف عن الكالسيوم</h3><p>مع كربونات الأمونيوم يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span>، ويكسب لهب بنزن لوناً أحمر طوبياً.</p></div>'
-        }
+        co3: { title: "أنيون الكربونات (CO₃²⁻)", parent: "scr-l1-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتفاعلات</h3><p>الملح الصلب + حمض HCl المخفف ← يحدث فوران ويتصاعد غاز ثاني أكسيد الكربون (CO₂) الذي يعكر ماء الجير الرائق.</p><div class="formula-box">Na₂CO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)↑</div><div class="formula-box">Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s)↓ (راسب أبيض) + H₂O(l)</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + كبريتات المغنسيوم (MgSO₄) ← يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض على البارد</span>.</p><div class="formula-box">Na₂CO₃(aq) + MgSO₄(aq) → Na₂SO₄(aq) + MgCO₃(s)↓</div></div>' },
+        hco3: { title: "أنيون البيكربونات (HCO₃⁻)", parent: "scr-l1-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز CO₂ يعكر ماء الجير، ومع MgSO₄ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض بعد التسخين</span>.</p><div class="formula-box">Mg(HCO₃)₂(aq) —Δ→ MgCO₃(s)↓ (راسب أبيض) + H₂O(l) + CO₂(g)↑</div></div>' },
+        s2: { title: "أنيون الكبريتيد (S²⁻)", parent: "scr-l1-menu", colorGroup: "black", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز H₂S الذي يسوّد ورقة أسيتات الرصاص، ومع نترات الفضة يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أسود</span>.</p><div class="formula-box">Na₂S(aq) + 2AgNO₃(aq) → 2NaNO₃(aq) + Ag₂S(s)↓ (أسود)</div></div>' },
+        so3: { title: "أنيون الكبريتيت (SO₃²⁻)", parent: "scr-l1-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز SO₂ يخضر ورقة ثاني كرومات البوتاسيوم، ومع AgNO₃ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض يسوّد بالتسخين</span>.</p><div class="formula-box">Ag₂SO₃(s) —Δ→ Ag₂S(s)↓ (أسود) + SO₃(g)</div></div>' },
+        s2o3: { title: "أنيون الثيوكبريتات (S₂O₃²⁻)", parent: "scr-l1-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>يتصاعد غاز SO₂ مع <span style="color:#eab308; font-weight:bold;">معلق أصفر</span> من الكبريت S.</p><div class="formula-box">Na₂S₂O₃(s) + 2HCl(aq) → 2NaCl + H₂O + SO₂ + S(s)↓</div></div>' },
+        no2: { title: "أنيون النيتريت (NO₂⁻)", parent: "scr-l1-menu", colorGroup: "brown", content: '<div class="detail-card"><h3>أبخرة NO₂ البنية الحمراء وتفاعل النيتريت</h3><p>يتصاعد غاز NO يتحول عند فوهة الأنبوبة إلى أبخرة <span style="color:#b45309; font-weight:bold;">بنية حمراء</span> من غاز NO₂.</p><div class="formula-box">2NO(g) + O₂(g) → 2NO₂(g)↑ (بني محمر)</div></div>' },
+        cl: { title: "أنيون الكلوريد (Cl⁻)", parent: "scr-l2-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تصاعد غاز HCl المكون لسحب بيضاء، ومع AgNO₃ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span> يذوب بسرعة في النشادر.</p><div class="formula-box">NaCl(aq) + AgNO₃(aq) → NaNO₃(aq) + AgCl(s)↓</div></div>' },
+        br: { title: "أنيون البروميد (Br⁻)", parent: "scr-l2-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تتصاعد أبخرة برتقالية حمراء، ومع AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أبيض مصفر</span> يذوب ببطء في النشادر.</p><div class="formula-box">NaBr(aq) + AgNO₃(aq) → NaNO₃(aq) + AgBr(s)↓</div></div>' },
+        i: { title: "أنيون اليوديد (I⁻)", parent: "scr-l2-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تسامى أبخرة بنفسجية، ومع AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أصفر</span> لا يذوب في النشادر.</p><div class="formula-box">NaI(aq) + AgNO₃(aq) → NaNO₃(aq) + AgI(s)↓</div></div>' },
+        no3: { title: "أنيون النيترات (NO₃⁻)", parent: "scr-l2-menu", colorGroup: "brown", content: '<div class="detail-card"><h3>تجربة الحلقة السمراء (FeSO₄)</h3><p>تتكون <span style="color:#b45309; font-weight:bold;">حلقة سمراء</span> عند السطح الفاصل نتيجة تفاعل مركب FeSO₄ مع غاز NO.</p><div class="formula-box">FeSO₄ + NO → FeSO₄·NO (مركب الحلقة السمراء)</div></div>' },
+        po4: { title: "أنيون الفوسفات (PO₄³⁻)", parent: "scr-l2-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أصفر</span> يذوب في النشادر وحمض النيتريك.</p><div class="formula-box">Na₃PO₄ + 3AgNO₃ → 3NaNO₃ + Ag₃PO₄(s)↓</div></div>' },
+        so4: { title: "أنيون الكبريتات (SO₄²⁻)", parent: "scr-l2-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>محلول الملح + BaCl₂ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span> لا يذوب في HCl.</p><div class="formula-box">Na₂SO₄ + BaCl₂ → 2NaCl + BaSO₄(s)↓</div></div>' },
+        cat1: { title: "المجموعة التحليلية الأولى", parent: "scr-l3-menu", colorGroup: "white", content: '<div class="detail-card"><h3>الشقوق والترسيب</h3><p>تترسب على هيئة <span style="color:#38bdf8; font-weight:bold;">كلوريدات شحيحة الذوبان</span> في الماء.</p></div>' },
+        cu2: { title: "المجموعة الثانية - النحاس II (Cu²⁺)", parent: "scr-l3-menu", colorGroup: "black", content: '<div class="detail-card"><h3>الكشف عن النحاس</h3><p>مع غاز H₂S في وسط حمضي يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أسود</span> من CuS.</p><div class="formula-box">CuSO₄(aq) + H₂S(g) → CuS(s)↓ (أسود)</div></div>' },
+        al3: { title: "المجموعة الثالثة - الألومنيوم (Al³⁺)", parent: "scr-l3-menu", colorGroup: "white", content: '<div class="detail-card"><h3>الكشف عن الألومنيوم</h3><p>يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض جيلاتيني</span> يذوب في الزيادة من الصودا الكاوية.</p></div>' },
+        fe2: { title: "المجموعة الثالثة - الحديد II (Fe²⁺)", parent: "scr-l3-menu", colorGroup: "green", content: '<div class="detail-card"><h3>الكشف عن الحديد II وتفاعل FeSO₄</h3><p>مع محلول هيدروكسيد الصوديوم يتكون <span style="color:#22c55e; font-weight:bold;">راسب أبيض مخضر</span>.</p><div class="formula-box">FeSO₄ + 2NaOH → Na₂SO₄ + Fe(OH)₂(s)↓ (أبيض مخضر)</div></div>' },
+        fe3: { title: "المجموعة الثالثة - الحديد III (Fe³⁺)", parent: "scr-l3-menu", colorGroup: "brown", content: '<div class="detail-card"><h3>الكشف عن الحديد III</h3><p>يتكون <span style="color:#b45309; font-weight:bold;">راسب بني محمر جيلاتيني</span> من Fe(OH)₃.</p><div class="formula-box">FeCl₃ + 3NaOH → 3NaCl + Fe(OH)₃(s)↓ (بني محمر)</div></div>' },
+        ca2: { title: "المجموعة الخامسة - الكالسيوم (Ca²⁺)", parent: "scr-l3-menu", colorGroup: "white", content: '<div class="detail-card"><h3>الكشف عن الكالسيوم</h3><p>مع كربونات الأمونيوم يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span>، ويكسب لهب بنزن لوناً أحمر طوبياً.</p></div>' }
     };
 
     window.showScreen = function(screenId) {
@@ -124,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo(0, 0);
     };
 });
-// الجزء الثاني: تفعيل جميع الأزرار والروابط والاستجابة الكاملة
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function() {
         var homeHeaderBtn = document.getElementById('homeHeaderBtn');
@@ -170,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
             };
         }
 
-        // ربط جميع أزرار الانتقال بين القوائم
         document.querySelectorAll('.nav-screen-btn, .menu-card-btn').forEach(function (btn) {
             btn.onclick = function () {
                 var target = btn.getAttribute('data-target');
@@ -180,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
             };
         });
 
-        // ربط أزرار مجموعات الألوان
         document.querySelectorAll('.color-folder-btn').forEach(function (btn) {
             btn.onclick = function () {
                 var groupKey = btn.getAttribute('data-color-group');
@@ -229,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
             };
         }
 
-        // ربط أزرار تفاصيل الدروس العادية
         document.querySelectorAll('.detail-btn').forEach(function (btn) {
             btn.onclick = function () {
                 var key = btn.getAttribute('data-key');
@@ -251,4 +171,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, 100);
 });
-               
+                    
