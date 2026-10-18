@@ -1,496 +1,174 @@
+document.addEventListener("DOMContentLoaded", function () {
+    window.currentParentScreen = "scr-main-menu";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const $ = (selector) => document.querySelector(selector);
-  const $$ = (selector) => document.querySelectorAll(selector);
-
-  let currentParentScreen = "scr-main-menu";
-  let currentColorGroup = "white";
-
-  const dataDB = {
-    co3: {
-      title: "أيون الكربونات CO₃²⁻",
-      parent: "scr-l1-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الكربونات</h3>
-          <div class="formula-box">CO₃²⁻</div>
-          <p><strong>الكاشف:</strong> حمض الهيدروكلوريك المخفف.</p>
-          <p><strong>الملاحظة:</strong> يحدث فوران وينطلق غاز ثاني أكسيد الكربون.</p>
-          <p><strong>اختبار الغاز:</strong> يعكّر ماء الجير الرائق.</p>
-          <div class="formula-box">CO₃²⁻ + 2H⁺ → CO₂↑ + H₂O</div>
-        </div>`
-    },
-
-    hco3: {
-      title: "أيون البيكربونات HCO₃⁻",
-      parent: "scr-l1-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون البيكربونات</h3>
-          <div class="formula-box">HCO₃⁻</div>
-          <p><strong>الكاشف:</strong> حمض الهيدروكلوريك المخفف.</p>
-          <p><strong>الملاحظة:</strong> يتصاعد غاز ثاني أكسيد الكربون مع حدوث فوران.</p>
-          <div class="formula-box">HCO₃⁻ + H⁺ → CO₂↑ + H₂O</div>
-        </div>`
-    },
-
-    s2: {
-      title: "أيون الكبريتيد S²⁻",
-      parent: "scr-l1-menu",
-      colorGroup: "black",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الكبريتيد</h3>
-          <div class="formula-box">S²⁻</div>
-          <p><strong>الملاحظة:</strong> قد يتصاعد غاز كبريتيد الهيدروجين، وهو غاز سام.</p>
-          <div class="formula-box">S²⁻ + 2H⁺ → H₂S↑</div>
-          <p>لا تُجرِ الاختبار إلا في معمل مجهز وتحت إشراف مختص.</p>
-        </div>`
-    },
-
-    so3: {
-      title: "أيون الكبريتيت SO₃²⁻",
-      parent: "scr-l1-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الكبريتيت</h3>
-          <div class="formula-box">SO₃²⁻</div>
-          <p><strong>الملاحظة:</strong> يتصاعد غاز ثاني أكسيد الكبريت عند إضافة حمض مناسب.</p>
-          <div class="formula-box">SO₃²⁻ + 2H⁺ → SO₂↑ + H₂O</div>
-        </div>`
-    },
-
-    s2o3: {
-      title: "أيون الثيوكبريتات S₂O₃²⁻",
-      parent: "scr-l1-menu",
-      colorGroup: "yellow",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الثيوكبريتات</h3>
-          <div class="formula-box">S₂O₃²⁻</div>
-          <p><strong>الملاحظة:</strong> قد يتكون كبريت أصفر مع انطلاق ثاني أكسيد الكبريت عند التفاعل مع حمض مناسب.</p>
-          <div class="formula-box">S₂O₃²⁻ + 2H⁺ → S↓ + SO₂↑ + H₂O</div>
-        </div>`
-    },
-
-    no2: {
-      title: "أيون النيتريت NO₂⁻",
-      parent: "scr-l1-menu",
-      colorGroup: "brown",
-      content: `
-        <div class="detail-card">
-          <h3>أيون النيتريت</h3>
-          <div class="formula-box">NO₂⁻</div>
-          <p>قد تتكون نواتج غازية من أكاسيد النيتروجين في بعض الاختبارات، وهي ضارة ويجب عدم استنشاقها.</p>
-        </div>`
-    },
-
-    cl: {
-      title: "أيون الكلوريد Cl⁻",
-      parent: "scr-l2-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الكلوريد</h3>
-          <div class="formula-box">Cl⁻</div>
-          <p><strong>الكاشف:</strong> نترات الفضة بعد تحميض العينة بحمض النيتريك المخفف.</p>
-          <p><strong>الملاحظة:</strong> يتكون راسب أبيض من كلوريد الفضة.</p>
-          <div class="formula-box">Ag⁺ + Cl⁻ → AgCl↓</div>
-        </div>`
-    },
-
-    br: {
-      title: "أيون البروميد Br⁻",
-      parent: "scr-l2-menu",
-      colorGroup: "yellow",
-      content: `
-        <div class="detail-card">
-          <h3>أيون البروميد</h3>
-          <div class="formula-box">Br⁻</div>
-          <p><strong>الكاشف:</strong> نترات الفضة في ظروف الاختبار المناسبة.</p>
-          <p><strong>الملاحظة:</strong> يتكون راسب كريمي من بروميد الفضة.</p>
-          <div class="formula-box">Ag⁺ + Br⁻ → AgBr↓</div>
-        </div>`
-    },
-
-    i: {
-      title: "أيون اليوديد I⁻",
-      parent: "scr-l2-menu",
-      colorGroup: "yellow",
-      content: `
-        <div class="detail-card">
-          <h3>أيون اليوديد</h3>
-          <div class="formula-box">I⁻</div>
-          <p><strong>الكاشف:</strong> نترات الفضة في ظروف الاختبار المناسبة.</p>
-          <p><strong>الملاحظة:</strong> يتكون راسب أصفر من يوديد الفضة.</p>
-          <div class="formula-box">Ag⁺ + I⁻ → AgI↓</div>
-        </div>`
-    },
-
-    no3: {
-      title: "أيون النترات NO₃⁻",
-      parent: "scr-l2-menu",
-      colorGroup: "brown",
-      content: `
-        <div class="detail-card">
-          <h3>أيون النترات</h3>
-          <div class="formula-box">NO₃⁻</div>
-          <p>يُكشف عن النترات باختبارات نوعية معروفة، ويُحدَّد الكاشف والملاحظة وفقًا للمنهج المقرر.</p>
-        </div>`
-    },
-
-    po4: {
-      title: "أيون الفوسفات PO₄³⁻",
-      parent: "scr-l2-menu",
-      colorGroup: "yellow",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الفوسفات</h3>
-          <div class="formula-box">PO₄³⁻</div>
-          <p>يُستخدم كاشف مناسب للفوسفات، وتعتمد الملاحظة على الكاشف وظروف الاختبار.</p>
-        </div>`
-    },
-
-    so4: {
-      title: "أيون الكبريتات SO₄²⁻",
-      parent: "scr-l2-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الكبريتات</h3>
-          <div class="formula-box">SO₄²⁻</div>
-          <p><strong>الملاحظة:</strong> يتكون راسب أبيض من كبريتات الباريوم عند استخدام كاشف مناسب.</p>
-          <div class="formula-box">Ba²⁺ + SO₄²⁻ → BaSO₄↓</div>
-        </div>`
-    },
-        
-    cat1: {
-      title: "المجموعة الأولى من الكاتيونات",
-      parent: "scr-l3-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>الكاتيونات</h3>
-          <p>الكاتيونات هي أيونات موجبة الشحنة، وتُصنَّف إلى مجموعات تحليلية حسب تفاعلاتها مع الكواشف.</p>
-        </div>`
-    },
-
-    cu2: {
-      title: "أيون النحاس الثنائي Cu²⁺",
-      parent: "scr-l3-menu",
-      colorGroup: "blue",
-      content: `
-        <div class="detail-card">
-          <h3>أيون النحاس الثنائي</h3>
-          <div class="formula-box">Cu²⁺</div>
-          <p>تتميز كثير من محاليل أملاح النحاس الثنائي باللون الأزرق.</p>
-        </div>`
-    },
-
-    al3: {
-      title: "أيون الألومنيوم Al³⁺",
-      parent: "scr-l3-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الألومنيوم</h3>
-          <div class="formula-box">Al³⁺</div>
-          <p>يتكون راسب أبيض هلامي من هيدروكسيد الألومنيوم عند إضافة هيدروكسيد مناسب.</p>
-          <div class="formula-box">Al³⁺ + 3OH⁻ → Al(OH)₃↓</div>
-        </div>`
-    },
-
-    fe2: {
-      title: "أيون الحديد الثنائي Fe²⁺",
-      parent: "scr-l3-menu",
-      colorGroup: "green",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الحديد الثنائي</h3>
-          <div class="formula-box">Fe²⁺</div>
-          <p>قد يتكون راسب أخضر من هيدروكسيد الحديد الثنائي باستخدام كاشف مناسب.</p>
-          <div class="formula-box">Fe²⁺ + 2OH⁻ → Fe(OH)₂↓</div>
-        </div>`
-    },
-
-    fe3: {
-      title: "أيون الحديد الثلاثي Fe³⁺",
-      parent: "scr-l3-menu",
-      colorGroup: "brown",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الحديد الثلاثي</h3>
-          <div class="formula-box">Fe³⁺</div>
-          <p>قد يتكون راسب بني محمر من هيدروكسيد الحديد الثلاثي باستخدام كاشف مناسب.</p>
-          <div class="formula-box">Fe³⁺ + 3OH⁻ → Fe(OH)₃↓</div>
-        </div>`
-    },
-
-    ca2: {
-      title: "أيون الكالسيوم Ca²⁺",
-      parent: "scr-l3-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>أيون الكالسيوم</h3>
-          <div class="formula-box">Ca²⁺</div>
-          <p>يمكن الكشف عن الكالسيوم باستخدام كواشف مناسبة وفقًا للاختبار المقرر.</p>
-        </div>`
-    },
-
-    ox_gases: {
-      title: "الغازات الناتجة",
-      parent: "scr-ox-menu",
-      colorGroup: "brown",
-      content: `
-        <div class="detail-card">
-          <h3>مرجع الغازات</h3>
-          <p><strong>CO₂:</strong> ثاني أكسيد الكربون، يعكر ماء الجير الرائق.</p>
-          <p><strong>SO₂:</strong> ثاني أكسيد الكبريت، غاز ضار.</p>
-          <p><strong>H₂S:</strong> كبريتيد الهيدروجين، غاز سام.</p>
-          <p>لا تستنشق الغازات الناتجة عن التفاعلات الكيميائية.</p>
-        </div>`
-    },
-
-    ox_anions: {
-      title: "مرجع الأنيونات",
-      parent: "scr-ox-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>الأنيونات</h3>
-          <p>الأنيونات أيونات سالبة الشحنة، ومنها الكلوريد والكربونات والكبريتات والنترات.</p>
-          <p>يُميَّز كل أيون باختبارات نوعية مناسبة.</p>
-        </div>`
-    },
-
-    ox_agents: {
-      title: "الكواشف المستخدمة",
-      parent: "scr-ox-menu",
-      colorGroup: "white",
-      content: `
-        <div class="detail-card">
-          <h3>الكواشف الكيميائية</h3>
-          <p>الكاشف مادة تُستخدم للتعرف على أيون أو مركب من خلال ملاحظة ناتجة عن التفاعل.</p>
-        </div>`
-    }
-  };
-
-  // إتاحة البيانات لباقي أجزاء الموقع
-  window.dataDB = dataDB;
-  window.currentParentScreen = currentParentScreen;
-  window.currentColorGroup = currentColorGroup;
-
-  // التنقل بين الصفحات
-  function showScreen(screenId) {
-    const target = document.getElementById(screenId);
-    if (!target) return;
-
-    $$(".app-screen").forEach((screen) => {
-      screen.classList.remove("active");
-    });
-
-    target.classList.add("active");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  window.showScreen = showScreen;
-
-  // عرض تفاصيل مادة
-  function openDetail(key) {
-    const item = dataDB[key];
-
-    if (!item) {
-      alert("المعلومات المطلوبة غير متاحة.");
-      return;
-    }
-
-    const title = $("#detail-title");
-    const body = $("#detail-body");
-
-    if (title) title.textContent = item.title;
-    if (body) body.innerHTML = item.content;
-
-    currentParentScreen = item.parent || "scr-main-menu";
-    window.currentParentScreen = currentParentScreen;
-
-    showScreen("scr-detail");
-  }
-
-  // عرض المواد حسب اللون
-  function openColorGroup(group) {
-    currentColorGroup = group;
-    window.currentColorGroup = group;
-
-    const colorNames = {
-      white: "اللون الأبيض",
-      black: "اللون الأسود",
-      yellow: "اللون الأصفر",
-      brown: "اللون البني",
-      green: "اللون الأخضر",
-      blue: "اللون الأزرق"
+    window.dataDB = {
+        ox_gases: {
+            title: "تصنيف الغازات (أكسدة واختزال)",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>الغازات القابلة وغير القابلة للأكسدة</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;"><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#22c55e; margin-bottom:8px;">غازات قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>CO</li><li>SO₂</li><li>NO</li><li>HBr(g)</li><li>HI(g)</li></ul></div><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#ef4444; margin-bottom:8px;">غازات غير قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>CO₂</li><li>SO₃</li><li>NO₂</li><li>Br₂</li><li>I₂</li><li>Cl₂</li><li>HCl</li></ul></div></div></div>'
+        },
+        ox_anions: {
+            title: "تصنيف الأنيونات (أكسدة واختزال)",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>الأنيونات القابلة وغير القابلة للأكسدة</h3><div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;"><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#22c55e; margin-bottom:8px;">أنيونات قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>S²⁻</li><li>SO₃²⁻</li><li>S₂O₃²⁻</li><li>NO₂⁻</li><li>Br⁻</li><li>I⁻</li></ul></div><div style="background:rgba(0,0,0,0.3); padding:12px; border-radius:12px;"><h4 style="color:#ef4444; margin-bottom:8px;">أنيونات غير قابلة للأكسدة</h4><ul style="list-style:none; line-height:1.8;"><li>HCO₃⁻</li><li>CO₃²⁻</li><li>SO₄²⁻</li><li>PO₄³⁻</li><li>Cl⁻</li></ul></div></div></div>'
+        },
+        ox_agents: {
+            title: "العوامل المؤكسدة وتفاعل النيتريت",
+            parent: "scr-ox-menu",
+            content: '<div class="detail-card"><h3>العوامل المؤكسدة وتغير الألوان</h3><p><strong>1. برمنجنات البوتاسيوم (KMnO₄):</strong> عامل مؤكسد (اختزال لونه <span style="color:#a855f7; font-weight:bold;">بنفسجي</span> ويزول اللون وتتحول لـ MnSO₄ عديمة اللون).</p><p><strong>2. ثاني كرومات البوتاسيوم (K₂Cr₂O₇):</strong> عامل مؤكسد لونه <span style="color:#f59e0b; font-weight:bold;">برتقالي</span> يتحول إلى <span style="color:#22c55e; font-weight:bold;">أخضر</span>.</p></div><div class="detail-card"><h3>معادلة تفاعل النيتريت مع البرمنجنات</h3><div class="formula-box">5NaNO₂ + 2KMnO₄ + 3H₂SO₄ → 5NaNO₃ + K₂SO₄ + 2MnSO₄ + 3H₂O</div></div>'
+        },
+        co3: { title: "أنيون الكربونات (CO₃²⁻)", parent: "scr-l1-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتفاعلات</h3><p>الملح الصلب + حمض HCl المخفف ← يحدث فوران ويتصاعد غاز ثاني أكسيد الكربون (CO₂) الذي يعكر ماء الجير الرائق.</p><div class="formula-box">Na₂CO₃(s) + 2HCl(aq) → 2NaCl(aq) + H₂O(l) + CO₂(g)↑</div><div class="formula-box">Ca(OH)₂(aq) + CO₂(g) → CaCO₃(s)↓ (راسب أبيض) + H₂O(l)</div></div><div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + كبريتات المغنسيوم (MgSO₄) ← يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض على البارد</span>.</p><div class="formula-box">Na₂CO₃(aq) + MgSO₄(aq) → Na₂SO₄(aq) + MgCO₃(s)↓</div></div>' },
+        hco3: { title: "أنيون البيكربونات (HCO₃⁻)", parent: "scr-l1-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز CO₂ يعكر ماء الجير، ومع MgSO₄ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض بعد التسخين</span>.</p><div class="formula-box">Mg(HCO₃)₂(aq) —Δ→ MgCO₃(s)↓ (راسب أبيض) + H₂O(l) + CO₂(g)↑</div></div>' },
+        s2: { title: "أنيون الكبريتيد (S²⁻)", parent: "scr-l1-menu", colorGroup: "black", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز H₂S الذي يسوّد ورقة أسيتات الرصاص، ومع نترات الفضة يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أسود</span>.</p><div class="formula-box">Na₂S(aq) + 2AgNO₃(aq) → 2NaNO₃(aq) + Ag₂S(s)↓ (أسود)</div></div>' },
+        so3: { title: "أنيون الكبريتيت (SO₃²⁻)", parent: "scr-l1-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>يتصاعد غاز SO₂ يخضر ورقة ثاني كرومات البوتاسيوم، ومع AgNO₃ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض يسوّد بالتسخين</span>.</p><div class="formula-box">Ag₂SO₃(s) —Δ→ Ag₂S(s)↓ (أسود) + SO₃(g)</div></div>' },
+        s2o3: { title: "أنيون الثيوكبريتات (S₂O₃²⁻)", parent: "scr-l1-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة الأساسية</h3><p>يتصاعد غاز SO₂ مع <span style="color:#eab308; font-weight:bold;">معلق أصفر</span> من الكبريت S.</p><div class="formula-box">Na₂S₂O₃(s) + 2HCl(aq) → 2NaCl + H₂O + SO₂ + S(s)↓</div></div>' },
+        no2: { title: "أنيون النيتريت (NO₂⁻)", parent: "scr-l1-menu", colorGroup: "brown", content: '<div class="detail-card"><h3>أبخرة NO₂ البنية الحمراء وتفاعل النيتريت</h3><p>يتصاعد غاز NO يتحول عند فوهة الأنبوبة إلى أبخرة <span style="color:#b45309; font-weight:bold;">بنية حمراء</span> من غاز NO₂.</p><div class="formula-box">2NO(g) + O₂(g) → 2NO₂(g)↑ (بني محمر)</div></div>' },
+        cl: { title: "أنيون الكلوريد (Cl⁻)", parent: "scr-l2-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تصاعد غاز HCl المكون لسحب بيضاء، ومع AgNO₃ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span> يذوب بسرعة في النشادر.</p><div class="formula-box">NaCl(aq) + AgNO₃(aq) → NaNO₃(aq) + AgCl(s)↓</div></div>' },
+        br: { title: "أنيون البروميد (Br⁻)", parent: "scr-l2-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تتصاعد أبخرة برتقالية حمراء، ومع AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أبيض مصفر</span> يذوب ببطء في النشادر.</p><div class="formula-box">NaBr(aq) + AgNO₃(aq) → NaNO₃(aq) + AgBr(s)↓</div></div>' },
+        i: { title: "أنيون اليوديد (I⁻)", parent: "scr-l2-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>تسامى أبخرة بنفسجية، ومع AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أصفر</span> لا يذوب في النشادر.</p><div class="formula-box">NaI(aq) + AgNO₃(aq) → NaNO₃(aq) + AgI(s)↓</div></div>' },
+        no3: { title: "أنيون النيترات (NO₃⁻)", parent: "scr-l2-menu", colorGroup: "brown", content: '<div class="detail-card"><h3>تجربة الحلقة السمراء (FeSO₄)</h3><p>تتكون <span style="color:#b45309; font-weight:bold;">حلقة سمراء</span> عند السطح الفاصل نتيجة تفاعل مركب FeSO₄ مع غاز NO.</p><div class="formula-box">FeSO₄ + NO → FeSO₄·NO (مركب الحلقة السمراء)</div></div>' },
+        po4: { title: "أنيون الفوسفات (PO₄³⁻)", parent: "scr-l2-menu", colorGroup: "yellow", content: '<div class="detail-card"><h3>التجربة التأكيدية</h3><p>محلول الملح + AgNO₃ يتكون <span style="color:#eab308; font-weight:bold;">راسب أصفر</span> يذوب في النشادر وحمض النيتريك.</p><div class="formula-box">Na₃PO₄ + 3AgNO₃ → 3NaNO₃ + Ag₃PO₄(s)↓</div></div>' },
+        so4: { title: "أنيون الكبريتات (SO₄²⁻)", parent: "scr-l2-menu", colorGroup: "white", content: '<div class="detail-card"><h3>التجربة الأساسية والتأكيدية</h3><p>محلول الملح + BaCl₂ يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span> لا يذوب في HCl.</p><div class="formula-box">Na₂SO₄ + BaCl₂ → 2NaCl + BaSO₄(s)↓</div></div>' },
+        cat1: { title: "المجموعة التحليلية الأولى", parent: "scr-l3-menu", colorGroup: "white", content: '<div class="detail-card"><h3>الشقوق والترسيب</h3><p>تترسب على هيئة <span style="color:#38bdf8; font-weight:bold;">كلوريدات شحيحة الذوبان</span> في الماء.</p></div>' },
+        cu2: { title: "المجموعة الثانية - النحاس II (Cu²⁺)", parent: "scr-l3-menu", colorGroup: "black", content: '<div class="detail-card"><h3>الكشف عن النحاس</h3><p>مع غاز H₂S في وسط حمضي يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أسود</span> من CuS.</p><div class="formula-box">CuSO₄(aq) + H₂S(g) → CuS(s)↓ (أسود)</div></div>' },
+        al3: { title: "المجموعة الثالثة - الألومنيوم (Al³⁺)", parent: "scr-l3-menu", colorGroup: "white", content: '<div class="detail-card"><h3>الكشف عن الألومنيوم</h3><p>يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض جيلاتيني</span> يذوب في الزيادة من الصودا الكاوية.</p></div>' },
+        fe2: { title: "المجموعة الثالثة - الحديد II (Fe²⁺)", parent: "scr-l3-menu", colorGroup: "green", content: '<div class="detail-card"><h3>الكشف عن الحديد II وتفاعل FeSO₄</h3><p>مع محلول هيدروكسيد الصوديوم يتكون <span style="color:#22c55e; font-weight:bold;">راسب أبيض مخضر</span>.</p><div class="formula-box">FeSO₄ + 2NaOH → Na₂SO₄ + Fe(OH)₂(s)↓ (أبيض مخضر)</div></div>' },
+        fe3: { title: "المجموعة الثالثة - الحديد III (Fe³⁺)", parent: "scr-l3-menu", colorGroup: "brown", content: '<div class="detail-card"><h3>الكشف عن الحديد III</h3><p>يتكون <span style="color:#b45309; font-weight:bold;">راسب بني محمر جيلاتيني</span> من Fe(OH)₃.</p><div class="formula-box">FeCl₃ + 3NaOH → 3NaCl + Fe(OH)₃(s)↓ (بني محمر)</div></div>' },
+        ca2: { title: "المجموعة الخامسة - الكالسيوم (Ca²⁺)", parent: "scr-l3-menu", colorGroup: "white", content: '<div class="detail-card"><h3>الكشف عن الكالسيوم</h3><p>مع كربونات الأمونيوم يتكون <span style="color:#38bdf8; font-weight:bold;">راسب أبيض</span>، ويكسب لهب بنزن لوناً أحمر طوبياً.</p></div>' }
     };
 
-    const title = $("#group-title");
-    const body = $("#group-content-body");
-
-    if (title) {
-      title.textContent = colorNames[group] || "تفاصيل اللون";
-    }
-
-    if (!body) return;
-
-    body.replaceChildren();
-
-    const matches = Object.entries(dataDB).filter(
-      ([, item]) => item.colorGroup === group
-    );
-
-    if (matches.length === 0) {
-      const message = document.createElement("div");
-      message.className = "detail-card";
-      message.textContent = "لا توجد مواد مسجلة لهذا اللون حاليًا.";
-      body.appendChild(message);
-    } else {
-      matches.forEach(([key, item]) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "item-link-btn detail-btn";
-        button.dataset.key = key;
-
-        const label = document.createElement("span");
-        label.textContent = item.title;
-
-        const arrow = document.createElement("span");
-        arrow.textContent = "←";
-
-        button.append(label, arrow);
-        body.appendChild(button);
-      });
-    }
-
-    showScreen("scr-color-group");
-  }
-
-  // تسجيل اسم الطالب
-  const loginForm = $("#loginForm");
-  const studentName = $("#studentName");
-  const nameError = $("#nameError");
-  const welcomeUserContainer = $("#welcomeUserContainer");
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      const name = studentName ? studentName.value.trim() : "";
-
-      if (name.length < 2) {
-        if (nameError) nameError.style.display = "block";
-        if (studentName) studentName.focus();
-        return;
-      }
-
-      if (nameError) nameError.style.display = "none";
-
-      if (welcomeUserContainer) {
-        welcomeUserContainer.textContent = `أهلًا يا ${name}، جاهز تبدأ؟`;
-        welcomeUserContainer.classList.add("welcome-user-message");
-      }
-
-      showScreen("scr-main-menu");
-    });
-  }
-
-  if (studentName && nameError) {
-    studentName.addEventListener("input", () => {
-      if (studentName.value.trim().length >= 2) {
-        nameError.style.display = "none";
-      }
-    });
-  }
-
-  // التعامل مع أزرار التنقل والتفاصيل والألوان
-  document.addEventListener("click", (event) => {
-    const detailButton = event.target.closest(".detail-btn");
-
-    if (detailButton) {
-      openDetail(detailButton.dataset.key);
-      return;
-    }
-
-    const colorButton = event.target.closest(".color-folder-btn");
-
-    if (colorButton) {
-      openColorGroup(colorButton.dataset.colorGroup);
-      return;
-    }
-
-    const navButton = event.target.closest(".nav-screen-btn");
-
-    if (navButton) {
-      const target = navButton.dataset.target;
-      if (target) showScreen(target);
-      return;
-    }
-
-    const menuButton = event.target.closest(
-      ".menu-card-btn, [data-target]"
-    );
-
-    if (menuButton && menuButton.dataset.target) {
-      showScreen(menuButton.dataset.target);
-    }
-  });
-
-  // الرجوع من معمل الألوان
-  const backToColorsBtn = $("#backToColorsBtn");
-
-  if (backToColorsBtn) {
-    backToColorsBtn.addEventListener("click", () => {
-      showScreen("scr-colors-menu");
-    });
-  }
-
-  // الرجوع من صفحة التفاصيل
-  const goBackDetailBtn = $("#goBackDetailBtn");
-
-  if (goBackDetailBtn) {
-    goBackDetailBtn.addEventListener("click", () => {
-      showScreen(currentParentScreen);
-    });
-  }
-
-  // زر الرئيسية والشعار
-  ["brandHomeBtn", "homeHeaderBtn"].forEach((id) => {
-    const button = document.getElementById(id);
-
-    if (button) {
-      button.addEventListener("click", () => {
-        const welcome = $("#scr-welcome");
-        const isWelcomeVisible =
-          welcome && welcome.classList.contains("active");
-
-        showScreen(
-          isWelcomeVisible ? "scr-welcome" : "scr-main-menu"
-        );
-      });
-    }
-  });
-
-  // إخفاء شاشة البداية
-  const splashScreen = $("#splashScreen");
-
-  if (splashScreen) {
-    setTimeout(() => {
-      splashScreen.classList.add("splash-hidden");
-
-      setTimeout(() => {
-        splashScreen.style.display = "none";
-      }, 500);
-    }, 1000);
-  }
+    window.showScreen = function(screenId) {
+        document.querySelectorAll('.app-screen').forEach(function (screen) {
+            screen.classList.remove('active');
+        });
+        var targetScreen = document.getElementById(screenId);
+        if (targetScreen) {
+            targetScreen.classList.add('active');
+        }
+        window.scrollTo(0, 0);
+    };
 });
-        
+          document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function() {
+        var homeHeaderBtn = document.getElementById('homeHeaderBtn');
+        if (homeHeaderBtn) {
+            homeHeaderBtn.onclick = function () {
+                window.showScreen('scr-main-menu');
+            };
+        }
+
+        var startBtn = document.getElementById('startBtn');
+        var studentNameInput = document.getElementById('studentName');
+        var nameError = document.getElementById('nameError');
+        var splashScreen = document.getElementById('splashScreen');
+
+        if (startBtn && studentNameInput) {
+            startBtn.onclick = function (e) {
+                e.preventDefault();
+                var studentName = studentNameInput.value.trim();
+
+                if (studentName.length < 2) {
+                    studentNameInput.classList.add('input-error');
+                    if (nameError) nameError.style.display = 'block';
+                    return;
+                }
+
+                studentNameInput.classList.remove('input-error');
+                if (nameError) nameError.style.display = 'none';
+
+                var welcomeContainer = document.getElementById('welcomeUserContainer');
+                if (welcomeContainer) {
+                    welcomeContainer.innerHTML = '<div class="user-welcome-banner">أهلاً بك يا ' + studentName + ' 👋</div>';
+                }
+
+                if (splashScreen) {
+                    splashScreen.classList.add('active');
+                    setTimeout(function () {
+                        splashScreen.classList.remove('active');
+                        window.showScreen('scr-main-menu');
+                    }, 1000);
+                } else {
+                    window.showScreen('scr-main-menu');
+                }
+            };
+        }
+
+        document.querySelectorAll('.nav-screen-btn, .menu-card-btn').forEach(function (btn) {
+            btn.onclick = function () {
+                var target = btn.getAttribute('data-target');
+                if (target) {
+                    window.showScreen(target);
+                }
+            };
+        });
+
+        document.querySelectorAll('.color-folder-btn').forEach(function (btn) {
+            btn.onclick = function () {
+                var groupKey = btn.getAttribute('data-color-group');
+                var groupTitleText = btn.querySelector('span:nth-child(2)').innerText;
+                
+                var container = document.getElementById('group-content-body');
+                var groupTitleElem = document.getElementById('group-title');
+                if (groupTitleElem) groupTitleElem.innerText = groupTitleText;
+                
+                var htmlContent = '';
+                for (var key in window.dataDB) {
+                    if (window.dataDB[key].colorGroup === groupKey) {
+                        htmlContent += '<button class="item-link-btn detail-btn" data-key="' + key + '">' + window.dataDB[key].title + ' <span>←</span></button>';
+                    }
+                }
+                
+                if (htmlContent === '') {
+                    htmlContent = '<p style="text-align:center; color:#9ca3af; padding:20px;">لا توجد عناصر مضافة لهذه المجموعة حالياً.</p>';
+                }
+                
+                if (container) {
+                    container.innerHTML = htmlContent;
+                    
+                    container.querySelectorAll('.detail-btn').forEach(function (detBtn) {
+                        detBtn.onclick = function () {
+                            var k = detBtn.getAttribute('data-key');
+                            var item = window.dataDB[k];
+                            if (item) {
+                                window.currentParentScreen = 'scr-color-group';
+                                document.getElementById('detail-title').innerText = item.title;
+                                document.getElementById('detail-body').innerHTML = item.content;
+                                window.showScreen('scr-detail');
+                            }
+                        };
+                    });
+                }
+
+                window.showScreen('scr-color-group');
+            };
+        });
+
+        var backToColorsBtn = document.getElementById('backToColorsBtn');
+        if (backToColorsBtn) {
+            backToColorsBtn.onclick = function () {
+                window.showScreen('scr-colors-menu');
+            };
+        }
+
+        document.querySelectorAll('.detail-btn').forEach(function (btn) {
+            btn.onclick = function () {
+                var key = btn.getAttribute('data-key');
+                var item = window.dataDB[key];
+                if (item) {
+                    window.currentParentScreen = item.parent;
+                    document.getElementById('detail-title').innerText = item.title;
+                    document.getElementById('detail-body').innerHTML = item.content;
+                    window.showScreen('scr-detail');
+                }
+            };
+        });
+
+        var goBackDetailBtn = document.getElementById('goBackDetailBtn');
+        if (goBackDetailBtn) {
+            goBackDetailBtn.onclick = function () {
+                window.showScreen(window.currentParentScreen);
+            };
+        }
+    }, 100);
+});
+          
