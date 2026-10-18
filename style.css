@@ -289,8 +289,8 @@ body {
 }
 
 .highlight-card {
-    border-color: rgba(236, 72, 153, 0.4);
-    background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(236, 72, 153, 0.1) 100%);
+    border-color: rgba(56, 189, 248, 0.4);
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(56, 189, 248, 0.1) 100%);
 }
 
 .section-top-bar {
@@ -440,5 +440,4 @@ body {
     padding: 16px;
     border-radius: 16px;
     border: 1px solid var(--card-border);
-    }
-        
+}
