@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bab Two By Ahmed.com </title>
+  <title>Ahmed Store | الكيمياء التحليلية وتسجيل الدخول</title>
   
-  <!-- Google Fonts: Cairo & Fira Code for chemistry formulas -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome for chemistry & UI icons -->
+  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- KaTeX for crisp chemical and mathematical typesetting -->
+  <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 
@@ -59,39 +59,42 @@
       color: #e2e8f0;
       overflow-x: hidden;
     }
-    
-    /* Custom Neon Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #070a14;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #233258;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #00f2fe;
-    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #070a14; }
+    ::-webkit-scrollbar-thumb { background: #233258; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #00f2fe; }
 
-    /* Glow glass card style */
     .glass-panel {
-      background: rgba(21, 30, 54, 0.75);
+      background: rgba(21, 30, 54, 0.85);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(79, 172, 254, 0.15);
+      border: 1px solid rgba(79, 172, 254, 0.25);
     }
-    .glass-panel:hover {
-      border-color: rgba(0, 242, 254, 0.4);
-    }
-
-    /* Animated background glow dots */
     .bg-grid-pattern {
       background-image: radial-gradient(rgba(79, 172, 254, 0.08) 1px, transparent 1px);
       background-size: 30px 30px;
     }
 
-    /* Lab Test Tube Bubbles & Liquid simulation */
+    /* Animation Styles for Man & Box Pulling */
+    @keyframes pullBox {
+      0% { transform: translateX(120vw); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes ropePull {
+      0% { width: 0px; }
+      100% { width: 120px; }
+    }
+    .animate-pull-in {
+      animation: pullBox 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+    .rope-line {
+      position: absolute;
+      right: -120px;
+      top: 50%;
+      height: 4px;
+      background: linear-gradient(90deg, #8b5cf6, #00f2fe);
+      animation: ropePull 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
     @keyframes bubbleUp {
       0% { transform: translateY(120px) scale(0.3); opacity: 0; }
       50% { opacity: 0.8; }
@@ -104,157 +107,66 @@
       pointer-events: none;
       animation: bubbleUp 2.2s infinite ease-in;
     }
-
-    /* Test tube glass highlight */
     .tube-glass {
       background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.15) 100%);
       box-shadow: inset 0 0 15px rgba(255,255,255,0.1), 0 15px 30px rgba(0,0,0,0.6);
     }
-    
-    /* Flip Card Animation */
-    .flip-card {
-      perspective: 1000px;
-    }
+    .flip-card { perspective: 1000px; }
     .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      position: relative; width: 100%; height: 100%;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
     }
-    .flip-card.flipped .flip-card-inner {
-      transform: rotateY(180deg);
-    }
+    .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
     .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
+      position: absolute; width: 100%; height: 100%;
+      -webkit-backface-visibility: hidden; backface-visibility: hidden;
     }
-    .flip-card-back {
-      transform: rotateY(180deg);
-    }
+    .flip-card-back { transform: rotateY(180deg); }
   </style>
 </head>
 <body class="bg-chem-dark bg-grid-pattern min-h-screen text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
 
-  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-chem-surface/85 backdrop-blur-md border-b border-chem-border/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
-        
-        <!-- Logo & Title -->
         <a href="#hero" class="flex items-center gap-3 group cursor-pointer">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center shadow-glow-cyan transition-transform group-hover:scale-105 duration-300">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center shadow-glow-cyan">
             <i class="fa-solid fa-atom text-2xl text-white animate-spin" style="animation-duration: 12s;"></i>
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-2xl font-black bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 bg-clip-text text-transparent">الكيمياء التحليلية</span>
+              <span class="text-2xl font-black bg-gradient-to-r from-cyan-400 via-sky-300 to-purple-400 bg-clip-text text-transparent">Ahmed Store</span>
               <span class="px-2 py-0.5 text-xs rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/30">ثانوية عامة</span>
             </div>
-            <p class="text-xs text-slate-400">المرجع التفاعلي للكشف عن الأنيونات</p>
+            <p class="text-xs text-slate-400">المرجع التفاعلي للكيمياء التحليلية</p>
           </div>
         </a>
 
-        <!-- Desktop Navigation Menu -->
         <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
-          <button onclick="switchTab('hero')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-cyan-400 bg-chem-card" data-section="hero">
-            <i class="fa-solid fa-house ml-1.5"></i>الرئيسية
-          </button>
-          <button onclick="switchTab('intro')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-slate-300" data-section="intro">
-            <i class="fa-solid fa-book-open ml-1.5"></i>مقدمة التحليلية
-          </button>
-          <button onclick="switchTab('anions-map')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-slate-300" data-section="anions-map">
-            <i class="fa-solid fa-diagram-project ml-1.5"></i>مجموعات الأنيونات
-          </button>
-          <button onclick="switchTab('virtual-lab')" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 shadow-glow-cyan hover:brightness-110 transition-all" data-section="virtual-lab">
-            <i class="fa-solid fa-flask-vial ml-1.5"></i>المختبر الافتراضي
-          </button>
-          <button onclick="switchTab('comparison-table')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-slate-300" data-section="comparison-table">
-            <i class="fa-solid fa-table-list ml-1.5"></i>جدول المقارنة
-          </button>
-          <button onclick="switchTab('equations-section')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-slate-300" data-section="equations-section">
-            <i class="fa-solid fa-calculator ml-1.5"></i>المعادلات
-          </button>
-          <button onclick="switchTab('quiz-section')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-slate-300" data-section="quiz-section">
-            <i class="fa-solid fa-vial-circle-check ml-1.5"></i>بنك الأسئلة
-          </button>
-          <button onclick="switchTab('revision-section')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold hover:text-cyan-400 hover:bg-chem-card/80 transition-all text-slate-300" data-section="revision-section">
-            <i class="fa-solid fa-brain ml-1.5"></i>المراجعة الذكية
-          </button>
+          <button onclick="switchTab('hero')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-cyan-400 bg-chem-card" data-section="hero">الرئيسية</button>
+          <button onclick="switchTab('intro')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-slate-300" data-section="intro">مقدمة التحليلية</button>
+          <button onclick="switchTab('anions-map')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-slate-300" data-section="anions-map">المجموعات</button>
+          <button onclick="switchTab('virtual-lab')" class="nav-btn px-3.5 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 shadow-glow-cyan" data-section="virtual-lab">المختبر</button>
+          <button onclick="switchTab('comparison-table')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-slate-300" data-section="comparison-table">المقارنة</button>
+          <button onclick="switchTab('equations-section')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-slate-300" data-section="equations-section">المعادلات</button>
+          <button onclick="switchTab('quiz-section')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-slate-300" data-section="quiz-section">الأسئلة</button>
+          <button onclick="switchTab('revision-section')" class="nav-btn px-3 py-2 rounded-xl text-sm font-semibold text-slate-300" data-section="revision-section">المراجعة</button>
+          <button onclick="switchTab('auth-section')" class="nav-btn px-3 py-2 rounded-xl text-xs font-bold text-purple-300 bg-purple-950/60 border border-purple-500/40" data-section="auth-section">تسجيل الدخول</button>
         </nav>
-
-        <!-- Right Quick Actions -->
-        <div class="flex items-center gap-3">
-          <!-- Student Progress Badge -->
-          <div class="hidden sm:flex items-center gap-2 bg-chem-card/90 px-3 py-1.5 rounded-xl border border-chem-border text-xs">
-            <i class="fa-solid fa-award text-amber-400"></i>
-            <span class="text-slate-400">إنجازك:</span>
-            <span id="user-progress-badge" class="font-bold text-cyan-400 font-mono">0%</span>
-          </div>
-
-          <!-- Mobile Menu Button -->
-          <button onclick="toggleMobileNav()" class="lg:hidden p-2.5 rounded-xl bg-chem-card border border-chem-border text-slate-300 hover:text-cyan-400 focus:outline-none">
-            <i id="mobileMenuIcon" class="fa-solid fa-bars text-xl"></i>
-          </button>
-        </div>
-
       </div>
     </div>
-
-    <!-- Mobile Drawer Navigation -->
-    <div id="mobile-nav" class="hidden lg:hidden bg-chem-surface border-b border-chem-border px-4 pt-2 pb-6 space-y-2">
-      <button onclick="switchTab('hero'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-house text-cyan-400"></i> الرئيسية
-      </button>
-      <button onclick="switchTab('intro'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-book-open text-purple-400"></i> مقدمة الكيمياء التحليلية
-      </button>
-      <button onclick="switchTab('anions-map'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-diagram-project text-cyan-400"></i> خريطة الأنيونات
-      </button>
-      <button onclick="switchTab('virtual-lab'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg bg-cyan-600/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-2 font-bold">
-        <i class="fa-solid fa-flask-vial text-cyan-400"></i> المختبر الافتراضي
-      </button>
-      <button onclick="switchTab('comparison-table'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-table-list text-emerald-400"></i> جدول المقارنة الذكي
-      </button>
-      <button onclick="switchTab('equations-section'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-calculator text-amber-400"></i> قسم المعادلات
-      </button>
-      <button onclick="switchTab('quiz-section'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-vial-circle-check text-rose-400"></i> الاختبارات وبنك الأسئلة
-      </button>
-      <button onclick="switchTab('revision-section'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-brain text-purple-400"></i> أدوات المراجعة الذكية
-      </button>
-      <button onclick="switchTab('educational-links'); toggleMobileNav();" class="w-full text-right px-4 py-2.5 rounded-lg text-slate-200 hover:bg-chem-card flex items-center gap-2">
-        <i class="fa-solid fa-link text-emerald-400"></i> الروابط التعليمية
-      </button>
-    </div>
   </header>
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
 
-  <!-- Global Progress Tracker Line -->
-  <div class="h-1 w-full bg-slate-900 sticky top-20 z-40">
-    <div id="site-progress-bar" class="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 w-0 transition-all duration-500"></div>
-  </div>
-
-  <!-- ==================== MAIN CONTENT CONTAINERS ==================== -->
-  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-
-    <!-- ==================== 1. HERO & HOME SECTION ==================== -->
+    <!-- 1. HERO SECTION -->
     <section id="section-hero" class="content-section space-y-12 block">
-      <!-- Big Hero Banner -->
       <div class="relative rounded-3xl overflow-hidden glass-panel p-8 sm:p-14 border border-cyan-500/20 shadow-2xl">
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        
         <div class="relative z-10 max-w-3xl space-y-6">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-400/30 text-cyan-300 text-xs sm:text-sm font-semibold">
             <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-            منهاج الكيمياء للثانوية العامة - الباب الثاني
+            منهاج الكيمياء للثانوية العامة - Ahmed Store
           </div>
           
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
@@ -265,2082 +177,289 @@
           </h1>
 
           <p class="text-base sm:text-xl text-slate-300 leading-relaxed font-light">
-            «اكتشف الأيونات، افهم التفاعلات، وشاهد الدليل بنفسك». منصة كيميائية تفاعلية متكاملة تأخذك في رحلة بصرية وعملية من الأساس النظري للتحليل الكيفي وحتى محاكاة أنابيب الاختبار الحقيقية.
+            «اكتشف الأيونات، افهم التفاعلات، وشاهد الدليل بنفسك». منصة كيميائية تفاعلية متكاملة مع نظام حسابات آمن.
           </p>
 
-          <!-- Action Buttons -->
           <div class="flex flex-wrap gap-4 pt-2">
-            <button onclick="switchTab('intro')" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-base shadow-glow-cyan hover:scale-[1.02] transition-transform flex items-center gap-2.5">
-              <i class="fa-solid fa-graduation-cap"></i> ابدأ التعلم
-            </button>
-            <button onclick="switchTab('virtual-lab')" class="px-6 py-3.5 rounded-2xl bg-chem-surface border border-cyan-400/40 text-cyan-300 font-bold text-base hover:bg-chem-card hover:border-cyan-400 transition-all flex items-center gap-2.5 shadow-lg">
-              <i class="fa-solid fa-vial"></i> ادخل المختبر الافتراضي
-            </button>
-            <button onclick="switchTab('quiz-section')" class="px-6 py-3.5 rounded-2xl bg-purple-600/30 border border-purple-500/40 text-purple-300 font-bold text-base hover:bg-purple-600/50 transition-all flex items-center gap-2.5">
-              <i class="fa-solid fa-puzzle-piece"></i> اختبر نفسك
-            </button>
-            <button onclick="switchTab('educational-links')" class="px-6 py-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-400/40 text-emerald-300 font-bold text-base hover:bg-emerald-500/20 hover:border-emerald-300 transition-all flex items-center gap-2.5">
-              <i class="fa-solid fa-link"></i> الروابط التعليمية
-            </button>
+            <button onclick="switchTab('intro')" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-glow-cyan">ابدأ التعلم</button>
+            <button onclick="switchTab('virtual-lab')" class="px-6 py-3.5 rounded-2xl bg-chem-surface border border-cyan-400/40 text-cyan-300 font-bold">المختبر الافتراضي</button>
+            <button onclick="switchTab('auth-section')" class="px-6 py-3.5 rounded-2xl bg-purple-600/30 border border-purple-500/40 text-purple-300 font-bold">تسجيل الدخول</button>
           </div>
         </div>
       </div>
-
-      <!-- Quick stats & cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <div onclick="switchTab('intro')" class="glass-panel p-6 rounded-2xl cursor-pointer group transition-all duration-300 hover:-translate-y-1">
-          <div class="w-12 h-12 rounded-xl bg-cyan-950 flex items-center justify-center text-cyan-400 text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-microscope"></i>
-          </div>
-          <h3 class="font-bold text-lg text-white mb-1">أساس الكيمياء التحليلية</h3>
-          <p class="text-sm text-slate-400">الفرق بين التحليل الكيفي والكمي وأهمية الكيمياء في الطب والبيئة.</p>
-        </div>
-
-        <div onclick="switchTab('anions-map')" class="glass-panel p-6 rounded-2xl cursor-pointer group transition-all duration-300 hover:-translate-y-1">
-          <div class="w-12 h-12 rounded-xl bg-purple-950 flex items-center justify-center text-purple-400 text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-diagram-project"></i>
-          </div>
-          <h3 class="font-bold text-lg text-white mb-1">مجموعات الأنيونات الـ 3</h3>
-          <p class="text-sm text-slate-400">مجموعة حمض HCl المخفف، وحمض H₂SO₄ المركز، وكلوريد الباريوم.</p>
-        </div>
-
-        <div onclick="switchTab('virtual-lab')" class="glass-panel p-6 rounded-2xl cursor-pointer group transition-all duration-300 hover:-translate-y-1 border-cyan-500/30">
-          <div class="w-12 h-12 rounded-xl bg-emerald-950 flex items-center justify-center text-emerald-400 text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-flask-vial"></i>
-          </div>
-          <h3 class="font-bold text-lg text-white mb-1">المختبر التفاعلي</h3>
-          <p class="text-sm text-slate-400">أضف الكواشف، وشاهد الفوران وتغير الألوان وتكون الرواسب آنيًا.</p>
-        </div>
-
-        <div onclick="switchTab('equations-section')" class="glass-panel p-6 rounded-2xl cursor-pointer group transition-all duration-300 hover:-translate-y-1">
-          <div class="w-12 h-12 rounded-xl bg-amber-950 flex items-center justify-center text-amber-400 text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-atom"></i>
-          </div>
-          <h3 class="font-bold text-lg text-white mb-1">المعادلات الأيونية</h3>
-          <p class="text-sm text-slate-400">المعادلات الموزونة مع بيان الحالات الفيزيائية والشحنات الكهربائية وتجربة الإكمال.</p>
-        </div>
-
-      </div>
-
-      <!-- Quick Revision Highlight Bar -->
-      <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-cyan-400 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-4">
-          <div class="w-10 h-10 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl shrink-0">
-            <i class="fa-solid fa-bolt"></i>
-          </div>
-          <div>
-            <h4 class="font-bold text-white text-base">المبدأ العلمي الذهبي لمجموعة حمض الهيدروكلوريك:</h4>
-            <p class="text-slate-300 text-sm mt-0.5">«الحمض الأكثر ثباتًا يطرد الحمض الأقل ثباتًا من أملاحه الصلبة على هيئة غازات يسهل الكشف عنها بكواشف مناسبة»</p>
-          </div>
-        </div>
-        <button onclick="switchTab('anions-map')" class="shrink-0 px-4 py-2 rounded-xl bg-chem-border text-cyan-300 hover:bg-cyan-500 hover:text-black font-semibold text-xs transition-colors">
-          استكشف أنيونات المجموعة الستة &larr;
-        </button>
-      </div>
-
     </section>
 
-    <!-- ==================== 2. INTRO TO ANALYTICAL CHEMISTRY ==================== -->
+    <!-- 2. INTRO SECTION -->
     <section id="section-intro" class="content-section space-y-10 hidden">
-      <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto space-y-3">
         <h2 class="text-3xl font-extrabold text-white">مقدمة في الكيمياء التحليلية</h2>
-        <p class="text-slate-400">الركيزة الأساسية لتحديد هوية المواد وكمياتها وتطبيقاتها الحيوية في حياتنا اليومية.</p>
+        <p class="text-slate-400">الركيزة الأساسية لتحديد هوية المواد وكمياتها وتطبيقاتها الحيوية.</p>
       </div>
-
-      <!-- Definition & Interactive Question Activity -->
       <div class="glass-panel p-8 rounded-3xl space-y-6">
-        <div class="border-b border-chem-border pb-4">
-          <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">مفهوم علمي</span>
-          <h3 class="text-2xl font-bold text-white mt-1">ما هي الكيمياء التحليلية (Analytical Chemistry)؟</h3>
-        </div>
-        
-        <p class="text-slate-300 leading-relaxed text-base sm:text-lg">
-          أحد فروع علم الكيمياء الأساسية، ويهتم بدراسة التركيب الكيميائي للمواد وتحديد هويتها ونسب مكوناتها. وتنقسم العمليات التحليلية إجمالاً إلى مسارين متكاملين:
-        </p>
-
-        <!-- Interactive Question Quiz for Qualitative vs Quantitative -->
-        <div class="bg-chem-dark/70 p-6 rounded-2xl border border-chem-border space-y-4">
-          <h4 class="font-bold text-cyan-300 flex items-center gap-2">
-            <i class="fa-solid fa-circle-question"></i> نشاط تفاعلي: ميّز بين السؤالين التاليين
-          </h4>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-            
-            <div class="p-5 rounded-xl bg-chem-surface border border-chem-border flex flex-col justify-between space-y-3">
-              <div>
-                <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-blue-900/50 text-blue-300 mb-2">السؤال الأول</span>
-                <p class="text-lg font-bold text-white">«ما المادة الموجودة في العينة؟ وما مكوناتها؟»</p>
-                <p class="text-sm text-slate-400 mt-1">يهدف فقط إلى التعرف على نوع العناصر أو الأيونات أو المجموعات الوظيفية.</p>
-              </div>
-              <div class="p-3 bg-cyan-950/50 rounded-lg border border-cyan-500/30 text-cyan-300 font-semibold text-center text-sm">
-                <i class="fa-solid fa-check ml-1"></i> يُمثل: التحليل الكيفي (النوعي أو الوصفي)
-              </div>
-            </div>
-
-            <div class="p-5 rounded-xl bg-chem-surface border border-chem-border flex flex-col justify-between space-y-3">
-              <div>
-                <span class="inline-block px-2.5 py-1 rounded-md text-xs font-bold bg-purple-900/50 text-purple-300 mb-2">السؤال الثاني</span>
-                <p class="text-lg font-bold text-white">«ما كمية أو نسبة المادة الموجودة في العينة؟»</p>
-                <p class="text-sm text-slate-400 mt-1">يهدف إلى حساب الكتلة، الحجم، التركيز المئوي، أو المعايرة الحجمية.</p>
-              </div>
-              <div class="p-3 bg-purple-950/50 rounded-lg border border-purple-500/30 text-purple-300 font-semibold text-center text-sm">
-                <i class="fa-solid fa-check ml-1"></i> يُمثل: التحليل الكمي (Quantitative Analysis)
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Academic Sequencing Flow Chart -->
-          <div class="mt-4 p-4 rounded-xl bg-gradient-to-r from-blue-950/30 via-chem-surface to-purple-950/30 border border-chem-border flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
-            <span class="text-sm font-semibold text-slate-300">الترتيب الدراسي المنطقي:</span>
-            <div class="flex items-center gap-3">
-              <span class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-bold text-sm">التحليل الكيفي أولاً</span>
-              <i class="fa-solid fa-arrow-left text-slate-400"></i>
-              <span class="px-3 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-400/30 font-bold text-sm">التحليل الكمي ثانيًا</span>
-            </div>
-            <span class="text-xs text-slate-400">(لا يمكن تقدير كمية مادة قبل معرفة نوعها ومكوناتها)</span>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Importance of Analytical Chemistry (4 Expandable Cards) -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-2xl font-bold text-white">أهمية الكيمياء التحليلية في مجالات الحياة</h3>
-          <span class="text-xs text-slate-400">اضغط على البطاقة لعرض التطبيقات والشرح</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          
-          <!-- Card 1: Medicine -->
-          <div class="glass-panel rounded-2xl p-6 border-t-4 border-t-cyan-400 transition-all cursor-pointer hover:border-cyan-300" onclick="toggleDetails('app-med')">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-cyan-900/60 text-cyan-300 flex items-center justify-center">
-                  <i class="fa-solid fa-heart-pulse"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white">1. المجال الطبي والصيدلي</h4>
-              </div>
-              <i id="icon-app-med" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-            </div>
-            <p class="text-sm text-slate-300">تقدير نسب المواد الفعالة في الأدوية والتشخيص الدقيق للدم وسوائل الجسم.</p>
-            <div id="app-med" class="hidden mt-4 pt-4 border-t border-chem-border/60 text-xs sm:text-sm text-slate-300 space-y-2">
-              <ul class="list-disc list-inside space-y-1 text-slate-300">
-                <li>تقدير كمية المادة الفعالة في المستحضرات الدوائية لضمان مطابقتها للمواصفات العلاجية.</li>
-                <li>تسهيل تشخيص الأمراض عبر قياس نسب ومستويات: السكر (الجلوكوز)، الزلال (الألبومين)، الكوليسترول، اليوريا في الدم والبول.</li>
-              </ul>
-              <div class="p-2.5 rounded-lg bg-cyan-950/40 text-cyan-300 font-mono text-xs mt-2">
-                مثال: فحص مستوى اليوريا لتحديد كفاءة وظائف الكلى لدى المريض.
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: Agriculture -->
-          <div class="glass-panel rounded-2xl p-6 border-t-4 border-t-emerald-400 transition-all cursor-pointer hover:border-emerald-300" onclick="toggleDetails('app-agri')">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-emerald-900/60 text-emerald-300 flex items-center justify-center">
-                  <i class="fa-solid fa-seedling"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white">2. المجال الزراعي</h4>
-              </div>
-              <i id="icon-app-agri" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-            </div>
-            <p class="text-sm text-slate-300">تحليل خواص التربة الكيميائية واختيار الأسمدة الملائمة للمحاصيل.</p>
-            <div id="app-agri" class="hidden mt-4 pt-4 border-t border-chem-border/60 text-xs sm:text-sm text-slate-300 space-y-2">
-              <ul class="list-disc list-inside space-y-1 text-slate-300">
-                <li>قياس وتحديد حموضة أو قاعدية التربة باستخدام الرقم الهيدروجيني (pH).</li>
-                <li>معرفة أنواع العناصر الغذائية المتوفرة في التربة (النيتروجين، الفوسفور، البوتاسيوم NPK) ونسبتها لمعالجة النقص بالسماد المناسب.</li>
-              </ul>
-              <div class="p-2.5 rounded-lg bg-emerald-950/40 text-emerald-300 font-mono text-xs mt-2">
-                مثال: إضافة الجير لمعادلة التربة شديدة الحموضة ورفع الـ pH للدرجة المثلى.
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: Industry -->
-          <div class="glass-panel rounded-2xl p-6 border-t-4 border-t-purple-400 transition-all cursor-pointer hover:border-purple-300" onclick="toggleDetails('app-ind')">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-purple-900/60 text-purple-300 flex items-center justify-center">
-                  <i class="fa-solid fa-industry"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white">3. المجال الصناعي</h4>
-              </div>
-              <i id="icon-app-ind" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-            </div>
-            <p class="text-sm text-slate-300">مراقبة الجودة، ومعايرة الخامات، ومطابقة المنتجات للمواصفات القياسية الدولية.</p>
-            <div id="app-ind" class="hidden mt-4 pt-4 border-t border-chem-border/60 text-xs sm:text-sm text-slate-300 space-y-2">
-              <ul class="list-disc list-inside space-y-1 text-slate-300">
-                <li>لا يمكن لخط إنتاج صناعي أن ينجح دون تحليل كيميائي مستمر للخامات الواردة والمنتجات المصنعة.</li>
-                <li>تحديد مدى مطابقة الخامات والمنتجات الغذائية أو الكيميائية للمواصفات القياسية المعتمدة.</li>
-              </ul>
-              <div class="p-2.5 rounded-lg bg-purple-950/40 text-purple-300 font-mono text-xs mt-2">
-                مثال: فحص نسبة سبائك الصلب ودرجة نقاء خام الحديد قبل استخدامه في البناء.
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: Environment -->
-          <div class="glass-panel rounded-2xl p-6 border-t-4 border-t-amber-400 transition-all cursor-pointer hover:border-amber-300" onclick="toggleDetails('app-env')">
-            <div class="flex items-center justify-between mb-3">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-900/60 text-amber-300 flex items-center justify-center">
-                  <i class="fa-solid fa-earth-americas"></i>
-                </div>
-                <h4 class="text-xl font-bold text-white">4. المجال البيئي</h4>
-              </div>
-              <i id="icon-app-env" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
-            </div>
-            <p class="text-sm text-slate-300">رصد ملوثات المياه والغذاء، وقياس تركيزات الغازات السامة في الهواء الجوي.</p>
-            <div id="app-env" class="hidden mt-4 pt-4 border-t border-chem-border/60 text-xs sm:text-sm text-slate-300 space-y-2">
-              <ul class="list-disc list-inside space-y-1 text-slate-300">
-                <li>معرفة وقياس محتوى المياه والأغذية من الملوثات البيئية والمركبات السامة.</li>
-                <li>قياس نسب الغازات الضارة المنبعثة في الغلاف الجوي، مثل: أول أكسيد الكربون CO، وثاني أكسيد الكبريت SO₂، وأكاسيد النيتروجين.</li>
-              </ul>
-              <div class="p-2.5 rounded-lg bg-amber-950/40 text-amber-300 font-mono text-xs mt-2">
-                مثال: تحليل مياه الصرف الصناعي للتأكد من خلوها من المعادن الثقيلة كالرصاص والزئبق.
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Nature of Analyte & Ions (Anion vs Cation) -->
-      <div class="glass-panel p-8 rounded-3xl space-y-8">
-        <div>
-          <h3 class="text-2xl font-bold text-white">طبيعة المادة المراد تحليلها والأيونات</h3>
-          <p class="text-slate-400 text-sm mt-1">كيف يتعامل الكيميائي مع العينات المختلفة؟</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border">
-            <h5 class="font-bold text-cyan-300 mb-1">1. المادة النقية البسيطة</h5>
-            <p class="text-xs text-slate-300">يتم التعرف عليها مباشرة بالاستعانة بثوابتها الفيزيائية المميزة كالكتلة المولية، درجة الانصهار، درجة الغليان، والكثافة.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border">
-            <h5 class="font-bold text-cyan-300 mb-1">2. المخلوط المعقد</h5>
-            <p class="text-xs text-slate-300">يتطلب أولاً فصل مكوناته النقية عن بعضها بطرق الفصل الفيزيائية (كالترشيح والتقطير)، ثم الكشف عن كل مكون بمفرده.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border">
-            <h5 class="font-bold text-cyan-300 mb-1">3. المركبات العضوية</h5>
-            <p class="text-xs text-slate-300">يتم الكشف عن العناصر المكونة لها (C, H, O, N) ثم التعرف على المجموعات الوظيفية المميزة للجزيء (كالكحولات والأحماض).</p>
-          </div>
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border">
-            <h5 class="font-bold text-cyan-300 mb-1">4. المركبات غير العضوية</h5>
-            <p class="text-xs text-slate-300">تتكون في الغالب من أيونات: شق حمضي سالب يسمى (أنيون Anion) وشق قاعدي موجب يسمى (كاتيون Cation).</p>
-          </div>
-        </div>
-
-        <!-- Anion vs Cation Visual Comparison Box -->
-        <div class="bg-chem-dark p-6 rounded-2xl border border-chem-border space-y-4">
-          <h4 class="font-bold text-white text-lg flex items-center gap-2">
-            <i class="fa-solid fa-scale-balanced text-cyan-400"></i> المقارنة الأساسية: الأنيون (الشق الحمضي) مقابل الكاتيون (الشق القاعدي)
-          </h4>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-            <!-- Anion Box -->
-            <div class="p-5 rounded-2xl bg-cyan-950/30 border border-cyan-500/40 relative overflow-hidden">
-              <div class="absolute top-2 left-3 text-5xl font-mono text-cyan-500/10 font-bold select-none">-</div>
-              <div class="flex items-center gap-3 mb-2">
-                <span class="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center text-lg">-</span>
-                <h5 class="text-xl font-bold text-cyan-300">الأنيون (Anion)</h5>
-              </div>
-              <p class="text-xs text-cyan-200/70 font-mono mb-2">يُعرف بالشق الحمضي (Acidic Radical)</p>
-              <ul class="text-sm text-slate-300 space-y-1.5 list-disc list-inside">
-                <li>أيون يحمل شحنة كهربائية <strong class="text-cyan-300">سالبة</strong>.</li>
-                <li>تكون لديه <strong class="text-cyan-300">إلكترونات أكثر</strong> من الذرة أو المجموعة الذرية المتعادلة المقابلة (نتيجة اكتساب إلكترونات).</li>
-                <li>أمثلة دراستنا اليوم: <span class="font-mono text-cyan-300 font-bold">CO₃²⁻, HCO₃⁻, SO₃²⁻, S²⁻, S₂O₃²⁻, NO₂⁻</span>.</li>
-              </ul>
-            </div>
-
-            <!-- Cation Box -->
-            <div class="p-5 rounded-2xl bg-purple-950/30 border border-purple-500/40 relative overflow-hidden">
-              <div class="absolute top-2 left-3 text-5xl font-mono text-purple-500/10 font-bold select-none">+</div>
-              <div class="flex items-center gap-3 mb-2">
-                <span class="w-8 h-8 rounded-full bg-purple-500/20 text-purple-300 font-bold flex items-center justify-center text-lg">+</span>
-                <h5 class="text-xl font-bold text-purple-300">الكاتيون (Cation)</h5>
-              </div>
-              <p class="text-xs text-purple-200/70 font-mono mb-2">يُعرف بالشق القاعدي (Basic Radical)</p>
-              <ul class="text-sm text-slate-300 space-y-1.5 list-disc list-inside">
-                <li>أيون يحمل شحنة كهربائية <strong class="text-purple-300">موجبة</strong>.</li>
-                <li>تكون لديه <strong class="text-purple-300">إلكترونات أقل</strong> من الذرة أو المجموعة المتعادلة المقابلة (نتيجة فقد إلكترونات).</li>
-                <li>الكشف عن الكاتيونات أكثر تعقيدًا بسبب كثرتها وتعدد حالات تأكسدها ووجود تداخلات بين الرواسب.</li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-
+        <h3 class="text-2xl font-bold text-white">ما هي الكيمياء التحليلية؟</h3>
+        <p class="text-slate-300 leading-relaxed">أحد فروع علم الكيمياء الأساسية، ويهتم بدراسة التركيب الكيميائي للمواد وتحديد هويتها ونسب مكوناتها.</p>
       </div>
     </section>
-
-    <!-- ==================== 3. ANIONS MAP & GROUPS ==================== -->
+        <!-- 3. ANIONS MAP -->
     <section id="section-anions-map" class="content-section space-y-10 hidden">
-      <!-- Header -->
       <div class="text-center max-w-3xl mx-auto space-y-2">
         <h2 class="text-3xl font-extrabold text-white">الخريطة التفاعلية لمجموعات الأنيونات</h2>
-        <p class="text-slate-400">تقسم الأنيونات في التحليل الوصفي إلى 3 مجموعات رئيسية حسب ثبات الأحماض المشتقة منها.</p>
       </div>
-
-      <!-- Scientific Fundamental Principle Banner -->
-      <div class="glass-panel p-6 rounded-2xl border-cyan-400/40 bg-gradient-to-r from-chem-card via-slate-900 to-chem-card space-y-3">
-        <div class="flex items-center gap-2 text-cyan-300 font-bold text-lg">
-          <i class="fa-solid fa-atom"></i> المبدأ العلمي الأساسي للكشف عن الأنيونات
-        </div>
-        <p class="text-slate-200 text-sm sm:text-base leading-relaxed">
-          «يعتمد الكشف عن أنيونات الأحماض الأقل ثباتًا على أن <strong class="text-cyan-300">الحمض الأكثر ثباتًا</strong> يستطيع أن يطرد <strong class="text-purple-300">الحمض الأقل ثباتًا</strong> من أملاحه الصلبة على صورة غاز متطاير يسهل التعرف عليه بكاشف مناسب».
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-400 pt-2 border-t border-chem-border">
-          <div class="flex items-start gap-2">
-            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-0.5"></i>
-            <span><strong>الثبات والتطاير:</strong> ثبات الحمض يرتبط بدرجة غليانه وقابليته للتفكك، فالحمض الأكثر ثباتًا أعلى في درجة الغليان وأقل تطايرًا، ولا تعتبر درجة الغليان وحدها معيارًا مطلقًا دون النظر لدرجة التفكك الحراري.</span>
-          </div>
-          <div class="flex items-start gap-2">
-            <i class="fa-solid fa-info-circle text-cyan-400 mt-0.5"></i>
-            <span><strong>الثبات مقابل القوة:</strong> هناك فرق علمي كبير بين "ثبات الحمض" (مقاومته للحرارة والانحلال) وبين "قوة الحمض" (مدى تأينه التام في الماء وإعطائه لأيونات الهيدرونيوم H₃O⁺).</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Three Groups Navigator Tabs -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <!-- Group 1 Tab -->
-        <button onclick="showGroupDetails(1)" id="grp-btn-1" class="group-tab-btn p-5 rounded-2xl bg-cyan-950/60 border-2 border-cyan-400 text-right space-y-2 transition-all">
-          <div class="flex items-center justify-between">
-            <span class="text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">المجموعة الأولى</span>
-            <span class="text-xs text-slate-400 font-mono">6 أنيونات</span>
-          </div>
-          <h3 class="text-xl font-bold text-white">مجموعة حمض الهيدروكلوريك المخفف (dil. HCl)</h3>
-          <p class="text-xs text-slate-300">كاشف المجموعة: حمض HCl المخفف على الملح الصلب.</p>
+        <button onclick="showGroupDetails(1)" id="grp-btn-1" class="p-5 rounded-2xl bg-cyan-950/60 border-2 border-cyan-400 text-right space-y-2">
+          <h3 class="text-xl font-bold text-white">المجموعة الأولى (dil. HCl)</h3>
         </button>
-
-        <!-- Group 2 Tab -->
-        <button onclick="showGroupDetails(2)" id="grp-btn-2" class="group-tab-btn p-5 rounded-2xl bg-chem-surface border border-chem-border text-right space-y-2 transition-all opacity-80 hover:opacity-100">
-          <div class="flex items-center justify-between">
-            <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-bold">المجموعة الثانية</span>
-            <span class="text-xs text-slate-400 font-mono">4 أنيونات</span>
-          </div>
-          <h3 class="text-xl font-bold text-white">مجموعة حمض الكبريتيك المركز (conc. H₂SO₄)</h3>
-          <p class="text-xs text-slate-300">أنيونات متوسطة الثبات: الكلوريد، البروميد، اليوديد، النترات.</p>
+        <button onclick="showGroupDetails(2)" id="grp-btn-2" class="p-5 rounded-2xl bg-chem-surface border border-chem-border text-right space-y-2 opacity-80">
+          <h3 class="text-xl font-bold text-white">المجموعة الثانية (conc. H₂SO₄)</h3>
         </button>
-
-        <!-- Group 3 Tab -->
-        <button onclick="showGroupDetails(3)" id="grp-btn-3" class="group-tab-btn p-5 rounded-2xl bg-chem-surface border border-chem-border text-right space-y-2 transition-all opacity-80 hover:opacity-100">
-          <div class="flex items-center justify-between">
-            <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">المجموعة الثالثة</span>
-            <span class="text-xs text-slate-400 font-mono">أنيونان</span>
-          </div>
-          <h3 class="text-xl font-bold text-white">مجموعة محلول كلوريد الباريوم (BaCl₂ Sol.)</h3>
-          <p class="text-xs text-slate-300">أنيونات الأحماض الأكثر ثباتًا: الكبريتات، والفوسفات.</p>
+        <button onclick="showGroupDetails(3)" id="grp-btn-3" class="p-5 rounded-2xl bg-chem-surface border border-chem-border text-right space-y-2 opacity-80">
+          <h3 class="text-xl font-bold text-white">المجموعة الثالثة (BaCl₂)</h3>
         </button>
-
       </div>
-
-      <!-- Group Content Panel Display -->
-      <div id="group-details-container" class="glass-panel p-6 sm:p-8 rounded-3xl space-y-6">
-        <!-- Rendered dynamically via JS renderGroupDetails() -->
-      </div>
+      <div id="group-details-container" class="glass-panel p-6 sm:p-8 rounded-3xl space-y-6"></div>
     </section>
 
-    <!-- ==================== 4. VIRTUAL LAB ==================== -->
+    <!-- 4. VIRTUAL LAB -->
     <section id="section-virtual-lab" class="content-section space-y-8 hidden">
-      <!-- Lab Header -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-chem-border pb-4">
+      <div class="flex items-center justify-between border-b border-chem-border pb-4">
         <div>
-          <div class="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 bg-cyan-950/70 px-3 py-1 rounded-full border border-cyan-500/30">
-            <i class="fa-solid fa-flask"></i> بيئة محاكاة تفاعلية ثلاثية التأثير
-          </div>
-          <h2 class="text-3xl font-extrabold text-white mt-1">المختبر الكيميائي الافتراضي</h2>
-          <p class="text-slate-400 text-sm">اختر الأنيون والكاشف، وراقب الفوران وتصاعد الغازات والراسب خطوة بخطوة.</p>
+          <h2 class="text-3xl font-extrabold text-white">المختبر الكيميائي الافتراضي</h2>
+          <p class="text-slate-400 text-sm">اختر الأنيون والكاشف، وراقب التفاعل.</p>
         </div>
-        
-        <div class="flex items-center gap-2">
-          <button onclick="resetLab()" class="px-4 py-2 rounded-xl bg-chem-surface border border-chem-border text-slate-300 hover:text-white hover:border-cyan-400 text-sm transition-all flex items-center gap-2">
-            <i class="fa-solid fa-rotate-right"></i> تنظيف الأنبوبة
-          </button>
-          <button onclick="switchTab('equations-section')" class="px-4 py-2 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-sm font-semibold hover:bg-cyan-500/30 transition-all">
-            <i class="fa-solid fa-calculator ml-1"></i> المعادلات
-          </button>
-        </div>
+        <button onclick="resetLab()" class="px-4 py-2 rounded-xl bg-chem-surface border border-chem-border text-slate-300 text-sm">تنظيف الأنبوبة</button>
       </div>
 
-      <!-- Main Lab Interactive Bench -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- Controls Column (Left on desktop / 5 cols) -->
         <div class="lg:col-span-5 space-y-5">
-          
-          <!-- Step 1: Select Anion -->
           <div class="glass-panel p-5 rounded-2xl space-y-3">
-            <label class="block text-sm font-bold text-cyan-300 flex items-center justify-between">
-              <span>١. اختر العينة المجهولة (الملح الصلب أو المحلول):</span>
-              <span class="text-xs text-slate-400 font-normal">المجموعة الأولى</span>
-            </label>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <button onclick="selectLabAnion('CO3')" id="btn-anion-CO3" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold hover:border-cyan-400 text-right">
-                <span class="text-white block">الكربونات</span>
-                <span class="font-mono text-xs text-cyan-300">CO₃²⁻</span>
-              </button>
-              <button onclick="selectLabAnion('HCO3')" id="btn-anion-HCO3" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold hover:border-cyan-400 text-right">
-                <span class="text-white block">البيكربونات</span>
-                <span class="font-mono text-xs text-cyan-300">HCO₃⁻</span>
-              </button>
-              <button onclick="selectLabAnion('SO3')" id="btn-anion-SO3" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold hover:border-cyan-400 text-right">
-                <span class="text-white block">الكبريتيت</span>
-                <span class="font-mono text-xs text-cyan-300">SO₃²⁻</span>
-              </button>
-              <button onclick="selectLabAnion('S')" id="btn-anion-S" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold hover:border-cyan-400 text-right">
-                <span class="text-white block">الكبريتيد</span>
-                <span class="font-mono text-xs text-cyan-300">S²⁻</span>
-              </button>
-              <button onclick="selectLabAnion('S2O3')" id="btn-anion-S2O3" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold hover:border-cyan-400 text-right">
-                <span class="text-white block">الثيوكبريتات</span>
-                <span class="font-mono text-xs text-cyan-300">S₂O₃²⁻</span>
-              </button>
-              <button onclick="selectLabAnion('NO2')" id="btn-anion-NO2" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold hover:border-cyan-400 text-right">
-                <span class="text-white block">النيتريت</span>
-                <span class="font-mono text-xs text-cyan-300">NO₂⁻</span>
-              </button>
+            <label class="block text-sm font-bold text-cyan-300">١. اختر العينة المجهولة:</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="selectLabAnion('CO3')" id="btn-anion-CO3" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold text-right text-white">الكربونات</button>
+              <button onclick="selectLabAnion('SO3')" id="btn-anion-SO3" class="lab-anion-btn p-2.5 rounded-xl bg-chem-surface border border-chem-border text-sm font-semibold text-right text-white">الكبريتيت</button>
             </div>
           </div>
-
-          <!-- Step 2: Choose Test Type (Basic vs Confirmatory) -->
-          <div class="glass-panel p-5 rounded-2xl space-y-3">
-            <label class="block text-sm font-bold text-purple-300">٢. نوع التجربة والكاشف المضاف:</label>
-            <div class="grid grid-cols-2 gap-3">
-              <button onclick="setLabMode('primary')" id="mode-primary-btn" class="p-3 rounded-xl border-2 border-cyan-400 bg-cyan-950/40 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1">
-                <span>التجربة الأساسية</span>
-                <span class="text-xs text-cyan-300 font-mono">حمض dil. HCl</span>
-              </button>
-              <button onclick="setLabMode('confirmatory')" id="mode-confirm-btn" class="p-3 rounded-xl border border-chem-border bg-chem-surface text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 hover:border-purple-400">
-                <span>التجربة التأكيدية</span>
-                <span id="confirm-reagent-hint" class="text-xs text-purple-300 font-mono">الكاشف النوعي</span>
-              </button>
-            </div>
-
-            <!-- Optional Heat Toggle (For Bicarbonate & Sulfite) -->
-            <div id="heat-toggle-container" class="hidden pt-2 border-t border-chem-border/70">
-              <label class="flex items-center justify-between cursor-pointer p-2 rounded-xl bg-slate-900 border border-chem-border">
-                <span class="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-fire"></i> تسخين الأنبوبة (لهب بنزن)
-                </span>
-                <input type="checkbox" id="heat-checkbox" onchange="toggleLabHeating()" class="w-4 h-4 rounded text-amber-500 focus:ring-0 bg-slate-800">
-              </label>
-            </div>
-          </div>
-
-          <!-- Action Button: Add Reagent -->
-          <button onclick="runLabExperiment()" id="run-reaction-btn" class="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-black text-lg shadow-glow-cyan hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2">
-            <i class="fa-solid fa-eye-dropper"></i> إضافة الكاشف وملاحظة النتيجة
-          </button>
-
-          <!-- Safe Lab Notice -->
-          <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 flex items-start gap-2.5 text-xs text-amber-300">
-            <i class="fa-solid fa-triangle-exclamation mt-0.5 text-sm"></i>
-            <span><strong>تنبيه الأمان المخبري:</strong> غازات الكبريت (SO₂, H₂S) وغازات النيتروجين سامة وخانقة؛ يتم التعرف عليها بالأوراق المبللة بالكواشف المناسبة وتجنب استنشاقها مباشرة.</span>
-          </div>
-
+          <button onclick="runLabExperiment()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-black text-lg shadow-glow-cyan">إضافة الكاشف</button>
         </div>
 
-        <!-- Visual Lab Stage Column (Right on desktop / 7 cols) -->
-        <div class="lg:col-span-7 space-y-4">
-          
-          <div class="glass-panel p-6 rounded-3xl relative overflow-hidden flex flex-col items-center justify-center min-h-[460px] border border-cyan-500/30 shadow-2xl">
-            
-            <!-- Ambient Stage Lighting -->
-            <div class="absolute top-4 left-4 flex items-center gap-2 text-xs font-mono text-slate-400">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span id="lab-status-text">المعمل جاهز - بانتظار إضافة المواد</span>
-            </div>
-
-            <!-- Gas Detector Paper Indicator (e.g. Lead Acetate or Dichromate) -->
-            <div id="gas-test-paper" class="hidden absolute top-8 right-8 p-3 rounded-xl bg-slate-900 border border-cyan-500/40 shadow-lg text-xs space-y-1 w-44 transition-all duration-500">
-              <span class="text-slate-400 block text-[10px]">كاشف الغاز المتصاعد:</span>
-              <div id="paper-indicator-box" class="h-6 rounded-md bg-amber-100 flex items-center justify-center text-slate-800 font-bold text-xs transition-colors duration-700">
-                ورقة اختبار
-              </div>
-              <span id="paper-indicator-label" class="text-[11px] font-mono text-cyan-300 block text-center">ورقة مبللة</span>
-            </div>
-
-            <!-- 3D/CSS Test Tube Stand -->
+        <div class="lg:col-span-7">
+          <div class="glass-panel p-6 rounded-3xl relative flex flex-col items-center justify-center min-h-[400px]">
             <div class="relative w-44 h-80 flex flex-col items-center justify-end">
-              
-              <!-- Gas Cloud escaping the tube -->
-              <div id="gas-cloud" class="absolute -top-12 w-28 h-20 rounded-full blur-xl opacity-0 transition-opacity duration-700 pointer-events-none"></div>
-
-              <!-- Test Tube Rim & Glass Container -->
               <div class="w-24 h-72 rounded-b-full rounded-t-lg tube-glass border-2 border-white/20 relative overflow-hidden flex flex-col justify-end p-1.5">
-                
-                <!-- Dropper / Pipette animation overlay -->
-                <div id="dropper-anim" class="absolute -top-12 left-1/2 -translate-x-1/2 text-cyan-300 text-3xl opacity-0 transition-all duration-500">
-                  <i class="fa-solid fa-droplet animate-bounce"></i>
-                </div>
-
-                <!-- Liquid Column inside Test Tube -->
                 <div id="tube-liquid" class="w-full h-14 rounded-b-full transition-all duration-1000 relative flex flex-col justify-end items-center overflow-hidden" style="background-color: rgba(226, 232, 240, 0.2);">
-                  
-                  <!-- Precipitate formation at bottom -->
                   <div id="tube-precipitate" class="w-full h-0 transition-all duration-700 rounded-b-full"></div>
-
-                  <!-- Dynamic Bubbles Container for effervescence -->
-                  <div id="bubble-container" class="absolute inset-0 pointer-events-none"></div>
-
-                </div>
-
-              </div>
-
-              <!-- Test tube rack wooden/steel base -->
-              <div class="w-40 h-4 bg-slate-700 rounded-lg shadow-lg -mt-1 border border-slate-600"></div>
-              <div class="w-32 h-2 bg-slate-800 rounded-sm"></div>
-
-              <!-- Flame element if heating -->
-              <div id="flame-element" class="hidden absolute bottom-2 w-8 h-12 bg-gradient-to-t from-orange-500 via-yellow-400 to-transparent rounded-full blur-xs animate-pulse opacity-90"></div>
-
-            </div>
-
-            <!-- Live Lab Observation Box -->
-            <div id="observation-box" class="w-full mt-6 p-4 rounded-2xl bg-chem-dark/90 border border-chem-border space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="fa-solid fa-clipboard-check"></i> الملاحظة والاستنتاج المخبري:
-                </span>
-                <span id="badge-reaction-type" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300">لم يبدأ بعد</span>
-              </div>
-              <p id="observation-text" class="text-sm sm:text-base text-slate-200 font-semibold leading-relaxed">
-                حدد أنيونًا من القائمة، واختر نوع التجربة ثم اضغط على «إضافة الكاشف» لمشاهدة التفاعل الحي.
-              </p>
-              
-              <!-- Chemical Equation Reveal inside Lab -->
-              <div id="lab-equation-wrapper" class="hidden pt-3 border-t border-chem-border/70">
-                <span class="text-xs text-slate-400 block mb-1">المعادلة الأيونية للتفاعل:</span>
-                <div id="lab-rendered-equation" class="font-mono text-cyan-300 text-sm sm:text-base bg-chem-surface p-2.5 rounded-xl border border-cyan-500/20 text-center overflow-x-auto" dir="ltr">
-                  <!-- Rendered via KaTeX -->
                 </div>
               </div>
+              <div class="w-40 h-4 bg-slate-700 rounded-lg shadow-lg -mt-1"></div>
             </div>
-
+            <div id="observation-box" class="w-full mt-6 p-4 rounded-2xl bg-chem-dark/90 border border-chem-border">
+              <p id="observation-text" class="text-sm text-slate-200 font-semibold">اختر أنيونًا واضغط على إضافة الكاشف.</p>
+            </div>
           </div>
-
         </div>
-
       </div>
     </section>
-
-    <!-- ==================== 5. SMART COMPARISON TABLE ==================== -->
+        <!-- 5. COMPARISON TABLE -->
     <section id="section-comparison-table" class="content-section space-y-6 hidden">
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h2 class="text-3xl font-extrabold text-white">جدول المقارنة الذكي الشامل</h2>
-          <p class="text-slate-400 text-sm">تصفية فورية، بحث ذكي بالغاز والرواسب، وروابط مباشرة لصفحات الشرح التفصيلي.</p>
-        </div>
-
-        <!-- Search & Filter Controls -->
-        <div class="flex flex-wrap items-center gap-3">
-          <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-sm"></i>
-            <input type="text" id="tableSearchInput" onkeyup="filterComparisonTable()" placeholder="ابحث باسم الأنيون، الرمز، الغاز..." class="pl-3 pr-10 py-2 rounded-xl bg-chem-surface border border-chem-border text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 w-64">
-          </div>
-          
-          <select id="groupFilterSelect" onchange="filterComparisonTable()" class="py-2 px-3 rounded-xl bg-chem-surface border border-chem-border text-sm text-slate-300 focus:outline-none focus:border-cyan-400">
-            <option value="all">جميع المجموعات (١٢ أنيون)</option>
-            <option value="grp1" selected>المجموعة الأولى: حمض HCl المخفف</option>
-            <option value="grp2">المجموعة الثانية: حمض H₂SO₄ المركز</option>
-            <option value="grp3">المجموعة الثالثة: كلوريد الباريوم</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Responsive Table Container -->
-      <div class="glass-panel rounded-2xl overflow-hidden border border-chem-border shadow-xl">
-        <div class="overflow-x-auto">
-          <table class="w-full text-right text-sm">
-            <thead class="bg-chem-surface text-cyan-300 text-xs uppercase font-mono tracking-wider border-b border-chem-border">
-              <tr>
-                <th class="py-4 px-4">الأنيون</th>
-                <th class="py-4 px-3">الصيغة والشحنة</th>
-                <th class="py-4 px-3">الحمض المشتق</th>
-                <th class="py-4 px-4">الملاحظة مع HCl المخفف</th>
-                <th class="py-4 px-3">الغاز والناتج المميز</th>
-                <th class="py-4 px-4">التجربة التأكيدية</th>
-                <th class="py-4 px-3">لون الراسب / التغير</th>
-                <th class="py-4 px-3 text-center">التجربة الحية</th>
-              </tr>
-            </thead>
-            <tbody id="comparison-table-body" class="divide-y divide-chem-border text-slate-200">
-              <!-- Dynamically Populated via JS -->
-            </tbody>
-          </table>
-        </div>
+      <h2 class="text-3xl font-extrabold text-white">جدول المقارنة الذكي الشامل</h2>
+      <div class="glass-panel rounded-2xl overflow-hidden border border-chem-border">
+        <table class="w-full text-right text-sm">
+          <thead class="bg-chem-surface text-cyan-300 text-xs uppercase font-mono border-b border-chem-border">
+            <tr>
+              <th class="py-4 px-4">الأنيون</th>
+              <th class="py-4 px-3">الصيغة</th>
+              <th class="py-4 px-4">الملاحظة مع HCl</th>
+              <th class="py-4 px-3">الغاز الناتج</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-table-body" class="divide-y divide-chem-border text-slate-200">
+            <tr><td class="py-3 px-4">الكربونات</td><td class="py-3 px-3 font-mono">CO₃²⁻</td><td class="py-3 px-4">فوران وتصاعد CO₂</td><td class="py-3 px-3 text-amber-300">CO₂</td></tr>
+            <tr><td class="py-3 px-4">الكبريتيت</td><td class="py-3 px-3 font-mono">SO₃²⁻</td><td class="py-3 px-4">تصاعد SO₂ النفاذ</td><td class="py-3 px-3 text-amber-300">SO₂</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <!-- ==================== 6. EQUATIONS & PRACTICE ==================== -->
+    <!-- 6. EQUATIONS -->
     <section id="section-equations-section" class="content-section space-y-8 hidden">
-      <!-- Header -->
-      <div class="text-center max-w-3xl mx-auto space-y-2">
-        <h2 class="text-3xl font-extrabold text-white">قسم المعادلات الكيميائية وموازنتها</h2>
-        <p class="text-slate-400">معادلات جزيئية وأيونية صافية موزونة بدقة، مع الحالات الفيزيائية والشحنات وخاصية إخفاء النواتج للتدرّب.</p>
-      </div>
-
-      <!-- Interactive Filter Tabs for Equations -->
-      <div class="flex flex-wrap items-center justify-center gap-2">
-        <button onclick="filterEquations('all')" class="eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-black shadow-glow-cyan" data-filter="all">جميع المعادلات</button>
-        <button onclick="filterEquations('carbonate')" class="eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-chem-surface text-slate-300 hover:text-white" data-filter="carbonate">الكربونات والبيكربونات</button>
-        <button onclick="filterEquations('sulfite-sulfide')" class="eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-chem-surface text-slate-300 hover:text-white" data-filter="sulfite-sulfide">الكبريتيت والكبريتيد</button>
-        <button onclick="filterEquations('thiosulfate')" class="eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-chem-surface text-slate-300 hover:text-white" data-filter="thiosulfate">الثيوكبريتات</button>
-        <button onclick="filterEquations('nitrite')" class="eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-chem-surface text-slate-300 hover:text-white" data-filter="nitrite">النيتريت</button>
-      </div>
-
-      <!-- Equations Grid Cards Container -->
-      <div id="equations-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <!-- Injected via renderEquations() -->
-      </div>
+      <h2 class="text-3xl font-extrabold text-white">قسم المعادلات الكيميائية</h2>
+      <div id="equations-cards-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
     </section>
 
-    <!-- ==================== 7. INTERACTIVE QUIZ & TEST BANK ==================== -->
+    <!-- 7. QUIZ SECTION -->
     <section id="section-quiz-section" class="content-section space-y-8 hidden">
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-chem-border pb-4">
-        <div>
-          <h2 class="text-3xl font-extrabold text-white">منصة الاختبارات وبنك الأسئلة</h2>
-          <p class="text-slate-400 text-sm">أسئلة اختيار من متعدد، كشف أنيون مجهول، وتصحيح فوري مع تحليل النتيجة.</p>
+      <h2 class="text-3xl font-extrabold text-white">منصة الاختبارات وبنك الأسئلة</h2>
+      <div class="glass-panel p-6 sm:p-10 rounded-3xl max-w-3xl mx-auto space-y-6 shadow-2xl">
+        <h3 id="question-text" class="text-xl font-bold text-white">الأساس العلمي للكشف عن أنيونات مجموعة حمض HCl هو:</h3>
+        <div id="quiz-options-list" class="space-y-3">
+          <button class="w-full text-right p-4 rounded-xl bg-chem-surface border border-chem-border text-white">الحمض الأكثر ثباتًا يطرد الأقل ثباتًا</button>
         </div>
-        
-        <!-- Quiz Mode Toggle & Timer -->
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-2 bg-chem-surface px-3 py-1.5 rounded-xl border border-chem-border text-xs">
-            <i class="fa-regular fa-clock text-cyan-400"></i>
-            <span id="quiz-timer-display" class="font-mono font-bold text-white">00:00</span>
-          </div>
-          <button onclick="resetQuiz()" class="px-3.5 py-1.5 rounded-xl bg-purple-600/30 text-purple-300 hover:bg-purple-600/50 border border-purple-500/40 text-xs font-bold transition-all">
-            <i class="fa-solid fa-arrow-rotate-right ml-1"></i> إعادة الاختبار
-          </button>
-        </div>
-      </div>
-
-      <!-- Quiz Card Container -->
-      <div class="glass-panel p-6 sm:p-10 rounded-3xl max-w-3xl mx-auto space-y-6 shadow-2xl relative">
-        
-        <!-- Question Progress Bar & Counter -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>السؤال <span id="current-q-index" class="text-cyan-400 font-bold">1</span> من <span id="total-q-count">8</span></span>
-            <span id="score-counter">الدرجة الحالية: 0</span>
-          </div>
-          <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-            <div id="quiz-progress-fill" class="h-full bg-gradient-to-r from-cyan-400 to-purple-500 w-[12%] transition-all duration-300"></div>
-          </div>
-        </div>
-
-        <!-- Question Body Area -->
-        <div id="quiz-question-box" class="space-y-4 pt-2">
-          <span id="question-tag" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/30">
-            سؤال تجربة أساسية
-          </span>
-          <h3 id="question-text" class="text-xl sm:text-2xl font-bold text-white leading-relaxed">
-            <!-- Dynamic Question Text -->
-          </h3>
-          
-          <!-- Choices List -->
-          <div id="quiz-options-list" class="space-y-3 pt-3">
-            <!-- Dynamic Options Buttons -->
-          </div>
-        </div>
-
-        <!-- Explanation & Feedback (Hidden until answered) -->
-        <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl border text-sm space-y-2">
-          <div id="feedback-title" class="font-bold flex items-center gap-2"></div>
-          <p id="feedback-reason" class="text-slate-300 text-xs sm:text-sm leading-relaxed"></p>
-        </div>
-
-        <!-- Next Question Button -->
-        <div class="flex items-center justify-end pt-4 border-t border-chem-border">
-          <button onclick="nextQuizQuestion()" id="next-q-btn" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-glow-cyan hover:scale-[1.02] transition-transform">
-            السؤال التالي &larr;
-          </button>
-        </div>
-
-        <!-- Final Quiz Results View (Initially Hidden) -->
-        <div id="quiz-result-view" class="hidden text-center py-8 space-y-6">
-          <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center mx-auto shadow-glow-cyan text-3xl text-white">
-            <i class="fa-solid fa-trophy"></i>
-          </div>
-          <div class="space-y-2">
-            <h3 class="text-3xl font-black text-white">اكتمل الاختبار بنجاح!</h3>
-            <p id="quiz-final-score" class="text-lg text-cyan-300 font-mono font-bold">درجتك: 8 / 8 (100%)</p>
-            <p id="quiz-feedback-summary" class="text-sm text-slate-300 max-w-md mx-auto">
-              ممتاز! لديك فهم عميق لمبدأ ثبات الأحماض وغازات مجموعة حمض الهيدروكلوريك والتجارب التأكيدية.
-            </p>
-          </div>
-          <div class="flex items-center justify-center gap-4">
-            <button onclick="resetQuiz()" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-black font-bold text-sm shadow-glow-cyan">
-              إعادة المحاولة
-            </button>
-            <button onclick="switchTab('revision-section')" class="px-5 py-2.5 rounded-xl bg-chem-surface border border-chem-border text-slate-300 hover:text-white text-sm">
-              أدوات المراجعة الذكية
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- ==================== 8. SMART REVISION & FLASHCARDS ==================== -->
+    <!-- 8. REVISION SECTION -->
     <section id="section-revision-section" class="content-section space-y-10 hidden">
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto space-y-2">
-        <h2 class="text-3xl font-extrabold text-white">أدوات المراجعة الذكية والبطاقات الخاطفة</h2>
-        <p class="text-slate-400">انقر على البطاقة لقلبها ومراجعة التجربة والملاحظة والمعادلة قبل الامتحان.</p>
-      </div>
-
-      <!-- Revision Tools Tabs -->
-      <div class="flex items-center justify-center gap-3">
-        <button onclick="setRevisionView('flashcards')" id="rev-tab-cards" class="px-5 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-black shadow-glow-cyan transition-all">
-          <i class="fa-solid fa-clone ml-1.5"></i> بطاقات المراجعة (Flashcards)
-        </button>
-        <button onclick="setRevisionView('summary')" id="rev-tab-summary" class="px-5 py-2 rounded-xl text-sm font-bold bg-chem-surface text-slate-300 hover:text-white border border-chem-border transition-all">
-          <i class="fa-solid fa-table-cells ml-1.5"></i> ملخص الغازات والألوان
-        </button>
-      </div>
-
-      <!-- Flashcards Grid View -->
-      <div id="flashcards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Rendered via renderFlashcards() -->
-      </div>
-
-      <!-- Quick Summary Table of Gases & Precipitates (Initially Hidden) -->
-      <div id="summary-container" class="hidden glass-panel p-6 rounded-3xl space-y-6">
-        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-          <i class="fa-solid fa-cloud-meatball text-cyan-400"></i> دليل الغازات الناتجة وطرق التعرف عليها
-        </h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border space-y-2">
-            <span class="font-mono text-cyan-300 font-bold text-base">غاز ثاني أكسيد الكربون CO₂</span>
-            <p class="text-xs text-slate-300">عديم اللون والرائحة، يعكر ماء الجير الرائق Ca(OH)₂ لمدة قصيرة لتكون كربونات الكالسيوم غير الذائبة CaCO₃، ويزول التعكر بالاستمرار لتكون بيكربونات الكالسيوم الذائبة Ca(HCO₃)₂.</p>
-          </div>
-
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border space-y-2">
-            <span class="font-mono text-emerald-300 font-bold text-base">غاز ثاني أكسيد الكبريت SO₂</span>
-            <p class="text-xs text-slate-300">غاز ذو رائحة نفاذة، يخضر ورقة مبللة بمحلول ثنائي كرومات البوتاسيوم المحمضة بحمض الكبريتيك المركز لتحول أيونات الكروم البرتقالية Cr⁶⁺ إلى كبريتات الكروم III الخضراء Cr₂(SO₄)₃.</p>
-          </div>
-
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border space-y-2">
-            <span class="font-mono text-amber-300 font-bold text-base">غاز كبريتيد الهيدروجين H₂S</span>
-            <p class="text-xs text-slate-300">غاز كريه الرائحة (يشبه البيض الفاسد)، يسود ورقة مبللة بمحلول أسيتات الرصاص II لتكون راسب أسود من كبريتيد الرصاص PbS↓. (سام جدًا ويحظر استنشاقه).</p>
-          </div>
-
-          <div class="p-4 rounded-xl bg-chem-surface border border-chem-border space-y-2">
-            <span class="font-mono text-purple-300 font-bold text-base">غاز أكسيد النيتريك NO</span>
-            <p class="text-xs text-slate-300">غاز عديم اللون داخل أنبوبة الاختبار، يتحول عند فوهة الأنبوبة إلى أبخرة بنية حمراء من ثاني أكسيد النيتروجين NO₂ لاتحاده السريع مع أكسجين الهواء الجوي.</p>
-          </div>
-        </div>
-
-        <div class="pt-4 border-t border-chem-border">
-          <h4 class="text-lg font-bold text-white mb-3">مصطلح «المعادلة العطشانة» المذكور في المنهج:</h4>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed bg-chem-dark p-4 rounded-xl border border-cyan-500/20">
-            يُطلق مجازًا على تفاعل أكسدة غاز ثاني أكسيد الكبريت SO₂ بواسطة ثنائي كرومات البوتاسيوم المحمضة بحمض الكبريتيك، حيث لا يظهر الماء H₂O كناتج صريح في بعض الصيغ المبسطة للأكسدة ولكن يلزم وجود قطرات الماء والحمض لتكوين كبريتات الكروم المائية الخضراء وكبريتات البوتاسيوم.
-          </p>
-        </div>
-
-      </div>
-
+      <h2 class="text-3xl font-extrabold text-white">أدوات المراجعة الذكية</h2>
+      <div id="flashcards-container" class="grid grid-cols-1 sm:grid-cols-3 gap-6"></div>
     </section>
+        <!-- 9. AUTHENTICATION & LOGIN SECTION (WITH MAN & BOX ANIMATION) -->
+    <section id="section-auth-section" class="content-section space-y-8 hidden min-h-[500px] flex items-center justify-center relative overflow-hidden py-12">
+      
+      <!-- الصندوق المتحرك -->
+      <div id="pulled-box" class="w-full max-w-md glass-panel p-8 rounded-3xl border border-purple-500/40 shadow-2xl space-y-6 relative animate-pull-in z-10">
+        
+        <!-- الحبل الموصول بالرجل -->
+        <div class="rope-line"></div>
 
-
-    <!-- ==================== EDUCATIONAL LINKS ==================== -->
-    <section id="section-educational-links" class="content-section space-y-8 hidden">
-      <div class="text-center max-w-3xl mx-auto space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
-          <i class="fa-solid fa-graduation-cap"></i> مجتمع نبض الكيمياء التعليمي
+        <!-- الرجل الذي يسحب ويسند على الصندوق -->
+        <div id="leaning-man" class="absolute -right-20 -top-16 text-cyan-400 text-5xl flex items-center gap-1">
+          <i class="fa-solid fa-person text-purple-400 animate-bounce"></i>
+          <span class="text-xs bg-chem-surface px-2 py-1 rounded border border-chem-border text-white font-mono">أنا مسند هنا!</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">الروابط التعليمية</h2>
-        <p class="text-slate-400 leading-relaxed">انتقل مباشرة إلى قنوات الشرح والمراجعة، وشارك أسئلتك مع مجتمع معاك للآخر، أو انضم إلى فريق المتابعة.</p>
-      </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-        <a href="https://t.me/C00M5" target="_blank" rel="noopener noreferrer"
-           class="group glass-panel rounded-2xl p-6 border border-cyan-500/30 hover:border-cyan-300 hover:shadow-glow-cyan transition-all duration-300 hover:-translate-y-1 flex flex-col min-h-56">
-          <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-flask-vial"></i>
+        <div class="text-center space-y-2">
+          <div class="w-14 h-14 rounded-2xl bg-purple-600/20 text-purple-400 border border-purple-500/40 flex items-center justify-center mx-auto text-xl shadow-glow-purple">
+            <i class="fa-solid fa-user-lock"></i>
           </div>
-          <h3 class="text-lg font-extrabold text-white mb-2">قناة نبض الكيمياء</h3>
-          <p class="text-sm leading-relaxed text-slate-400 flex-grow">تابع محتوى الكيمياء والشروحات والمراجعات والمواد التعليمية.</p>
-          <span class="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500/15 border border-cyan-400/30 px-4 py-3 text-sm font-bold text-cyan-300 group-hover:bg-cyan-500/25 transition-colors">
-            <i class="fa-brands fa-telegram"></i> فتح القناة <i class="fa-solid fa-arrow-up-left-from-square text-xs"></i>
-          </span>
-        </a>
+          <h2 class="text-2xl font-black text-white">تسجيل الدخول لـ Ahmed Store</h2>
+          <p class="text-xs text-slate-400">سجل بريدك الإلكتروني وكلمة المرور للمتابعة</p>
+        </div>
 
-        <a href="https://t.me/C55C4" target="_blank" rel="noopener noreferrer"
-           class="group glass-panel rounded-2xl p-6 border border-purple-500/30 hover:border-purple-300 hover:shadow-glow-purple transition-all duration-300 hover:-translate-y-1 flex flex-col min-h-56">
-          <div class="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-400/30 text-purple-300 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-book-open-reader"></i>
+        <!-- Form Inputs -->
+        <div id="auth-form-inputs" class="space-y-4">
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">البريد الإلكتروني</label>
+            <input type="email" id="auth-email" placeholder="example@gmail.com" class="w-full px-4 py-3 rounded-xl bg-chem-surface border border-chem-border text-white text-sm focus:outline-none focus:border-purple-400">
           </div>
-          <h3 class="text-lg font-extrabold text-white mb-2">قناة معاك للآخر</h3>
-          <p class="text-sm leading-relaxed text-slate-400 flex-grow">مصدر للمحتوى الدراسي والتنبيهات والمراجعات لطلاب الثانوية العامة.</p>
-          <span class="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-purple-500/15 border border-purple-400/30 px-4 py-3 text-sm font-bold text-purple-300 group-hover:bg-purple-500/25 transition-colors">
-            <i class="fa-brands fa-telegram"></i> فتح القناة <i class="fa-solid fa-arrow-up-left-from-square text-xs"></i>
-          </span>
-        </a>
-
-        <a href="https://t.me/c_ecce" target="_blank" rel="noopener noreferrer"
-           class="group glass-panel rounded-2xl p-6 border border-blue-500/30 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1 flex flex-col min-h-56 hover:shadow-[0_0_25px_rgba(59,130,246,0.25)]">
-          <div class="w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-400/30 text-blue-300 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-comments"></i>
+          <div>
+            <label class="block text-xs text-slate-300 mb-1">كلمة المرور</label>
+            <input type="password" id="auth-password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-chem-surface border border-chem-border text-white text-sm focus:outline-none focus:border-purple-400">
           </div>
-          <h3 class="text-lg font-extrabold text-white mb-2">مناقشة معاك للآخر</h3>
-          <p class="text-sm leading-relaxed text-slate-400 flex-grow">مكان لمناقشة الأسئلة والاستفسارات والتفاعل مع مجتمع الطلاب.</p>
-          <span class="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-500/15 border border-blue-400/30 px-4 py-3 text-sm font-bold text-blue-300 group-hover:bg-blue-500/25 transition-colors">
-            <i class="fa-brands fa-telegram"></i> الدخول للمناقشة <i class="fa-solid fa-arrow-up-left-from-square text-xs"></i>
-          </span>
-        </a>
 
-        <a href="https://t.me/Affer_Team" target="_blank" rel="noopener noreferrer"
-           class="group glass-panel rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-300 transition-all duration-300 hover:-translate-y-1 flex flex-col min-h-56 hover:shadow-glow-green">
-          <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-people-group"></i>
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <button id="login-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-glow-cyan hover:brightness-110">تسجيل الدخول</button>
+            <button id="signup-btn" class="w-full py-3 rounded-xl bg-chem-surface border border-purple-500/40 text-purple-300 font-bold text-sm hover:bg-purple-600/20">إنشاء حساب</button>
           </div>
-          <h3 class="text-lg font-extrabold text-white mb-2">فريق المتابعة</h3>
-          <p class="text-sm leading-relaxed text-slate-400 flex-grow">انضم إلى فريق المتابعة للتنظيم والتشجيع ومساندة الطلاب في رحلتهم الدراسية.</p>
-          <span class="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500/15 border border-emerald-400/30 px-4 py-3 text-sm font-bold text-emerald-300 group-hover:bg-emerald-500/25 transition-colors">
-            <i class="fa-brands fa-telegram"></i> الانضمام للفريق <i class="fa-solid fa-arrow-up-left-from-square text-xs"></i>
-          </span>
-        </a>
-      </div>
+        </div>
 
-      <div class="glass-panel rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="text-sm text-slate-300"><i class="fa-solid fa-circle-info text-cyan-400 ml-2"></i>تُفتح الروابط في نافذة جديدة حتى تظل صفحة الدراسة متاحة.</p>
-        <button onclick="switchTab('hero')" class="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-chem-surface border border-chem-border text-cyan-300 hover:border-cyan-400 transition-colors">
-          <i class="fa-solid fa-house"></i> العودة للرئيسية
-        </button>
+        <!-- Logged In Box -->
+        <div id="user-logged-box" class="hidden text-center space-y-4 pt-4 border-t border-chem-border">
+          <p class="text-sm text-emerald-400 font-bold">مرحباً بك! أنت مسجل الدخول الآن.</p>
+          <p id="logged-user-email" class="text-xs font-mono text-cyan-300 bg-chem-surface py-2 px-3 rounded-xl border border-chem-border"></p>
+          <button id="logout-btn" class="w-full py-2.5 rounded-xl bg-rose-600/20 border border-rose-500/40 text-rose-300 text-xs font-bold">تسجيل الخروج</button>
+        </div>
+
       </div>
     </section>
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-chem-surface/90 border-t border-chem-border mt-16 py-10 text-slate-400 text-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        
-        <!-- Brand -->
-        <div class="flex items-center gap-3 text-center md:text-right">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-white text-lg">
-            <i class="fa-solid fa-atom"></i>
-          </div>
-          <div>
-            <h4 class="text-lg font-bold text-white">الكيمياء التحليلية</h4>
-            <p class="text-xs text-slate-400">المنصة التعليمية المتكاملة لشرح وتجارب الكيمياء التحليلية للثانوية العامة</p>
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-300">
-          <button onclick="switchTab('hero')" class="hover:text-cyan-400">الرئيسية</button>
-          <button onclick="switchTab('intro')" class="hover:text-cyan-400">مقدمة التحليلية</button>
-          <button onclick="switchTab('virtual-lab')" class="hover:text-cyan-400 text-cyan-300 font-bold">المختبر</button>
-          <button onclick="switchTab('comparison-table')" class="hover:text-cyan-400">جدول المقارنة</button>
-          <button onclick="switchTab('quiz-section')" class="hover:text-cyan-400">بنك الأسئلة</button>
-          <button onclick="switchTab('educational-links')" class="hover:text-cyan-400 text-emerald-300 font-bold">الروابط التعليمية</button>
-        </div>
-
-      </div>
-
-      <div class="border-t border-chem-border/70 pt-6 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p>© 2026 الكيمياء التحليلية - جميع الحقوق محفوظة لطلاب ومعلمي الكيمياء بالثانوية العامة.</p>
-        <p class="text-cyan-400/80">صُمم بمعايير علمية بصرية دقيقة تضمن السلامة والواقعية التفاعلية.</p>
-      </div>
-    </div>
+  <!-- FOOTER -->
+  <footer class="bg-chem-surface/90 border-t border-chem-border mt-16 py-8 text-slate-400 text-sm text-center">
+    <p>© 2026 Ahmed Store - جميع الحقوق محفوظة.</p>
   </footer>
+    <!-- ==================== FIREBASE & APP SCRIPT ==================== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-  <!-- ==================== CORE JAVASCRIPT APPLICATION LOGIC ==================== -->
+    const firebaseConfig = {
+      apiKey: "AIzaSyAF7j3fuI1PHTW2sUgcRYjQo8J5hwwV4mM",
+      authDomain: "my-store-75b70.firebaseapp.com",
+      databaseURL: "https://my-store-75b70-default-rtdb.firebaseio.com",
+      projectId: "my-store-75b70",
+      storageBucket: "my-store-75b70.firebasestorage.app",
+      messagingSenderId: "762773021655",
+      appId: "1:762773021655:web:a80847a66bc135dc49e192",
+      measurementId: "G-RPMDPLQF90"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const emailInput = document.getElementById("auth-email");
+    const passwordInput = document.getElementById("auth-password");
+    const loginBtn = document.getElementById("login-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const userLoggedBox = document.getElementById("user-logged-box");
+    const authFormInputs = document.getElementById("auth-form-inputs");
+    const loggedUserEmail = document.getElementById("logged-user-email");
+
+    loginBtn.addEventListener("click", () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      if (!email || !password) return alert("أدخل البريد وكلمة المرور!");
+      signInWithEmailAndPassword(auth, email, password).then(() => alert("تم تسجيل الدخول بنجاح!")).catch(err => alert("خطأ: " + err.message));
+    });
+
+    signupBtn.addEventListener("click", () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      if (!email || !password) return alert("أدخل البريد وكلمة المرور!");
+      createUserWithEmailAndPassword(auth, email, password).then(() => alert("تم إنشاء الحساب وتسجيل الدخول!")).catch(err => alert("خطأ: " + err.message));
+    });
+
+    logoutBtn.addEventListener("click", () => signOut(auth).then(() => alert("تم تسجيل الخروج.")));
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userLoggedBox.classList.remove('hidden');
+        authFormInputs.classList.add('hidden');
+        loggedUserEmail.innerText = user.email;
+      } else {
+        userLoggedBox.classList.add('hidden');
+        authFormInputs.classList.remove('hidden');
+      }
+    });
+  </script>
+
   <script>
-    /* Global Application State */
-    const state = {
-      activeSection: 'hero',
-      currentGroup: 1,
-      lab: {
-        selectedAnion: 'CO3',
-        mode: 'primary', // 'primary' (HCl) or 'confirmatory'
-        isHeating: false,
-        isRunning: false
-      },
-      userProgress: {
-        visitedSections: new Set(['hero']),
-        quizCompleted: false,
-        quizScore: 0
-      },
-      quiz: {
-        currentIndex: 0,
-        score: 0,
-        answered: false,
-        timerSeconds: 0,
-        timerInterval: null
-      }
-    };
-
-    /* ================= 1. TAB & NAVIGATION SYSTEM ================= */
     function switchTab(sectionId) {
-      state.activeSection = sectionId;
-      state.userProgress.visitedSections.add(sectionId);
-      updateUserProgress();
-
-      // Toggle sections
-      document.querySelectorAll('.content-section').forEach(sec => {
-        sec.classList.add('hidden');
-      });
+      document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
       const targetSec = document.getElementById('section-' + sectionId);
-      if (targetSec) {
-        targetSec.classList.remove('hidden');
+      if (targetSec) targetSec.classList.remove('hidden');
+
+      // إعادة تشغيل انيميشن الرجل والصندوق عند الانتقال لصفحة تسجيل الدخول
+      if (sectionId === 'auth-section') {
+        const box = document.getElementById('pulled-box');
+        box.classList.remove('animate-pull-in');
+        void box.offsetWidth;
+        box.classList.add('animate-pull-in');
       }
 
-      // Update Header nav styling
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        if (btn.dataset.section === sectionId) {
-          btn.classList.add('text-cyan-400', 'bg-chem-card');
-          btn.classList.remove('text-slate-300');
-        } else {
-          btn.classList.remove('text-cyan-400', 'bg-chem-card');
-          btn.classList.add('text-slate-300');
-        }
-      });
-
-      // Window scroll to top smooth
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // Trigger Math typesetting if needed
-      renderKatexEquations();
-    }
-
-    function toggleMobileNav() {
-      const mobNav = document.getElementById('mobile-nav');
-      mobNav.classList.toggle('hidden');
-    }
-
-    function updateUserProgress() {
-      const totalSections = 7;
-      const progressPercent = Math.min(100, Math.round((state.userProgress.visitedSections.size / totalSections) * 100));
-      const badge = document.getElementById('user-progress-badge');
-      const bar = document.getElementById('site-progress-bar');
-      if (badge) badge.innerText = progressPercent + '%';
-      if (bar) bar.style.width = progressPercent + '%';
-    }
-
-    function toggleDetails(elementId) {
-      const el = document.getElementById(elementId);
-      const icon = document.getElementById('icon-' + elementId);
-      if (el) {
-        el.classList.toggle('hidden');
-        if (icon) icon.classList.toggle('rotate-180');
-      }
-    }
-
-    /* ================= 2. GROUPS DATA & RENDERING ================= */
-    const groupsData = {
-      1: {
-        title: "المجموعة الأولى: حمض الهيدروكلوريك المخفف (dil. HCl)",
-        reagent: "حمض الهيدروكلوريك المخفف dil. HCl على الملح الصلب",
-        anionCount: "6 أنيونات مشتقة من 5 أحماض أقل ثباتًا من حمض الهيدروكلوريك",
-        note: "تنبيه هام: الكربونات والبيكربونات تشتقان من حمض واحد هو حمض الكربونيك H₂CO₃، ولذا ينتج عن كليهما غاز CO₂ مع حمض الهيدروكلوريك، ولا يصلح حمض HCl للتمييز بينهما بل نستخدم كبريتات المغنيسيوم MgSO₄.",
-        anions: [
-          { name: "الكربونات", formula: "CO₃²⁻", acid: "حمض الكربونيك (H₂CO₃)", gas: "ثاني أكسيد الكربون CO₂ (يعكر ماء الجير)", confirm: "كبريتات المغنيسيوم MgSO₄ (راسب أبيض على البارد)" },
-          { name: "البيكربونات", formula: "HCO₃⁻", acid: "حمض الكربونيك (H₂CO₃)", gas: "ثاني أكسيد الكربون CO₂ (يعكر ماء الجير)", confirm: "كبريتات المغنيسيوم MgSO₄ (راسب أبيض بعد التسخين)" },
-          { name: "الكبريتيت", formula: "SO₃²⁻", acid: "حمض الكبريتوز (H₂SO₃)", gas: "ثاني أكسيد الكبريت SO₂ (يخضر ثنائي الكرومات)", confirm: "نترات الفضة AgNO₃ (راسب أبيض يسود بالتسخين)" },
-          { name: "الكبريتيد", formula: "S²⁻", acid: "حمض الهيدروسلفوريك (H₂S)", gas: "كبريتيد الهيدروجين H₂S (يسود ورقة أسيتات الرصاص)", confirm: "نترات الفضة AgNO₃ (راسب أسود على البارد)" },
-          { name: "الثيوكبريتات", formula: "S₂O₃²⁻", acid: "حمض الثيوكبريتيك (H₂S₂O₃)", gas: "ثاني أكسيد الكبريت SO₂ + معلق كبريت أصفر", confirm: "محلول اليود البني I₂ (يزول اللون البني)" },
-          { name: "النيتريت", formula: "NO₂⁻", acid: "حمض النيتروز (HNO₂)", gas: "أكسيد النيتريك NO (يتحول لأبخرة بنية حمراء عند الفوهة)", confirm: "برمنجنات البوتاسيوم KMnO₄ المحمضة (يزول اللون البنفسجي)" }
-        ]
-      },
-      2: {
-        title: "المجموعة الثانية: حمض الكبريتيك المركز (conc. H₂SO₄)",
-        reagent: "حمض الكبريتيك المركز conc. H₂SO₄ مع التسخين الهين",
-        anionCount: "4 أنيونات مشتقة من أحماض متوسطة الثبات",
-        note: "حمض الكبريتيك أعلى ثباتًا من أحماض هذه المجموعة (HCl, HBr, HI, HNO₃) فيطردهم على هيئة غازات مميزة، كما أنه عامل مؤكسد قوي يؤكسد جزءًا من HBr و HI لأبخرة البروم واليود الملونة.",
-        anions: [
-          { name: "الكلوريد", formula: "Cl⁻", acid: "حمض الهيدروكلوريك (HCl)", gas: "غاز كلوريد الهيدروجين عديم اللون (سحب بيضاء مع NH₃)", confirm: "نترات الفضة AgNO₃ (راسب أبيض يذوب سريعًا في النشادر)" },
-          { name: "البروميد", formula: "Br⁻", acid: "حمض الهيدروبروميك (HBr)", gas: "أبخرة برتقالية حمراء من البروم Br₂ (تصفر النشا)", confirm: "نترات الفضة AgNO₃ (راسب أبيض مصفر يذوب ببطء في النشادر)" },
-          { name: "اليوديد", formula: "I⁻", acid: "حمض الهيدرويوديك (HI)", gas: "أبخرة بنفسجية من اليود I₂ (تزرق النشا)", confirm: "نترات الفضة AgNO₃ (راسب أصفر لا يذوب في النشادر)" },
-          { name: "النترات", formula: "NO₃⁻", acid: "حمض النيتريك (HNO₃)", gas: "أبخرة بنية حمراء من NO₂ تزداد بإضافة خراطة النحاس", confirm: "تجربة الحلقة البنية مع FeSO₄ المحمضة بحمض H₂SO₄" }
-        ]
-      },
-      3: {
-        title: "المجموعة الثالثة: محلول كلوريد الباريوم (BaCl₂ Sol.)",
-        reagent: "محلول كلوريد الباريوم BaCl₂ على محاليل أملاح الأنيونات",
-        anionCount: "أنيونان مشتقان من أحماض أكثر ثباتًا من حمضي HCl و H₂SO₄",
-        note: "لا يتفاعل حمض الهيدروكلوريك أو حمض الكبريتيك مع أملاح هذه المجموعة لأن أحماضها (حمض الكبريتيك وحمض الفوسفوريك) أكثر ثباتًا، لذلك نلجأ لمحلول ملح كلوريد الباريوم حيث تتكون رواسب بيضاء مميزة.",
-        anions: [
-          { name: "الكبريتات", formula: "SO₄²⁻", acid: "حمض الكبريتيك (H₂SO₄)", gas: "لا يتصاعد غاز مع HCl (يتكون راسب أبيض مع BaCl₂)", confirm: "محلول أسيتات الرصاص II (راسب أبيض) - راسب BaSO₄ لا يذوب في HCl" },
-          { name: "الفوسفات", formula: "PO₄³⁻", acid: "حمض الفوسفوريك (H₃PO₄)", gas: "لا يتصاعد غاز مع HCl (يتكون راسب أبيض مع BaCl₂)", confirm: "نترات الفضة AgNO₃ (راسب أصفر يذوب في حمض HNO₃ ومحلول النشادر)" }
-        ]
-      }
-    };
-
-    function showGroupDetails(groupNum) {
-      state.currentGroup = groupNum;
-      
-      // Update Tab Buttons UI
-      for (let i = 1; i <= 3; i++) {
-        const btn = document.getElementById('grp-btn-' + i);
-        if (i === groupNum) {
-          btn.className = "group-tab-btn p-5 rounded-2xl bg-cyan-950/60 border-2 border-cyan-400 text-right space-y-2 transition-all shadow-glow-cyan";
-          btn.classList.remove('opacity-80');
-        } else {
-          btn.className = "group-tab-btn p-5 rounded-2xl bg-chem-surface border border-chem-border text-right space-y-2 transition-all opacity-80 hover:opacity-100";
-        }
-      }
-
-      renderGroupDetails();
-    }
-
-    function renderGroupDetails() {
-      const data = groupsData[state.currentGroup];
-      const container = document.getElementById('group-details-container');
-      if (!container) return;
-
-      let anionsCardsHtml = '';
-      data.anions.forEach((a, idx) => {
-        anionsCardsHtml += `
-          <div class="p-4 rounded-2xl bg-chem-surface border border-chem-border/80 hover:border-cyan-400/50 transition-all space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-white text-base">${idx + 1}. ${a.name}</span>
-              <span class="font-mono text-cyan-300 font-bold text-sm bg-cyan-950 px-2.5 py-0.5 rounded-lg border border-cyan-500/30">${a.formula}</span>
-            </div>
-            <p class="text-xs text-slate-400">الحمض: <span class="text-slate-200">${a.acid}</span></p>
-            <div class="text-xs text-slate-300 space-y-1 pt-1 border-t border-chem-border/60">
-              <div><strong class="text-cyan-400">الناتج/الغاز:</strong> ${a.gas}</div>
-              <div><strong class="text-purple-400">التأكيدية:</strong> ${a.confirm}</div>
-            </div>
-            <button onclick="goToLabWithAnion('${a.name}')" class="w-full mt-2 py-1.5 rounded-lg bg-chem-card hover:bg-cyan-500 hover:text-black text-cyan-300 text-xs font-semibold transition-colors flex items-center justify-center gap-1">
-              <i class="fa-solid fa-flask"></i> تجربة الأنيون بالمختبر
-            </button>
-          </div>
-        `;
-      });
-
-      container.innerHTML = `
-        <div class="space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-chem-border pb-4">
-            <div>
-              <h3 class="text-2xl font-black text-white">${data.title}</h3>
-              <p class="text-xs sm:text-sm text-cyan-300 font-mono mt-1">${data.reagent}</p>
-            </div>
-            <span class="text-xs px-3 py-1.5 rounded-xl bg-cyan-900/40 text-cyan-200 border border-cyan-500/30 font-semibold self-start sm:self-auto">
-              ${data.anionCount}
-            </span>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-purple-950/30 border border-purple-500/30 text-xs sm:text-sm text-purple-200 leading-relaxed">
-            <i class="fa-solid fa-circle-info ml-1.5 text-purple-400"></i> ${data.note}
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
-            ${anionsCardsHtml}
-          </div>
-        </div>
-      `;
-    }
-
-    function goToLabWithAnion(name) {
-      const map = {
-        'الكربونات': 'CO3',
-        'البيكربونات': 'HCO3',
-        'الكبريتيت': 'SO3',
-        'الكبريتيد': 'S',
-        'الثيوكبريتات': 'S2O3',
-        'النيتريت': 'NO2'
-      };
-      if (map[name]) {
-        selectLabAnion(map[name]);
-      }
-      switchTab('virtual-lab');
-    }
-
-    /* ================= 3. VIRTUAL LAB ENGINE ================= */
-    const labReactions = {
-      CO3: {
-        name: "الكربونات CO₃²⁻",
-        primary: {
-          reagentName: "حمض الهيدروكلوريك المخفف dil. HCl",
-          liquidColor: "rgba(240, 248, 255, 0.4)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: true,
-          bubbleCount: 18,
-          gasColor: "rgba(255, 255, 255, 0.3)",
-          observation: "يحدث فوران شديد ويتصاعد غاز ثاني أكسيد الكربون CO₂ عديم اللون والرائحة، والذي يعكر ماء الجير الرائق Ca(OH)₂ لمدة قصيرة.",
-          equation: "\\text{CO}_3^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{CO}_2\\uparrow",
-          paper: { show: true, initial: "ماء الجير الرائق", final: "يتعكر (CaCO₃)", bgColor: "#e2e8f0" }
-        },
-        confirmatory: {
-          reagentName: "محلول كبريتات المغنيسيوم MgSO₄",
-          liquidColor: "rgba(224, 231, 255, 0.5)",
-          precipitate: { color: "#ffffff", height: "35%" },
-          bubbles: false,
-          gasColor: "transparent",
-          observation: "يتكون راسب أبيض من كربونات المغنيسيوم MgCO₃ على البارد مباشرة دون الحاجة لتسخين.",
-          equation: "\\text{Mg}^{2+} + \\text{CO}_3^{2-} \\rightarrow \\text{MgCO}_3\\downarrow \\text{ (راسب أبيض على البارد)}",
-          paper: { show: false }
-        }
-      },
-      HCO3: {
-        name: "البيكربونات HCO₃⁻",
-        primary: {
-          reagentName: "حمض الهيدروكلوريك المخفف dil. HCl",
-          liquidColor: "rgba(240, 248, 255, 0.4)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: true,
-          bubbleCount: 18,
-          gasColor: "rgba(255, 255, 255, 0.3)",
-          observation: "يحدث فوران ويتصاعد غاز ثاني أكسيد الكربون CO₂، لا يمكن التمييز هنا بينه وبين الكربونات بحمض HCl.",
-          equation: "\\text{HCO}_3^- + \\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{CO}_2\\uparrow",
-          paper: { show: true, initial: "ماء الجير الرائق", final: "تعكر خفيف (CaCO₃)", bgColor: "#e2e8f0" }
-        },
-        confirmatory: {
-          reagentName: "محلول كبريتات المغنيسيوم MgSO₄",
-          liquidColor: "rgba(224, 231, 255, 0.4)",
-          precipitate: { color: "#ffffff", height: "0%" }, // requires heat
-          bubbles: false,
-          gasColor: "transparent",
-          observation: "لا يتكون راسب على البارد لأن بيكربونات المغنيسيوم Mg(HCO₃)₂ تذوب في الماء؛ وعند التسخين تنحل ويتكون راسب أبيض من MgCO₃.",
-          equation: "\\text{Mg(HCO}_3)_2 \\xrightarrow{\\Delta} \\text{MgCO}_3\\downarrow + \\text{H}_2\\text{O} + \\text{CO}_2\\uparrow",
-          paper: { show: false }
-        }
-      },
-      SO3: {
-        name: "الكبريتيت SO₃²⁻",
-        primary: {
-          reagentName: "حمض الهيدروكلوريك المخفف dil. HCl",
-          liquidColor: "rgba(224, 242, 254, 0.5)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: true,
-          bubbleCount: 12,
-          gasColor: "rgba(240, 240, 240, 0.3)",
-          observation: "يتصاعد غاز ثاني أكسيد الكبريت SO₂ ذو الرائحة النفاذة، ويخضر ورقة مبللة بمحلول ثنائي كرومات البوتاسيوم المحمضة بحمض الكبريتيك.",
-          equation: "\\text{SO}_3^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{SO}_2\\uparrow",
-          paper: { show: true, initial: "ثنائي كرومات (برتقالي)", final: "تتحول للون الأخضر", bgColor: "#10b981" }
-        },
-        confirmatory: {
-          reagentName: "محلول نترات الفضة AgNO₃",
-          liquidColor: "rgba(230, 230, 250, 0.5)",
-          precipitate: { color: "#f8fafc", height: "30%" },
-          bubbles: false,
-          gasColor: "transparent",
-          observation: "يتكون راسب أبيض من كبريتيت الفضة Ag₂SO₃، ويسود هذا الراسب بالتسخين ليتحول إلى كبريتيد الفضة أو أكسيدها.",
-          equation: "2\\text{Ag}^+ + \\text{SO}_3^{2-} \\rightarrow \\text{Ag}_2\\text{SO}_3\\downarrow \\text{ (أبيض يسود بالتسخين)}",
-          paper: { show: false }
-        }
-      },
-      S: {
-        name: "الكبريتيد S²⁻",
-        primary: {
-          reagentName: "حمض الهيدروكلوريك المخفف dil. HCl",
-          liquidColor: "rgba(226, 232, 240, 0.4)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: true,
-          bubbleCount: 10,
-          gasColor: "rgba(241, 245, 249, 0.3)",
-          observation: "يتصاعد غاز كبريتيد الهيدروجين H₂S الكريه الرائحة، ويسود ورقة مبللة بمحلول أسيتات الرصاص II لتكون راسب كبريتيد الرصاص PbS الأسود.",
-          equation: "\\text{S}^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{S}\\uparrow",
-          paper: { show: true, initial: "أسيتات الرصاص (بيضاء)", final: "تتحول للون الأسود (PbS)", bgColor: "#1e293b" }
-        },
-        confirmatory: {
-          reagentName: "محلول نترات الفضة AgNO₃",
-          liquidColor: "rgba(30, 41, 59, 0.6)",
-          precipitate: { color: "#09090b", height: "35%" },
-          bubbles: false,
-          gasColor: "transparent",
-          observation: "يتكون راسب أسود من كبريتيد الفضة Ag₂S على البارد مباشرة.",
-          equation: "2\\text{Ag}^+ + \\text{S}^{2-} \\rightarrow \\text{Ag}_2\\text{S}\\downarrow \\text{ (راسب أسود)}",
-          paper: { show: false }
-        }
-      },
-      S2O3: {
-        name: "الثيوكبريتات S₂O₃²⁻",
-        primary: {
-          reagentName: "حمض الهيدروكلوريك المخفف dil. HCl",
-          liquidColor: "rgba(254, 240, 138, 0.6)",
-          precipitate: { color: "#facc15", height: "25%" }, // yellow colloidal sulfur
-          bubbles: true,
-          bubbleCount: 10,
-          gasColor: "rgba(240, 240, 240, 0.3)",
-          observation: "يتصاعد غاز ثاني أكسيد الكبريت SO₂ النفاذ مع ظهور معلق أصفر دقيق من الكبريت S يترسب تدريجيًا في المحلول.",
-          equation: "\\text{S}_2\\text{O}_3^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{SO}_2\\uparrow + \\text{S}\\downarrow \\text{ (أصفر)}",
-          paper: { show: true, initial: "ثنائي كرومات (برتقالي)", final: "يخضر بفعل SO₂", bgColor: "#10b981" }
-        },
-        confirmatory: {
-          reagentName: "محلول اليود البني I₂ Sol.",
-          liquidColor: "rgba(248, 250, 252, 0.3)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: false,
-          gasColor: "transparent",
-          observation: "يزول لون محلول اليود البني تدريجيًا نتيجة اختزاله إلى يوديد الصوديوم عديم اللون وتأكسد الثيوكبريتات إلى رباعي ثيونات الصوديوم Na₂S₄O₆.",
-          equation: "2\\text{S}_2\\text{O}_3^{2-} + \\text{I}_2 \\text{ (بني)} \\rightarrow \\text{S}_4\\text{O}_6^{2-} + 2\\text{I}^- \\text{ (عديم اللون)}",
-          paper: { show: false }
-        }
-      },
-      NO2: {
-        name: "النيتريت NO₂⁻",
-        primary: {
-          reagentName: "حمض الهيدروكلوريك المخفف dil. HCl",
-          liquidColor: "rgba(186, 230, 253, 0.5)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: true,
-          bubbleCount: 14,
-          gasColor: "rgba(180, 83, 9, 0.75)", // reddish-brown NO2 at the top
-          observation: "يتكون أولاً حمض النيتروز غير الثابت الذي ينحل منتجًا غاز أكسيد النيتريك NO عديم اللون داخل الأنبوب، والذي يتحول عند فوهة الأنبوبة إلى أبخرة بنية حمراء من غاز ثاني أكسيد النيتروجين NO₂.",
-          equation: "3\\text{HNO}_2 \\rightarrow \\text{HNO}_3 + 2\\text{NO}\\uparrow + \\text{H}_2\\text{O} \\quad ; \\quad 2\\text{NO} + \\text{O}_2 \\rightarrow 2\\text{NO}_2\\uparrow",
-          paper: { show: false }
-        },
-        confirmatory: {
-          reagentName: "محلول برمنجنات البوتاسيوم KMnO₄ المحمضة",
-          liquidColor: "rgba(240, 248, 255, 0.3)",
-          precipitate: { color: "transparent", height: "0%" },
-          bubbles: false,
-          gasColor: "transparent",
-          observation: "يزول لون برمنجنات البوتاسيوم البنفسجي المحمضة لتأكسد النيتريت إلى نترات واختزال أيونات البرمنجنات Mn⁷⁺ إلى كبريتات منجنيز II عديمة اللون Mn²⁺.",
-          equation: "5\\text{NO}_2^- + 2\\text{MnO}_4^- + 6\\text{H}^+ \\rightarrow 5\\text{NO}_3^- + 2\\text{Mn}^{2+} + 3\\text{H}_2\\text{O}",
-          paper: { show: false }
-        }
-      }
-    };
-
-    function selectLabAnion(anionKey) {
-      state.lab.selectedAnion = anionKey;
-      
-      // Update Anion Buttons UI
-      document.querySelectorAll('.lab-anion-btn').forEach(b => {
-        b.classList.remove('border-cyan-400', 'bg-cyan-950/60');
-      });
-      const activeBtn = document.getElementById('btn-anion-' + anionKey);
-      if (activeBtn) {
-        activeBtn.classList.add('border-cyan-400', 'bg-cyan-950/60');
-      }
-
-      // Heat container condition: Bicarbonate or Sulfite confirmatory
-      const heatCont = document.getElementById('heat-toggle-container');
-      if (anionKey === 'HCO3' || (anionKey === 'SO3' && state.lab.mode === 'confirmatory')) {
-        heatCont.classList.remove('hidden');
-      } else {
-        heatCont.classList.add('hidden');
-        state.lab.isHeating = false;
-        const heatBox = document.getElementById('heat-checkbox');
-        if (heatBox) heatBox.checked = false;
-      }
-
-      // Update Hint for confirmatory reagent
-      const hint = document.getElementById('confirm-reagent-hint');
-      if (anionKey === 'CO3' || anionKey === 'HCO3') hint.innerText = "MgSO₄ Sol.";
-      else if (anionKey === 'SO3' || anionKey === 'S') hint.innerText = "AgNO₃ Sol.";
-      else if (anionKey === 'S2O3') hint.innerText = "محلول اليود I₂";
-      else if (anionKey === 'NO2') hint.innerText = "KMnO₄ المحمضة";
-
-      resetTubeVisuals();
-      document.getElementById('lab-status-text').innerText = `تم تحديد أنيون ${labReactions[anionKey].name}`;
-    }
-
-    function setLabMode(mode) {
-      state.lab.mode = mode;
-      const primBtn = document.getElementById('mode-primary-btn');
-      const confBtn = document.getElementById('mode-confirm-btn');
-
-      if (mode === 'primary') {
-        primBtn.className = "p-3 rounded-xl border-2 border-cyan-400 bg-cyan-950/40 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 shadow-glow-cyan";
-        confBtn.className = "p-3 rounded-xl border border-chem-border bg-chem-surface text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 hover:border-purple-400";
-      } else {
-        confBtn.className = "p-3 rounded-xl border-2 border-purple-400 bg-purple-950/40 text-white font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 shadow-glow-purple";
-        primBtn.className = "p-3 rounded-xl border border-chem-border bg-chem-surface text-slate-300 font-bold text-xs sm:text-sm flex flex-col items-center justify-center gap-1 hover:border-cyan-400";
-      }
-
-      selectLabAnion(state.lab.selectedAnion);
-    }
-
-    function toggleLabHeating() {
-      const box = document.getElementById('heat-checkbox');
-      state.lab.isHeating = box ? box.checked : false;
-      const flame = document.getElementById('flame-element');
-      if (state.lab.isHeating) {
-        flame.classList.remove('hidden');
-      } else {
-        flame.classList.add('hidden');
-      }
-    }
-
-    function resetTubeVisuals() {
-      const tubeLiquid = document.getElementById('tube-liquid');
-      const tubePrecipitate = document.getElementById('tube-precipitate');
-      const bubbleCont = document.getElementById('bubble-container');
-      const gasCloud = document.getElementById('gas-cloud');
-      const paperCont = document.getElementById('gas-test-paper');
-
-      tubeLiquid.style.backgroundColor = "rgba(226, 232, 240, 0.15)";
-      tubeLiquid.style.height = "25%";
-      tubePrecipitate.style.height = "0%";
-      tubePrecipitate.style.backgroundColor = "transparent";
-      bubbleCont.innerHTML = "";
-      gasCloud.style.opacity = "0";
-      paperCont.classList.add('hidden');
-      
-      document.getElementById('observation-text').innerText = "تم إفراغ الأنبوبة. اضغط على «إضافة الكاشف» لملاحظة التفاعل الكيميائي.";
-      document.getElementById('badge-reaction-type').innerText = "جاهز";
-      document.getElementById('badge-reaction-type').className = "text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300";
-      document.getElementById('lab-equation-wrapper').classList.add('hidden');
-    }
-
-    function resetLab() {
-      resetTubeVisuals();
-      const flame = document.getElementById('flame-element');
-      if (flame) flame.classList.add('hidden');
-      const heatBox = document.getElementById('heat-checkbox');
-      if (heatBox) heatBox.checked = false;
-      state.lab.isHeating = false;
-      document.getElementById('lab-status-text').innerText = "المعمل جاهز للتجربة";
     }
 
     function runLabExperiment() {
-      const currentData = labReactions[state.lab.selectedAnion];
-      const test = state.lab.mode === 'primary' ? currentData.primary : currentData.confirmatory;
-
-      // Special Case: Bicarbonate Confirmatory requires heat for white precipitate
-      let isBicarbCold = (state.lab.selectedAnion === 'HCO3' && state.lab.mode === 'confirmatory' && !state.lab.isHeating);
-      let isSulfiteHeated = (state.lab.selectedAnion === 'SO3' && state.lab.mode === 'confirmatory' && state.lab.isHeating);
-
-      const tubeLiquid = document.getElementById('tube-liquid');
-      const tubePrecipitate = document.getElementById('tube-precipitate');
-      const bubbleCont = document.getElementById('bubble-container');
-      const gasCloud = document.getElementById('gas-cloud');
-      const paperCont = document.getElementById('gas-test-paper');
-      const dropper = document.getElementById('dropper-anim');
-
-      // 1. Dropper visual trigger
-      dropper.style.opacity = "1";
-      dropper.style.transform = "translate(-50%, 25px)";
-      setTimeout(() => {
-        dropper.style.opacity = "0";
-        dropper.style.transform = "translate(-50%, -10px)";
-      }, 700);
-
-      // 2. Liquid height and color change
-      setTimeout(() => {
-        tubeLiquid.style.height = "60%";
-        tubeLiquid.style.backgroundColor = test.liquidColor;
-
-        // 3. Bubbles simulation (Effervescence)
-        bubbleCont.innerHTML = "";
-        if (test.bubbles) {
-          for (let i = 0; i < test.bubbleCount; i++) {
-            const b = document.createElement('div');
-            b.className = 'bubble';
-            b.style.width = (Math.random() * 8 + 4) + 'px';
-            b.style.height = b.style.width;
-            b.style.left = (Math.random() * 75 + 10) + '%';
-            b.style.animationDelay = (Math.random() * 1.5) + 's';
-            bubbleCont.appendChild(b);
-          }
-        }
-
-        // 4. Precipitate
-        if (isBicarbCold) {
-          tubePrecipitate.style.height = "0%";
-          tubePrecipitate.style.backgroundColor = "transparent";
-        } else if (state.lab.selectedAnion === 'HCO3' && state.lab.mode === 'confirmatory' && state.lab.isHeating) {
-          tubePrecipitate.style.height = "32%";
-          tubePrecipitate.style.backgroundColor = "#ffffff";
-        } else if (isSulfiteHeated) {
-          tubePrecipitate.style.height = "30%";
-          tubePrecipitate.style.backgroundColor = "#000000"; // Ag2SO3 turns black upon heating
-        } else {
-          tubePrecipitate.style.height = test.precipitate.height;
-          tubePrecipitate.style.backgroundColor = test.precipitate.color;
-        }
-
-        // 5. Gas Cloud at mouth of tube
-        if (test.gasColor !== "transparent") {
-          gasCloud.style.backgroundColor = test.gasColor;
-          gasCloud.style.opacity = "0.9";
-        } else {
-          gasCloud.style.opacity = "0";
-        }
-
-        // 6. Test Paper Indicator
-        if (test.paper && test.paper.show) {
-          paperCont.classList.remove('hidden');
-          const box = document.getElementById('paper-indicator-box');
-          const label = document.getElementById('paper-indicator-label');
-          box.style.backgroundColor = "#fef08a";
-          box.innerText = test.paper.initial;
-          label.innerText = "جاري تعريض الورقة للغاز...";
-
-          setTimeout(() => {
-            box.style.backgroundColor = test.paper.bgColor;
-            box.innerText = test.paper.final;
-            box.style.color = test.paper.bgColor === "#1e293b" ? "#ffffff" : "#0f172a";
-            label.innerText = "اكتمل التفاعل اللوني";
-          }, 1200);
-        } else {
-          paperCont.classList.add('hidden');
-        }
-
-        // 7. Update Observation Text & Badge
-        let obsText = test.observation;
-        if (isBicarbCold) {
-          obsText = "على البارد: لم يتكون راسب! بيكربونات المغنيسيوم تذوب في الماء. جرب تفعيل (تسخين الأنبوبة) لمشاهدة تكون الراسب الأبيض.";
-        } else if (state.lab.selectedAnion === 'HCO3' && state.lab.mode === 'confirmatory' && state.lab.isHeating) {
-          obsText = "بعد التسخين: انحلت بيكربونات المغنيسيوم وتصاعد CO₂ وتكون راسب أبيض من كربونات المغنيسيوم MgCO₃↓.";
-        } else if (isSulfiteHeated) {
-          obsText = "بالتسخين: تحول راسب كبريتيت الفضة الأبيض Ag₂SO₃ إلى اللون الأسود.";
-        }
-
-        document.getElementById('observation-text').innerText = obsText;
-        const badge = document.getElementById('badge-reaction-type');
-        badge.innerText = state.lab.mode === 'primary' ? 'تجربة أساسية' : 'تجربة تأكيدية';
-        badge.className = state.lab.mode === 'primary' 
-          ? "text-xs px-2 py-0.5 rounded bg-cyan-900/60 text-cyan-300 border border-cyan-500/30"
-          : "text-xs px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 border border-purple-500/30";
-
-        // 8. Render Chemical Equation with KaTeX
-        const eqWrapper = document.getElementById('lab-equation-wrapper');
-        const eqContainer = document.getElementById('lab-rendered-equation');
-        eqWrapper.classList.remove('hidden');
-        katex.render(test.equation, eqContainer, { throwOnError: false, displayMode: true });
-
-        document.getElementById('lab-status-text').innerText = "تم إجراء التفاعل بنجاح";
-
-      }, 400);
+      document.getElementById('tube-liquid').style.height = "60%";
+      document.getElementById('tube-liquid').style.backgroundColor = "rgba(240, 248, 255, 0.4)";
+      document.getElementById('observation-text').innerText = "فوران شديد وتصاعد غاز CO₂ عديم اللون والرائحة يعكر ماء الجير الرائق.";
     }
 
-    /* ================= 4. COMPARISON TABLE LOGIC ================= */
-    const comparisonDatabase = [
-      { name: "الكربونات", formula: "CO₃²⁻", charge: "-2", group: "grp1", acid: "حمض الكربونيك (H₂CO₃)", mainObs: "فوران شديد وتصاعد CO₂", gas: "CO₂ يعكر ماء الجير", confirmReagent: "MgSO₄ Sol.", confirmColor: "راسب أبيض على البارد" },
-      { name: "البيكربونات", formula: "HCO₃⁻", charge: "-1", group: "grp1", acid: "حمض الكربونيك (H₂CO₃)", mainObs: "فوران وتصاعد CO₂", gas: "CO₂ يعكر ماء الجير", confirmReagent: "MgSO₄ Sol.", confirmColor: "راسب أبيض بعد التسخين" },
-      { name: "الكبريتيت", formula: "SO₃²⁻", charge: "-2", group: "grp1", acid: "حمض الكبريتوز (H₂SO₃)", mainObs: "تصاعد SO₂ النفاذ", gas: "SO₂ يخضر ثنائي الكرومات", confirmReagent: "AgNO₃ Sol.", confirmColor: "راسب أبيض يسود بالتسخين" },
-      { name: "الكبريتيد", formula: "S²⁻", charge: "-2", group: "grp1", acid: "حمض الهيدروسلفوريك (H₂S)", mainObs: "تصاعد H₂S كريه الرائحة", gas: "H₂S يسود أسيتات الرصاص", confirmReagent: "AgNO₃ Sol.", confirmColor: "راسب أسود على البارد" },
-      { name: "الثيوكبريتات", formula: "S₂O₃²⁻", charge: "-2", group: "grp1", acid: "حمض الثيوكبريتيك (H₂S₂O₃)", mainObs: "تصاعد SO₂ + راسب كبريت أصفر", gas: "SO₂ + معلق كبريت أصفر S↓", confirmReagent: "محلول اليود I₂", confirmColor: "يزول لون اليود البني" },
-      { name: "النيتريت", formula: "NO₂⁻", charge: "-1", group: "grp1", acid: "حمض النيتروز (HNO₂)", mainObs: "أبخرة بنية حمراء عند الفوهة", gas: "NO₂ بنية حمراء عند الفوهة", confirmReagent: "KMnO₄ المحمضة", confirmColor: "يزول اللون البنفسجي" },
-      { name: "الكلوريد", formula: "Cl⁻", charge: "-1", group: "grp2", acid: "حمض الهيدروكلوريك (HCl)", mainObs: "تصاعد HCl مع conc. H₂SO₄", gas: "سحب بيضاء مع ساق نشادر", confirmReagent: "AgNO₃ Sol.", confirmColor: "راسب أبيض يذوب بالنشادر" },
-      { name: "البروميد", formula: "Br⁻", charge: "-1", group: "grp2", acid: "حمض الهيدروبروميك (HBr)", mainObs: "أبخرة بروم برتقالية حمراء", gas: "Br₂ تصفر ورقة مبللة بالنشا", confirmReagent: "AgNO₃ Sol.", confirmColor: "راسب أبيض مصفر يذوب ببطء" },
-      { name: "اليوديد", formula: "I⁻", charge: "-1", group: "grp2", acid: "حمض الهيدرويوديك (HI)", mainObs: "أبخرة يود بنفسجية", gas: "I₂ تزرق ورقة مبللة بالنشا", confirmReagent: "AgNO₃ Sol.", confirmColor: "راسب أصفر لا يذوب بالنشادر" },
-      { name: "النترات", formula: "NO₃⁻", charge: "-1", group: "grp2", acid: "حمض النيتريك (HNO₃)", mainObs: "أبخرة بنية حمراء تزداد بالنحاس", gas: "NO₂ نفاذ بني محمر", confirmReagent: "تجربة الحلقة البنية", confirmColor: "حلقة بنية تزول بالرج" },
-      { name: "الكبريتات", formula: "SO₄²⁻", charge: "-2", group: "grp3", acid: "حمض الكبريتيك (H₂SO₄)", mainObs: "راسب أبيض مع BaCl₂ لا يذوب بـ HCl", gas: "لا يتصاعد غاز", confirmReagent: "أسيتات الرصاص II", confirmColor: "راسب أبيض من PbSO₄" },
-      { name: "الفوسفات", formula: "PO₄³⁻", charge: "-3", group: "grp3", acid: "حمض الفوسفوريك (H₃PO₄)", mainObs: "راسب أبيض مع BaCl₂ يذوب بـ HCl", gas: "لا يتصاعد غاز", confirmReagent: "AgNO₃ Sol.", confirmColor: "راسب أصفر يذوب بالنشادر و HNO₃" }
-    ];
-
-    function populateComparisonTable(dataToDisplay) {
-      const tbody = document.getElementById('comparison-table-body');
-      if (!tbody) return;
-      tbody.innerHTML = '';
-
-      if (dataToDisplay.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-500">لا توجد نتائج مطابقة لبحثك.</td></tr>`;
-        return;
-      }
-
-      dataToDisplay.forEach(item => {
-        const row = document.createElement('tr');
-        row.className = "hover:bg-chem-card/80 transition-colors";
-        row.innerHTML = `
-          <td class="py-3 px-4 font-bold text-white">${item.name}</td>
-          <td class="py-3 px-3 font-mono text-cyan-300 font-bold">${item.formula}</td>
-          <td class="py-3 px-3 text-xs text-slate-300">${item.acid}</td>
-          <td class="py-3 px-4 text-xs text-slate-300">${item.mainObs}</td>
-          <td class="py-3 px-3 text-xs font-semibold text-amber-300">${item.gas}</td>
-          <td class="py-3 px-4 text-xs font-mono text-purple-300">${item.confirmReagent}</td>
-          <td class="py-3 px-3 text-xs text-emerald-300">${item.confirmColor}</td>
-          <td class="py-3 px-3 text-center">
-            <button onclick="goToLabWithAnion('${item.name}')" class="p-2 rounded-lg bg-cyan-950 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-colors text-xs" title="اختبار بالمختبر">
-              <i class="fa-solid fa-flask"></i>
-            </button>
-          </td>
-        `;
-        tbody.appendChild(row);
-      });
+    function resetLab() {
+      document.getElementById('tube-liquid').style.height = "25%";
+      document.getElementById('observation-text').innerText = "تم إفراغ الأنبوبة.";
     }
 
-    function filterComparisonTable() {
-      const query = document.getElementById('tableSearchInput').value.trim().toLowerCase();
-      const groupFilter = document.getElementById('groupFilterSelect').value;
-
-      const filtered = comparisonDatabase.filter(item => {
-        const matchesGroup = (groupFilter === 'all') || (item.group === groupFilter);
-        const matchesQuery = !query || 
-          item.name.toLowerCase().includes(query) ||
-          item.formula.toLowerCase().includes(query) ||
-          item.gas.toLowerCase().includes(query) ||
-          item.confirmColor.toLowerCase().includes(query) ||
-          item.acid.toLowerCase().includes(query);
-        return matchesGroup && matchesQuery;
-      });
-
-      populateComparisonTable(filtered);
-    }
-
-    /* ================= 5. EQUATIONS BANK ================= */
-    const equationsDatabase = [
-      {
-        id: "eq-carb-1",
-        category: "carbonate",
-        title: "تفاعل كربونات الصوديوم مع حمض الهيدروكلوريك المخفف",
-        type: "معادلة جزيئية موزونة",
-        reactants: "\\text{Na}_2\\text{CO}_{3(s)} + 2\\text{HCl}_{(aq)}",
-        products: "2\\text{NaCl}_{(aq)} + \\text{H}_2\\text{O}_{(l)} + \\text{CO}_{2(g)}\\uparrow",
-        ionicNet: "\\text{CO}_3^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{CO}_2\\uparrow",
-        explanation: "حمض HCl أكثر ثباتًا من حمض الكربونيك H₂CO₃ فيطرده من ملحه الصلب في صورة ماء وغاز CO₂ المتصاعد بفوران."
-      },
-      {
-        id: "eq-bicarb-1",
-        category: "carbonate",
-        title: "تفاعل بيكربونات الصوديوم مع حمض الهيدروكلوريك المخفف",
-        type: "معادلة جزيئية وأيونية",
-        reactants: "\\text{NaHCO}_{3(s)} + \\text{HCl}_{(aq)}",
-        products: "\\text{NaCl}_{(aq)} + \\text{H}_2\\text{O}_{(l)} + \\text{CO}_{2(g)}\\uparrow",
-        ionicNet: "\\text{HCO}_3^- + \\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{CO}_2\\uparrow",
-        explanation: "يتكون نفس الناتج الغازي مع البيكربونات (نسبة المولات 1:1 مع أيونات H⁺)."
-      },
-      {
-        id: "eq-lime-1",
-        category: "carbonate",
-        title: "تعكر ماء الجير الرائق (لمدة قصيرة Short Time)",
-        type: "تفاعل التعكر",
-        reactants: "\\text{CO}_{2(g)} + \\text{Ca(OH)}_{2(aq)}",
-        products: "\\text{CaCO}_{3(s)}\\downarrow + \\text{H}_2\\text{O}_{(l)}",
-        ionicNet: "\\text{CO}_2 + \\text{Ca}^{2+} + 2\\text{OH}^- \\rightarrow \\text{CaCO}_3\\downarrow + \\text{H}_2\\text{O}",
-        explanation: "يتكون راسب أبيض غير ذائب في الماء من كربونات الكالسيوم CaCO₃."
-      },
-      {
-        id: "eq-lime-2",
-        category: "carbonate",
-        title: "زوال التعكر بزيادة الغاز (لمدة طويلة Long Time)",
-        type: "تفاعل إذابة الراسب",
-        reactants: "\\text{CaCO}_{3(s)} + \\text{H}_2\\text{O}_{(l)} + \\text{CO}_{2(g)}",
-        products: "\\text{Ca(HCO}_3)_{2(aq)}",
-        ionicNet: "\\text{CaCO}_3 + \\text{H}_2\\text{O} + \\text{CO}_2 \\rightarrow \\text{Ca}^{2+} + 2\\text{HCO}_3^-",
-        explanation: "يتحول الراسب الأبيض إلى بيكربونات الكالسيوم القابلة للذوبان في الماء."
-      },
-      {
-        id: "eq-sulfite-1",
-        category: "sulfite-sulfide",
-        title: "تفاعل كبريتيت الصوديوم مع حمض الهيدروكلوريك",
-        type: "تفاعل تصاعد غاز SO₂",
-        reactants: "\\text{Na}_2\\text{SO}_{3(s)} + 2\\text{HCl}_{(aq)}",
-        products: "2\\text{NaCl}_{(aq)} + \\text{H}_2\\text{O}_{(l)} + \\text{SO}_{2(g)}\\uparrow",
-        ionicNet: "\\text{SO}_3^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{SO}_2\\uparrow",
-        explanation: "يتصاعد غاز ثاني أكسيد الكبريت SO₂ ذو الرائحة النفاذة."
-      },
-      {
-        id: "eq-dichromate-1",
-        category: "sulfite-sulfide",
-        title: "أكسدة غاز SO₂ بواسطة ثنائي كرومات البوتاسيوم المحمضة",
-        type: "تفاعل أكسدة واختزال وتغير لوني",
-        reactants: "3\\text{SO}_2 + \\text{K}_2\\text{Cr}_2\\text{O}_7 + \\text{H}_2\\text{SO}_4",
-        products: "\\text{K}_2\\text{SO}_4 + \\text{Cr}_2(\\text{SO}_4)_3 \\text{ (أخضر)} + \\text{H}_2\\text{O}",
-        ionicNet: "3\\text{SO}_2 + \\text{Cr}_2\\text{O}_7^{2-} + 2\\text{H}^+ \\rightarrow 2\\text{Cr}^{3+} + 3\\text{SO}_4^{2-} + \\text{H}_2\\text{O}",
-        explanation: "يختزل الكروم البرتقالي Cr⁶⁺ إلى كبريتات الكروم III الخضراء Cr³⁺."
-      },
-      {
-        id: "eq-sulfide-1",
-        category: "sulfite-sulfide",
-        title: "تفاعل كبريتيد الصوديوم مع حمض الهيدروكلوريك",
-        type: "تصاعد غاز كبريتيد الهيدروجين",
-        reactants: "\\text{Na}_2\\text{S}_{(s)} + 2\\text{HCl}_{(aq)}",
-        products: "2\\text{NaCl}_{(aq)} + \\text{H}_2\\text{S}_{(g)}\\uparrow",
-        ionicNet: "\\text{S}^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{S}\\uparrow",
-        explanation: "غاز H₂S ذو رائحة كريهة ويسود أسيتات الرصاص بتكوين كبريتيد الرصاص PbS الأسود."
-      },
-      {
-        id: "eq-thiosulfate-1",
-        category: "thiosulfate",
-        title: "تفاعل ثيوكبريتات الصوديوم مع حمض الهيدروكلوريك",
-        type: "ترسب معلق أصفر وتصاعد غاز",
-        reactants: "\\text{Na}_2\\text{S}_2\\text{O}_{3(s)} + 2\\text{HCl}_{(aq)}",
-        products: "2\\text{NaCl} + \\text{H}_2\\text{O} + \\text{SO}_2\\uparrow + \\text{S}\\downarrow \\text{ (أصفر)}",
-        ionicNet: "\\text{S}_2\\text{O}_3^{2-} + 2\\text{H}^+ \\rightarrow \\text{H}_2\\text{O} + \\text{SO}_2\\uparrow + \\text{S}\\downarrow",
-        explanation: "انحلال ذاتي يتكون فيه كبريت غروي أصفر مع غاز ثاني أكسيد الكبريت."
-      },
-      {
-        id: "eq-iodine-1",
-        category: "thiosulfate",
-        title: "التجربة التأكيدية للثيوكبريتات بمحلول اليود البني",
-        type: "معادلة زوال اللون البني لليود",
-        reactants: "2\\text{Na}_2\\text{S}_2\\text{O}_3 + \\text{I}_2 \\text{ (بني)}",
-        products: "\\text{Na}_2\\text{S}_4\\text{O}_6 + 2\\text{NaI} \\text{ (عديم اللون)}",
-        ionicNet: "2\\text{S}_2\\text{O}_3^{2-} + \\text{I}_2 \\rightarrow \\text{S}_4\\text{O}_6^{2-} + 2\\text{I}^-",
-        explanation: "اليود مؤكسد يُختزل إلى يوديد عديم اللون، وتتأكسد الثيوكبريتات إلى رباعي ثيونات الصوديوم."
-      },
-      {
-        id: "eq-nitrite-1",
-        category: "nitrite",
-        title: "انحلال حمض النيتروز الناتج من تفاعل النيتريت مع HCl",
-        type: "تفاعل تصاعد NO وتحوله إلى NO₂",
-        reactants: "3\\text{HNO}_{2(aq)}",
-        products: "\\text{HNO}_{3(aq)} + 2\\text{NO}_{(g)}\\uparrow + \\text{H}_2\\text{O}_{(l)}",
-        ionicNet: "2\\text{NO}_{(g)} + \\text{O}_{2(g)} \\rightarrow 2\\text{NO}_{2(g)}\\uparrow \\text{ (بني محمر)}",
-        explanation: "أكسيد النيتريك NO عديم اللون داخل الأنبوبة ويتأكسد بأكسجين الهواء عند الفوهة لأبخرة بنية حمراء."
-      },
-      {
-        id: "eq-permang-1",
-        category: "nitrite",
-        title: "أكسدة النيتريت ببرمنجنات البوتاسيوم المحمضة بحمض الكبريتيك",
-        type: "زوال لون البرمنجنات البنفسجي",
-        reactants: "5\\text{KNO}_2 + 2\\text{KMnO}_4 + 3\\text{H}_2\\text{SO}_4",
-        products: "5\\text{KNO}_3 + \\text{K}_2\\text{SO}_4 + 2\\text{MnSO}_4 + 3\\text{H}_2\\text{O}",
-        ionicNet: "5\\text{NO}_2^- + 2\\text{MnO}_4^- + 6\\text{H}^+ \\rightarrow 5\\text{NO}_3^- + 2\\text{Mn}^{2+} + 3\\text{H}_2\\text{O}",
-        explanation: "البرمنجنات عامل مؤكسد قوي؛ يختزل Mn⁷⁺ البنفسجي إلى كبريتات منجنيز II عديمة اللون."
-      }
-    ];
-
-    function renderEquations(filter = 'all') {
-      const container = document.getElementById('equations-cards-grid');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const list = filter === 'all' ? equationsDatabase : equationsDatabase.filter(e => e.category === filter);
-
-      list.forEach((eq, idx) => {
-        const card = document.createElement('div');
-        card.className = "glass-panel p-6 rounded-2xl border border-chem-border space-y-4 hover:border-cyan-400/40 transition-all";
-        card.innerHTML = `
-          <div class="flex items-center justify-between border-b border-chem-border pb-3">
-            <div>
-              <span class="text-xs font-mono text-cyan-400">${eq.type}</span>
-              <h4 class="font-bold text-white text-base mt-0.5">${eq.title}</h4>
-            </div>
-            <button onclick="copyEquation('${eq.reactants} \\\\rightarrow ${eq.products}')" class="p-2 rounded-lg bg-chem-surface hover:text-cyan-400 text-slate-400 text-xs transition-colors" title="نسخ المعادلة الكيميائية">
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
-
-          <!-- Formula Box -->
-          <div class="p-3.5 rounded-xl bg-chem-dark border border-chem-border space-y-2 text-center" dir="ltr">
-            <div id="full-eq-${idx}" class="font-mono text-cyan-300 text-sm sm:text-base overflow-x-auto py-1">
-              <!-- KaTeX will render full -->
-            </div>
-            
-            <!-- Hide/Show Practice Mode -->
-            <div id="practice-box-${idx}" class="hidden text-xs text-slate-400 font-mono pt-2 border-t border-chem-border">
-              <span class="text-amber-400 block mb-1">النواتج مخفية لاختبار حفظك:</span>
-              <button onclick="revealProducts(${idx})" class="px-3 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/30 font-bold hover:bg-cyan-900">
-                إظهار النواتج النموذجية
-              </button>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between text-xs pt-1">
-            <span class="text-slate-400 leading-relaxed"><strong class="text-slate-200">التفسير:</strong> ${eq.explanation}</span>
-            <button onclick="toggleEquationPractice(${idx})" class="shrink-0 text-cyan-400 hover:underline mr-2 text-xs">
-              <i class="fa-solid fa-graduation-cap"></i> تدرّب
-            </button>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-
-      // Render KaTeX for all
-      setTimeout(() => {
-        list.forEach((eq, idx) => {
-          const el = document.getElementById(`full-eq-${idx}`);
-          if (el) {
-            const rawTex = `${eq.reactants} \\rightarrow ${eq.products}`;
-            katex.render(rawTex, el, { throwOnError: false, displayMode: true });
-          }
-        });
-      }, 50);
-    }
-
-    function filterEquations(category) {
-      document.querySelectorAll('.eq-filter-btn').forEach(b => {
-        if (b.dataset.filter === category) {
-          b.className = "eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-cyan-500 text-black shadow-glow-cyan";
-        } else {
-          b.className = "eq-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-chem-surface text-slate-300 hover:text-white";
-        }
-      });
-      renderEquations(category);
-    }
-
-    function toggleEquationPractice(idx) {
-      const fullEl = document.getElementById(`full-eq-${idx}`);
-      const pracBox = document.getElementById(`practice-box-${idx}`);
-      if (pracBox.classList.contains('hidden')) {
-        pracBox.classList.remove('hidden');
-        // show only reactants
-        const eq = equationsDatabase[idx];
-        katex.render(`${eq.reactants} \\rightarrow \\text{ ? + ? }`, fullEl, { throwOnError: false, displayMode: true });
-      } else {
-        revealProducts(idx);
-      }
-    }
-
-    function revealProducts(idx) {
-      const fullEl = document.getElementById(`full-eq-${idx}`);
-      const pracBox = document.getElementById(`practice-box-${idx}`);
-      pracBox.classList.add('hidden');
-      const eq = equationsDatabase[idx];
-      katex.render(`${eq.reactants} \\rightarrow ${eq.products}`, fullEl, { throwOnError: false, displayMode: true });
-    }
-
-    function copyEquation(texString) {
-      const dummy = document.createElement("textarea");
-      document.body.appendChild(dummy);
-      dummy.value = texString;
-      dummy.select();
-      document.execCommand("copy");
-      document.body.removeChild(dummy);
-
-      // Temporary visual feedback
-      const badge = document.createElement("div");
-      badge.className = "fixed bottom-20 left-1/2 -translate-x-1/2 bg-cyan-500 text-black font-bold px-4 py-2 rounded-xl text-xs z-50 shadow-2xl animate-bounce";
-      badge.innerText = "تم نسخ المعادلة بنجاح!";
-      document.body.appendChild(badge);
-      setTimeout(() => badge.remove(), 2000);
-    }
-
-    /* ================= 6. QUIZ & TEST BANK ================= */
-    const quizQuestions = [
-      {
-        tag: "مبدأ الكشف العلمي",
-        question: "ما الأساس العلمي الذي يعتمد عليه الكشف عن أنيونات مجموعة حمض الهيدروكلوريك المخفف؟",
-        options: [
-          "الحمض الأقل ثباتًا يطرد الحمض الأكثر ثباتًا من أملاحه.",
-          "الحمض الأكثر ثباتًا يطرد الحمض الأقل ثباتًا من أملاحه على هيئة غاز يسهل كشفه.",
-          "تفاعل أكسدة واختزال مباشر بين الكاتيون والأنيون دون تطاير غازات.",
-          "ترسيب جميع الأنيونات في صورة أملاح غير قابلة للذوبان في الماء."
-        ],
-        correct: 1,
-        explanation: "يعتمد الكشف على قاعدة أن الحمض الأكثر ثباتًا (الأعلى في درجة الغليان والأقل تطايرًا) يحل محل الحمض الأقل ثباتًا ويطرده في صورة غاز يسهل الكشف عنه بالخواص الفيزيائية والكيميائية."
-      },
-      {
-        tag: "التمييز المعملي",
-        question: "لماذا لا يصلح حمض الهيدروكلوريك المخفف للتمييز العملي بين ملحي كربونات الصوديوم وبيكربونات الصوديوم؟",
-        options: [
-          "لأن أحدهما لا يتفاعل إطلاقًا مع حمض الهيدروكلوريك المخفف.",
-          "لأن كليهما مشتق من حمض الكربونيك H₂CO₃ وينتج عن تفاعلهما نفس الغاز (CO₂) الذي يعكر ماء الجير.",
-          "لأن البيكربونات تحتاج لحمض كبريتيك مركز لتتفاعل.",
-          "لأنه يتكون راسب أبيض في الحالتين على البارد."
-        ],
-        correct: 1,
-        explanation: "كلا الأنيونين مشتق من حمض الكربونيك، وتفاعلهما مع حمض HCl المخفف يحرر غاز ثاني أكسيد الكربون CO₂ بفوران شديد في الحالتين، لذا نستخدم كبريتات المغنيسيوم MgSO₄ للتفرقة على البارد."
-      },
-      {
-        tag: "الكشف عن الغازات",
-        question: "عند إضافة حمض الهيدروكلوريك المخفف لملح صلب تصاعد غاز نفاذ الرائحة يخضر ورقة مبللة بمحلول ثنائي كرومات البوتاسيوم المحمضة، الأنيون هو:",
-        options: [
-          "الكبريتيد S²⁻",
-          "الكبريتيت SO₃²⁻",
-          "النيتريت NO₂⁻",
-          "الكربونات CO₃²⁻"
-        ],
-        correct: 1,
-        explanation: "الغاز هو ثاني أكسيد الكبريت SO₂ المتصاعد من أملاح الكبريتيت SO₃²⁻، والذي يختزل أيونات الكروم البرتقالية Cr⁶⁺ في ثنائي كرومات البوتاسيوم إلى كبريتات الكروم III الخضراء Cr³⁺."
-      },
-      {
-        tag: "الظواهر البصرية",
-        question: "ما الظاهرة المميزة التي تظهر بوضوح في الأنبوبة عند إضافة HCl المخفف إلى ملح ثيوكبريتات الصوديوم ولا تظهر مع الكبريتيت؟",
-        options: [
-          "تصاعد غاز كريه الرائحة يسود أسيتات الرصاص.",
-          "ظهور معلق أصفر دقيق من الكبريت S↓ يترسب تدريجيًا في المحلول.",
-          "تكون راسب أبيض يسود بالتسخين مباشرة.",
-          "تحول لون المحلول إلى اللون البنفسجي."
-        ],
-        correct: 1,
-        explanation: "ينحل حمض الثيوكبريتيك غير الثابت ليعطي ماء وغاز SO₂ بالإضافة إلى ترسب معلق أصفر من الكبريت العنصري S↓، وهذه ميزة تفريقية هامة عن الكبريتيت."
-      },
-      {
-        tag: "الأكسدة والاختزال",
-        question: "ما دور محلول برمنجنات البوتاسيوم KMnO₄ المحمضة عند الكشف التأكيدي عن أنيون النيتريت NO₂⁻؟",
-        options: [
-          "عامل مختزل يتأكسد ويزداد لونه قتامة.",
-          "عامل مؤكسد قوي يؤكسد النيتريت إلى نترات ويزول لونه البنفسجي نتيجة اختزاله لأيونات منجنيز II.",
-          "كاشف ترسيبي يكون راسبًا بنفسجيًا في قاع الأنبوبة.",
-          "حمض قوي يطرد حمض النيتروز من أملاحه."
-        ],
-        correct: 1,
-        explanation: "البرمنجنات عامل مؤكسد قوي يؤكسد أيون النيتريت NO₂⁻ إلى نترات NO₃⁻، بينما يختزل أيون البرمنجنات MnO₄⁻ (المنجنيز سباعي التكافؤ البنفسجي) إلى كبريتات منجنيز II عديمة اللون MnSO₄."
-      },
-      {
-        tag: "تفاعل ماء الجير",
-        question: "لماذا يزول تعكر ماء الجير الرائق عند استمرار إمرار غاز CO₂ فيه لفترة طويلة (Long time)؟",
-        options: [
-          "بسبب تفكك كربونات الكالسيوم إلى أكسيد كالسيوم.",
-          "بسبب تحول كربونات الكالسيوم CaCO₃ غير الذائبة إلى بيكربونات الكالسيوم Ca(HCO₃)₂ الذائبة في الماء.",
-          "بسبب تصاعد غاز أول أكسيد الكربون وطرد الراسب.",
-          "بسبب تعادل الوسط الحمضي وتحوله لقلوي صريح."
-        ],
-        correct: 1,
-        explanation: "وفق المعادلة: CaCO₃ + H₂O + CO₂ → Ca(HCO₃)₂، تتكون بيكربونات الكالسيوم وجميع أملاح البيكربونات قابلة للذوبان في الماء مما يؤدي لصفاء المحلول مجددًا."
-      },
-      {
-        tag: "تجارب الفضة AgNO₃",
-        question: "يتكون راسب أسود على البارد مباشرة عند إضافة محلول نترات الفضة AgNO₃ إلى محلول يحتوي على أنيون:",
-        options: [
-          "الكبريتيت SO₃²⁻",
-          "الكبريتيد S²⁻",
-          "الكلوريد Cl⁻",
-          "الكربونات CO₃²⁻"
-        ],
-        correct: 1,
-        explanation: "يتفاعل كبريتيد الصوديوم مع نترات الفضة ليعطي راسبًا أسود مباشرة من كبريتيد الفضة Ag₂S↓، بينما الكبريتيت يعطي راسبًا أبيض من Ag₂SO₃ يسود بعد التسخين."
-      },
-      {
-        tag: "أيونات وغازات النيتروجين",
-        question: "الغاز المتصاعد من تفاعل ملح النيتريت مع حمض الهيدروكلوريك هو غاز ............. داخل الأنبوبة، ويتحول إلى ............. عند فوهة الأنبوبة:",
-        options: [
-          "ثاني أكسيد النيتروجين NO₂ - غاز النيتروجين N₂",
-          "أكسيد النيتريك NO عديم اللون - أبخرة بنية حمراء من NO₂",
-          "غاز النشادر NH₃ - سحب بيضاء كثيفة",
-          "أكسيد النيتروز N₂O - غاز الأكسجين O₂"
-        ],
-        correct: 1,
-        explanation: "ينحل حمض النيتروز إلى HNO₃ وماء وغاز أكسيد النيتريك NO عديم اللون، وعند وصوله لفوهة الأنبوبة يتحد فورًا مع أكسجين الهواء ليتأكسد إلى ثاني أكسيد النيتروجين NO₂ البني المحمر."
-      }
-    ];
-
-    function startQuizTimer() {
-      if (state.quiz.timerInterval) clearInterval(state.quiz.timerInterval);
-      state.quiz.timerSeconds = 0;
-      state.quiz.timerInterval = setInterval(() => {
-        state.quiz.timerSeconds++;
-        const mins = String(Math.floor(state.quiz.timerSeconds / 60)).padStart(2, '0');
-        const secs = String(state.quiz.timerSeconds % 60).padStart(2, '0');
-        const el = document.getElementById('quiz-timer-display');
-        if (el) el.innerText = `${mins}:${secs}`;
-      }, 1000);
-    }
-
-    function renderCurrentQuestion() {
-      const q = quizQuestions[state.quiz.currentIndex];
-      state.quiz.answered = false;
-
-      document.getElementById('current-q-index').innerText = state.quiz.currentIndex + 1;
-      document.getElementById('total-q-count').innerText = quizQuestions.length;
-      document.getElementById('score-counter').innerText = `الدرجة الحالية: ${state.quiz.score}`;
-      
-      const pct = Math.round(((state.quiz.currentIndex + 1) / quizQuestions.length) * 100);
-      document.getElementById('quiz-progress-fill').style.width = pct + '%';
-
-      document.getElementById('question-tag').innerText = q.tag;
-      document.getElementById('question-text').innerText = q.question;
-
-      const optsContainer = document.getElementById('quiz-options-list');
-      optsContainer.innerHTML = '';
-
-      q.options.forEach((optText, i) => {
-        const btn = document.createElement('button');
-        btn.className = "w-full text-right p-4 rounded-2xl bg-chem-surface border border-chem-border text-slate-200 hover:border-cyan-400 hover:bg-chem-card transition-all font-semibold text-sm sm:text-base flex items-center justify-between";
-        btn.innerHTML = `
-          <span>${optText}</span>
-          <span class="w-6 h-6 rounded-full border border-slate-600 flex items-center justify-center text-xs text-slate-400 ml-2">${i + 1}</span>
-        `;
-        btn.onclick = () => selectQuizAnswer(i, btn);
-        optsContainer.appendChild(btn);
-      });
-
-      document.getElementById('quiz-feedback-box').className = "hidden p-4 rounded-2xl border text-sm space-y-2";
-      document.getElementById('next-q-btn').classList.add('hidden');
-    }
-
-    function selectQuizAnswer(selectedIndex, selectedBtn) {
-      if (state.quiz.answered) return;
-      state.quiz.answered = true;
-
-      const q = quizQuestions[state.quiz.currentIndex];
-      const allButtons = document.getElementById('quiz-options-list').children;
-      const feedbackBox = document.getElementById('quiz-feedback-box');
-      const feedbackTitle = document.getElementById('feedback-title');
-      const feedbackReason = document.getElementById('feedback-reason');
-
-      feedbackBox.classList.remove('hidden');
-
-      if (selectedIndex === q.correct) {
-        state.quiz.score++;
-        selectedBtn.classList.add('bg-emerald-950/70', 'border-emerald-400', 'text-emerald-200');
-        feedbackBox.className = "p-4 rounded-2xl border border-emerald-500/40 bg-emerald-950/40 text-sm space-y-2";
-        feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i> <span class="text-emerald-300 font-bold">إجابة نموذجية صحيحة! أحسنت.</span>`;
-      } else {
-        selectedBtn.classList.add('bg-rose-950/70', 'border-rose-400', 'text-rose-200');
-        allButtons[q.correct].classList.add('bg-emerald-950/70', 'border-emerald-400', 'text-emerald-200');
-        feedbackBox.className = "p-4 rounded-2xl border border-rose-500/40 bg-rose-950/40 text-sm space-y-2";
-        feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400 text-lg"></i> <span class="text-rose-300 font-bold">إجابة غير صحيحة. الإجابة الصحيحة موضحة بالأخضر.</span>`;
-      }
-
-      feedbackReason.innerText = q.explanation;
-      document.getElementById('score-counter').innerText = `الدرجة الحالية: ${state.quiz.score}`;
-      document.getElementById('next-q-btn').classList.remove('hidden');
-    }
-
-    function nextQuizQuestion() {
-      if (state.quiz.currentIndex < quizQuestions.length - 1) {
-        state.quiz.currentIndex++;
-        renderCurrentQuestion();
-      } else {
-        finishQuiz();
-      }
-    }
-
-    function finishQuiz() {
-      if (state.quiz.timerInterval) clearInterval(state.quiz.timerInterval);
-      document.getElementById('quiz-question-box').classList.add('hidden');
-      document.getElementById('quiz-feedback-box').classList.add('hidden');
-      document.getElementById('next-q-btn').classList.add('hidden');
-      document.getElementById('quiz-result-view').classList.remove('hidden');
-
-      const total = quizQuestions.length;
-      const pct = Math.round((state.quiz.score / total) * 100);
-      document.getElementById('quiz-final-score').innerText = `درجتك: ${state.quiz.score} من ${total} (${pct}%)`;
-
-      let summary = "ممتاز! استيعاب رائع لمنهاج الكشف عن الأنيونات والتجارب الأساسية والتأكيدية.";
-      if (pct < 60) {
-        summary = "يُنصح بمراجعة جدول المقارنة الذكي ودخول المختبر الافتراضي مرة أخرى لتثبيت ألوان الرواسب والغازات.";
-      } else if (pct < 85) {
-        summary = "أداء جيد جدًا! راجع المعادلات الخاصة بالثيوكبريتات والنيتريت لضمان الدرجة النهائية في الامتحان.";
-      }
-      document.getElementById('quiz-feedback-summary').innerText = summary;
-    }
-
-    function resetQuiz() {
-      state.quiz.currentIndex = 0;
-      state.quiz.score = 0;
-      document.getElementById('quiz-result-view').classList.add('hidden');
-      document.getElementById('quiz-question-box').classList.remove('hidden');
-      startQuizTimer();
-      renderCurrentQuestion();
-    }
-
-    /* ================= 7. REVISION & FLASHCARDS ================= */
-    const flashcardsData = [
-      {
-        frontTitle: "الكربونات CO₃²⁻",
-        badge: "التجربة الأساسية",
-        prompt: "ماذا يحدث عند إضافة dil. HCl؟ وما سلوك الغاز مع ماء الجير؟",
-        backAnswer: "فوران ويتصاعد غاز CO₂ عديم اللون والرائحة يعكر ماء الجير الرائق لفترة قصيرة (لتكون CaCO₃↓) ويزول التعكر بالاستمرار لتكون Ca(HCO₃)₂."
-      },
-      {
-        frontTitle: "البيكربونات HCO₃⁻",
-        badge: "التجربة التأكيدية",
-        prompt: "كيف تميزها عن الكربونات باستخدام MgSO₄؟",
-        backAnswer: "مع الكربونات يتكون راسب أبيض من MgCO₃ على البارد. مع البيكربونات لا يتكون راسب على البارد، ولكن يتكون راسب أبيض بعد التسخين."
-      },
-      {
-        frontTitle: "الكبريتيت SO₃²⁻",
-        badge: "كشف الغاز",
-        prompt: "ما رائحة غاز SO₂؟ وكيف يؤثر على ثنائي كرومات البوتاسيوم؟",
-        backAnswer: "غاز ذو رائحة نفاذة، ويخضر ورقة مبللة بمحلول ثنائي كرومات البوتاسيوم البرتقالية المحمضة بحمض الكبريتيك المركز لاختزاله إلى كبريتات الكروم III الخضراء."
-      },
-      {
-        frontTitle: "الكبريتيد S²⁻",
-        badge: "كشف الغاز والراسب",
-        prompt: "كيف تكشف عن غاز H₂S؟ وما لون راسب الفضة؟",
-        backAnswer: "غاز ذو رائحة كريهة (بيض فاسد) يسود ورقة أسيتات الرصاص لتكون PbS الأسود. ومع نترات الفضة AgNO₃ يتكون راسب أسود مباشر من كبريتيد الفضة Ag₂S."
-      },
-      {
-        frontTitle: "الثيوكبريتات S₂O₃²⁻",
-        badge: "ظاهرة مميزة",
-        prompt: "ماذا تلاحظ عند إضافة HCl؟ وما تأثيرها على محلول اليود؟",
-        backAnswer: "يتصاعد غاز SO₂ ويتكون معلق أصفر من الكبريت S↓. والتأكيدي: يزول لون محلول اليود البني I₂ لاختزاله إلى يوديد الصوديوم NaI وتأكسد الثيوكبريتات إلى رباعي ثيونات Na₂S₄O₆."
-      },
-      {
-        frontTitle: "النيتريت NO₂⁻",
-        badge: "أبخرة بنية حمراء",
-        prompt: "ما التغير الحادث للغاز عند فوهة الأنبوبة؟",
-        backAnswer: "يتصاعد أولاً غاز أكسيد النيتريك NO عديم اللون داخل الأنبوب، والذي يتأكسد فورًا بأكسجين الهواء عند الفوهة لأبخرة بنية حمراء من غاز ثاني أكسيد النيتروجين NO₂."
-      }
-    ];
-
-    function renderFlashcards() {
-      const cont = document.getElementById('flashcards-container');
-      if (!cont) return;
-      cont.innerHTML = '';
-
-      flashcardsData.forEach((card, i) => {
-        const fc = document.createElement('div');
-        fc.className = "flip-card h-72 cursor-pointer select-none";
-        fc.onclick = () => fc.classList.toggle('flipped');
-        fc.innerHTML = `
-          <div class="flip-card-inner rounded-2xl shadow-xl">
-            <!-- Front -->
-            <div class="flip-card-front glass-panel p-6 rounded-2xl flex flex-col justify-between border border-cyan-500/20">
-              <div>
-                <span class="text-xs px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 font-bold border border-cyan-500/30 font-mono">${card.badge}</span>
-                <h4 class="text-2xl font-black text-white mt-3">${card.frontTitle}</h4>
-              </div>
-              <p class="text-sm text-slate-300 font-semibold leading-relaxed">${card.prompt}</p>
-              <div class="flex items-center justify-between text-xs text-cyan-400 font-bold">
-                <span>انقر لقلب البطاقة ومعرفة الجواب</span>
-                <i class="fa-solid fa-arrows-rotate"></i>
-              </div>
-            </div>
-            <!-- Back -->
-            <div class="flip-card-back glass-panel p-6 rounded-2xl flex flex-col justify-between border border-purple-500/30 bg-chem-surface">
-              <div>
-                <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 font-bold border border-purple-500/30">الإجابة والملخص العلمي</span>
-                <h5 class="text-lg font-bold text-white mt-2">${card.frontTitle}</h5>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${card.backAnswer}</p>
-              <div class="text-left text-xs text-slate-400">
-                <span>انقر مجددًا للعودة للسؤال</span>
-              </div>
-            </div>
-          </div>
-        `;
-        cont.appendChild(fc);
-      });
-    }
-
-    function setRevisionView(view) {
-      const cardsCont = document.getElementById('flashcards-container');
-      const summCont = document.getElementById('summary-container');
-      const btnCards = document.getElementById('rev-tab-cards');
-      const btnSumm = document.getElementById('rev-tab-summary');
-
-      if (view === 'flashcards') {
-        cardsCont.classList.remove('hidden');
-        summCont.classList.add('hidden');
-        btnCards.className = "px-5 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-black shadow-glow-cyan transition-all";
-        btnSumm.className = "px-5 py-2 rounded-xl text-sm font-bold bg-chem-surface text-slate-300 hover:text-white border border-chem-border transition-all";
-      } else {
-        cardsCont.classList.add('hidden');
-        summCont.classList.remove('hidden');
-        btnSumm.className = "px-5 py-2 rounded-xl text-sm font-bold bg-cyan-500 text-black shadow-glow-cyan transition-all";
-        btnCards.className = "px-5 py-2 rounded-xl text-sm font-bold bg-chem-surface text-slate-300 hover:text-white border border-chem-border transition-all";
-      }
-    }
-
-    /* ================= 8. KATEX AUTO-RENDERER HELPER ================= */
-    function renderKatexEquations() {
-      // Re-trigger equations rendering if equations tab is active
-      if (state.activeSection === 'equations-section') {
-        renderEquations();
-      }
-    }
-
-    /* ================= WINDOW ONLOAD INITIALIZATION ================= */
     window.onload = function() {
-      // 1. Initialize Groups
-      showGroupDetails(1);
-
-      // 2. Initialize Virtual Lab default anion
-      selectLabAnion('CO3');
-
-      // 3. Populate Comparison Table (default Group 1 selected)
-      filterComparisonTable();
-
-      // 4. Render Equations
-      renderEquations('all');
-
-      // 5. Initialize Quiz
-      startQuizTimer();
-      renderCurrentQuestion();
-
-      // 6. Render Revision Flashcards
-      renderFlashcards();
-
-      // 7. Update progress
-      updateUserProgress();
+      // إعداد البطاقات الخاطفة
+      const flashCont = document.getElementById('flashcards-container');
+      if (flashCont) {
+        flashCont.innerHTML = `
+          <div class="flip-card h-48 cursor-pointer" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner rounded-xl">
+              <div class="flip-card-front glass-panel p-4 rounded-xl flex flex-col justify-between">
+                <h4 class="font-bold text-white">الكربونات CO₃²⁻</h4>
+                <p class="text-xs text-slate-300">ماذا يحدث مع HCl؟</p>
+                <span class="text-xs text-cyan-400">قلب البطاقة</span>
+              </div>
+              <div class="flip-card-back glass-panel p-4 rounded-xl flex items-center justify-center bg-chem-surface">
+                <p class="text-xs text-white font-bold">فوران وتصاعد CO₂ يعكر ماء الجير.</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
     };
   </script>
 </body>
